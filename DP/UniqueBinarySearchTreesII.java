@@ -15,7 +15,7 @@ Given n = 3, your program should return all 5 unique BST's shown below.
 /*
 这个不是dp，只是因为和I一起做了就放到这里了
 提交了好多次，囧，不是很好做啊
-
+错误原因是把这个放在循环外面了，TreeNode root = new TreeNode(i);这不对啊，每次都要初始化一个root才行啊，
 */
 
 /**
