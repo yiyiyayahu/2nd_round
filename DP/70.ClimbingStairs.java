@@ -15,6 +15,7 @@ dp的思路：
 一般dp数组的题可以想想滚动数组
 这道题其实只用到前面两个值，是不是只要dp[2]就够了呢
 */
+
 public class Solution {
     public int climbStairs(int n) {
         if(n <= 0) return 0;
@@ -25,5 +26,22 @@ public class Solution {
             ways[i] = ways[i-1] + ways[i-2];
         }
         return ways[n];
+    }
+}
+/*
+改进算法
+*/
+public class Solution {
+    public int climbStairs(int n) {
+        if(n <= 0) return 0;
+        if(n == 1) return 1;
+        int[] ways = new int[2];
+        ways[0] = 1; ways[1] = 2;
+        for(int i = 2; i < n; i++) {
+            int tmp = ways[0];
+            ways[0] = ways[1];
+            ways[1] = tmp + ways[1];
+        }
+        return ways[1];
     }
 }
