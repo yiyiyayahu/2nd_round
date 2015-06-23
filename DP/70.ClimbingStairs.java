@@ -46,3 +46,8 @@ public class Solution {
         return f2;
     }
 }
+/*
+这里的解法是O(n)的，但是居然有O(logn)的解法，神奇
+有一个公式，然后用divide-and-conquer求解
+http://blog.csdn.net/linhuanmars/article/details/23976963
+*/
