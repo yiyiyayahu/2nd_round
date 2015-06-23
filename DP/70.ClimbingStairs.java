@@ -30,18 +30,19 @@ public class Solution {
 }
 /*
 改进算法
+其实f(n)=f(n-1)+f(n-2)正是斐波那契数列的定义，直接两个变量就可以了
 */
 public class Solution {
     public int climbStairs(int n) {
         if(n <= 0) return 0;
         if(n == 1) return 1;
-        int[] ways = new int[2];
-        ways[0] = 1; ways[1] = 2;
+        int f1 = 1, f2 = 2;
+        
         for(int i = 2; i < n; i++) {
-            int tmp = ways[0];
-            ways[0] = ways[1];
-            ways[1] = tmp + ways[1];
+            int tmp = f1;
+            f1 = f2;
+            f2 = tmp + f2;
         }
-        return ways[1];
+        return f2;
     }
 }
