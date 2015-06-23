@@ -19,7 +19,9 @@ Given n = 3, there are a total of 5 unique BST's.
 所以dp就是dp[i] = sum(dp[j]*dp[i-1-j]) (0=<j<i)
 3.初始化dp[0]=1,dp[1]=1
 
-但是很显然这道题可以优化的，我不需要全部遍历，只要遍历一半就可以了对吧
+时间复杂度是O(n^2)，时间上每次求解i个结点的二叉查找树数量的需要一个i步的循环，比如求解3的时候要循环3次-> O(1+2+...+n)=O(n^2)
+空间复杂度O(n)
+这道题的模型正好是卡特兰数的定义。当然这道题还可以用卡特兰数的通项公式来求解，这样时间复杂度就可以降低到O(n)
 */
 public class Solution {
     public int numTrees(int n) {
