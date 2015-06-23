@@ -48,10 +48,10 @@ public class Solution {
             
             for(TreeNode l : lefts) {
             	for(TreeNode r : rights) {
-            	    TreeNode root = new TreeNode(i);
-            	    root.left = l;
-            		root.right = r;
-            		lists.add(root);
+                  TreeNode root = new TreeNode(i);
+                  root.left = l;
+                  root.right = r;
+                  lists.add(root);
             	}
             }          
         }
