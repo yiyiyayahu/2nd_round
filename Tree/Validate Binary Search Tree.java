@@ -34,6 +34,23 @@ helper(n.left, low, n.val, true, checkRight)，这里在递归里面应该把che
 O(n) runtime, O(n) stack space – Top-down recursion:
 */
 
+/*
+额，另外一种解法是利用Integer，上下限开始设成null就好了==
+*/
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        return helper(root, null, null);
+    }
+    public boolean helper(TreeNode root, Integer low, Integer high) {
+        if(root == null) return true;
+        if(low != null && root.val <= low) return false;
+        if(high != null && root.val >= high) return false;
+        
+        return helper(root.left, low, root.val) && helper(root.right, root.val, high);
+    }
+}
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
