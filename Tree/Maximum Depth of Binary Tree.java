@@ -5,7 +5,11 @@ The maximum depth is the number of nodes along the longest path from the root no
 */
 
 /*
-时间复杂度O(n)
+时间复杂度O(n) 空间复杂度为啥是O(logn)?
+Assume that n is the total number of nodes in the tree. The runtime complexity is O(n)
+because it traverse each node exactly once. As the maximum depth of a binary tree is
+O(log n), the extra space cost is O(log n) due to the extra stack space used by the
+recursion.
 */
 
 /**
