@@ -29,6 +29,9 @@ helper(n.left, low, n.val, true, checkRight)，这里在递归里面应该把che
 因为这两个变量其实只是解决这个tree不完全，就是low和high不应该完全是Integer.MIN_VALUE, Integer.MAX_VALUE才用到的，
 如果low和high都有相应地value了，我还是要都判断的，也就是if(n.val <= low || n.val >= high)
 递归的这个问题我发现我犯过不只一次了，就是没有把传进来的变量传下去
+
+复杂度：
+O(n) runtime, O(n) stack space – Top-down recursion:
 */
 
 /**
