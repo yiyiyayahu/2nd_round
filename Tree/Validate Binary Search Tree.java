@@ -36,6 +36,7 @@ O(n) runtime, O(n) stack space – Top-down recursion:
 
 /*
 额，另外一种解法是利用Integer，上下限开始设成null就好了==
+leetcode那本书上还介绍了一种方法：先inorderTraversal，然后看traverse出来的结果是不是单调递增的，这个解法木有想到过诶，思维定势了？
 */
 public class Solution {
     public boolean isValidBST(TreeNode root) {
