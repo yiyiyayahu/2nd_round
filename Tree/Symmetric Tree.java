@@ -27,6 +27,10 @@ Bonus points if you could solve it both recursively and iteratively.
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
+/*
+时间复杂度O(n)，空间的话是O(logn)还是O(n)啊啊啊啊，有个blog上面说的是O(logn)啊
+*/
 public class Solution {
     public boolean isSymmetric(TreeNode root) {
         if(root == null) return true;
