@@ -32,6 +32,9 @@ helper(n.left, low, n.val, true, checkRight)，这里在递归里面应该把che
 
 复杂度：
 O(n) runtime, O(n) stack space – Top-down recursion:
+
+这个空间复杂度是O(n)，而maxDepth那个是O(logn)是因为，这个是&&，我必须左边和右边都check了才能return
+maxDepth那个左边连着计算一下就好了，右边再连着计算一下就好了，所以每次stack只要存O(logn)就够了
 */
 
 /*
