@@ -13,6 +13,9 @@ Two binary trees are considered equal if they are structurally identical and the
  *     TreeNode(int x) { val = x; }
  * }
  */
+ /*
+ time O(n) space O(n) ???
+ */
 public class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if(p == null && q == null) return true;
