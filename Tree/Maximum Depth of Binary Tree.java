@@ -12,7 +12,8 @@ recursion的空间复杂度是这样的
 那我算f(5)的时候我会调用f(4)同时memory(stack)要把5的状态存下来，同理，f(4)调用f(3)，存f(4)的状态。。。
 然后f(1)调用完了之后就stack一点点pop出来，所以这个时候空间复杂度是O(n)
 
-那这道题呢？额，还是不咋懂。。囧
+那这道题呢
+因为是tree嘛，这里stack里面先存root，然后root.left，然后root.left.left，左边这个弄完了就都pop出来了，所以其实stack里面只存了logn
 */
 
 /**
