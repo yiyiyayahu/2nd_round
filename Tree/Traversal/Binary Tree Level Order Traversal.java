@@ -17,6 +17,8 @@ return its level order traversal as:
 */
 
 /*
+相当于BFS的做法
+
 我以前外面还套一个while(true)循环，后来发现没必要诶，下面这样写就好了呀
 时间复杂度O(n) 空间的话也是O(n)
 
