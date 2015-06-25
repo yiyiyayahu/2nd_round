@@ -23,7 +23,38 @@ return its level order traversal as:
 看到一个改进算法，我这里是用了一个tmp的queue来存下一层的节点。
 但实际上一个queue就够了，用两个number来track当前层和下一层的个数就好了
 */
-
+public class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        
+        if(root == null) return result;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        List<Integer> list = new ArrayList<Integer>();
+        queue.add(root);
+        int currNum = 0, lastNum = 1;
+        
+        while(!queue.isEmpty()) {
+            TreeNode n = queue.remove();
+            lastNum --;
+            list.add(n.val);
+            if(n.left != null) {
+                queue.add(n.left);
+                currNum ++;
+            }
+            if(n.right != null) {
+                queue.add(n.right);
+                currNum ++;
+            }
+            if(lastNum == 0) {
+                result.add(list);
+                lastNum = currNum;
+                currNum = 0;
+                list = new ArrayList<Integer>();
+            }
+        }
+        return result;
+    }
+}
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
