@@ -19,7 +19,17 @@ return its zigzag level order traversal as:
 
 /*
 这道题嘛，我就加了个int来track一下每一层是leftToRight还是RightToLeft了，感觉也没什么意义啊，和level traversal是一样的
-java可以直接加到ArrayList的前面，如果不可以呢，用stack来实现?
+java可以直接加到ArrayList的前面，如果不可以呢，
+一种方法是改变加入queue的顺序
+if(leftToRight == 1) {
+    if(n.left != null) queue.add(n.left);
+    if(n.right != null) queue.add(n.right);
+} else {
+    if(n.right != null) queue.add(n.right);
+    if(n.left != null) queue.add(n.left);
+}
+
+这个blog比较复杂，用stack来实现的，有时间看看？
 http://blog.csdn.net/linhuanmars/article/details/24509105
 */
 public class Solution {
