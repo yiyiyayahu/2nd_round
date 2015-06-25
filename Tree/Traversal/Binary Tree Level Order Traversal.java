@@ -19,6 +19,9 @@ return its level order traversal as:
 /*
 我以前外面还套一个while(true)循环，后来发现没必要诶，下面这样写就好了呀
 时间复杂度O(n) 空间的话也是O(n)
+
+看到一个改进算法，我这里是用了一个tmp的queue来存下一层的节点。
+但实际上一个queue就够了，用两个number来track当前层和下一层的个数就好了
 */
 
 /**
