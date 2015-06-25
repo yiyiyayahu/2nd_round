@@ -11,6 +11,8 @@ The minimum depth is the number of nodes along the shortest path from the root n
        2
 这个时候left是null，但是我不能直接返回0， 还应该看右边，因为这个时候不到leaf
 只要注意这点就可以了
+
+time: O(n) space: O(logn)
 */
 
 public class Solution {
