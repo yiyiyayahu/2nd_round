@@ -14,6 +14,7 @@ recursion的空间复杂度是这样的
 
 那这道题呢
 因为是tree嘛，这里stack里面先存root，然后root.left，然后root.left.left，左边这个弄完了就都pop出来了，所以其实stack里面只存了logn
+worst case就是都在一支上面，特别不平衡，那space complexity就是O(n)了
 */
 
 /**
