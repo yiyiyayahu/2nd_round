@@ -19,6 +19,8 @@ return its zigzag level order traversal as:
 
 /*
 这道题嘛，我就加了个int来track一下每一层是leftToRight还是RightToLeft了，感觉也没什么意义啊，和level traversal是一样的
+java可以直接加到ArrayList的前面，如果不可以呢，用stack来实现?
+http://blog.csdn.net/linhuanmars/article/details/24509105
 */
 public class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
