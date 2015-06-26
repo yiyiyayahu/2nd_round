@@ -2,6 +2,9 @@
 Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
 */
 
+/*
+time: O(n) space: O(logn)
+*/
 public class Solution {
     public TreeNode sortedArrayToBST(int[] nums) {
         if(nums.length == 0) return null;
