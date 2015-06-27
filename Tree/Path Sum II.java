@@ -22,6 +22,8 @@ return
 1. result.add(new ArrayList<Integer>(list));这里用的是result.add(list)；导致后面删list点的时候result里面的也删掉了，结果就错了
 2. 加到result里面之后还要执行一步list.remove(list.size()-1);
 因为我这个程序调用完left就直接调用right，如果left找到了但是list没有把最后一个节点删掉的话，right还会往里面加的
+
+时间复杂度O(n) 空间的话O(n)吧，因为还要存list<List<Integer>>
 */
 public class Solution {
     List<List<Integer>> result;
