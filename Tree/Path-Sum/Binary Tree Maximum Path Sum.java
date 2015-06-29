@@ -14,7 +14,8 @@ Return 6.
 
 /*
 这道题的trick之处在于，start & end at any point, 但是要是一条path，也就是说：
-left+root+right不一定能返回上一层，要有一个中间变量track它，因为helper函数要返回的是一支的最大值
+left+root+right不能返回上一层，因为helper函数要返回的是一支的最大值
+但是要有一个中间变量track它，有可能某个subtree的left+root+right最大
          4
        /  \
       1    -1
