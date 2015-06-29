@@ -25,6 +25,7 @@ return [1,3,2].
 
 google还要求O(1)的space，天，有一种Morris Traversal
 http://blog.csdn.net/linhuanmars/article/details/20187257
+http://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html
 */
 
 /*
