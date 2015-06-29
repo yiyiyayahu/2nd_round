@@ -22,6 +22,9 @@ return [1,3,2].
 所以就要track一下访问过的节点不要再push了。
 
 更好的方法想不到啊想不到，悲剧
+
+google还要求O(1)的space，天，有一种Morris Traversal
+http://blog.csdn.net/linhuanmars/article/details/20187257
 */
 public class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
