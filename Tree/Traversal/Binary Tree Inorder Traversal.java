@@ -29,6 +29,7 @@ http://blog.csdn.net/linhuanmars/article/details/20187257
 
 /*
 用一个n来track，有点模拟走过路线的意思，来保证重复路线没有走过！很巧妙诶，还是自己想不出肿么办
+time: O(n) space: O(logn)
 */
 public class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
