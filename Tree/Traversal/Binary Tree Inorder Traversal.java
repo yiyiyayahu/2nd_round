@@ -26,6 +26,32 @@ return [1,3,2].
 google还要求O(1)的space，天，有一种Morris Traversal
 http://blog.csdn.net/linhuanmars/article/details/20187257
 */
+
+/*
+用一个n来track，有点模拟走过路线的意思，来保证重复路线没有走过！很巧妙诶，还是自己想不出肿么办
+*/
+public class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> lists = new ArrayList<Integer>();
+        if(root == null) return lists;
+        
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+
+        TreeNode n = root;
+        while(!stack.isEmpty() || n != null) {            
+            if(n != null) {
+            	stack.push(n);
+            	n = n.left;
+            } else {
+                n = stack.pop();
+                lists.add(n.val);
+                n = n.right;
+            }
+        }
+        return lists;
+    }
+}
+
 public class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> lists = new ArrayList<Integer>();
