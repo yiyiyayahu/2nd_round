@@ -21,11 +21,11 @@ Time: O(n) Space: O(1)
 public class Solution {
     public int maxSubArray(int[] nums) {
         int max = Integer.MIN_VALUE;
-        int result = 0;
+        int tmp = 0;
         for(int i = 0; i < nums.length; i++) {
-            if(result < 0) result = 0;
-            result += nums[i];
-            max = Math.max(max, result);
+            if(tmp < 0) tmp = 0;
+            tmp += nums[i];
+            max = Math.max(max, tmp);
         }
         return max;
     }
