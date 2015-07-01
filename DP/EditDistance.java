@@ -9,6 +9,17 @@ b) Delete a character
 c) Replace a character
 */
 
+/*
+这道题还好一次写对了，但是我总是不记得哪种算是insert，哪种算是delete
+其实这样想就好了 (if word1="p" word2="s")
+dp[0][0] -> "" "" 
+dp[0][1] -> "" "s"
+dp[1][0] - "p" ""
+
+那dp[1][1]:
+dp[i-1][j-1] replace; dp[i-1][j] insert; dp[i][j-1] delete;
+*/
+
 public class Solution {
     public int minDistance(String word1, String word2) {
         int m = word1.length(), n = word2.length();
