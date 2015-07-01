@@ -6,6 +6,25 @@ The robot is trying to reach the bottom-right corner of the grid (marked 'Finish
 
 How many possible unique paths are there?
 */
+/*
+转成的一维的，时间还是O(mn)，空间变成了O(n)
+注意外面循环的j是从1算起的，因为m是从1开始的
+*/
+public class Solution {
+    public int uniquePaths(int m, int n) {
+        int[] dp = new int[n];
+        for(int i = 0; i < n; i++) {
+            dp[i] = 1;
+        }
+        
+        for(int j = 1; j < m; j++) {
+            for(int i = 1; i < n; i++) {
+                dp[i] = dp[i] + dp[i-1];
+            }
+        }
+        return dp[n-1];
+    }
+}
 
 public class Solution {
     public int uniquePaths(int m, int n) {
