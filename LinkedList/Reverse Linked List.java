@@ -21,3 +21,19 @@ public class Solution {
         return newtail;
     }
 }
+
+
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null) return head;
+        
+        ListNode reversed = reverseList(head.next);
+        ListNode tmp = reversed;
+        while(tmp != null && tmp.next != null) {
+            tmp = tmp.next;
+        }
+        head.next = null;
+        tmp.next = head;
+        return reversed;
+    }
+}
