@@ -12,7 +12,7 @@ public class Solution {
     public ListNode partition(ListNode head, int x) {
         if(head == null || head.next == null) return head;
         
-        ListNode dummyHead = new ListNode(Integer.MAX_VALUE);
+        ListNode dummyHead = new ListNode(-1);
         ListNode stop = dummyHead;
         dummyHead.next = head;
         while(stop.next != null && stop.next.val < x) {
