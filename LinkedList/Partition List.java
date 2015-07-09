@@ -22,12 +22,14 @@ public class Solution {
         ListNode tmp = stop.next;
         while(tmp != null && tmp.next != null) {
             if(tmp.next.val < x) {
-            	ListNode stopNext = stop.next;
-            	stop.next = new ListNode(tmp.next.val);
-            	stop = stop.next;
-            	stop.next = stopNext;
-            	
+            	ListNode curr = tmp.next;
             	tmp.next = tmp.next.next;
+            	curr.next = null;
+            	
+            	ListNode stopNext = stop.next;
+            	stop.next = curr;
+            	curr.next = stopNext;
+            	stop = curr;
             } else {
                 tmp = tmp.next;
             }
