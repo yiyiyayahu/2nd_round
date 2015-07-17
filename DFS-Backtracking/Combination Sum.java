@@ -16,6 +16,7 @@ A solution set is:
 
 /*
 if(i > 0 && candidates[i] == candidates[i-1]) continue;这个是为了去重~
+time: O(2^n) space: O(2^n) 虽然有剪枝，但是不晓得是不是还是这个量级的???
 */
 
 public class Solution {
