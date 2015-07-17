@@ -16,7 +16,7 @@ If n = 4 and k = 2, a solution is:
 
 /*
 又犯了类似的错误。。。result.add(new ArrayList<Integer>(list));不能直接result.add(list);不然结果会被改掉！
-时间复杂度比较恐怖 O(n!)
+时间复杂度比较恐怖 O(n!) 空间复杂度O(n)
 */
 
 public class Solution {
