@@ -21,6 +21,9 @@ If nums = [1,2,3], a solution is:
 
 /*
 很巧妙诶，只要每次都直接add到result里面就可以啦，不用像之前那样考虑size的问题
+
+时间复杂度O(2^n) 因为每个元素都有放入和不放入两种情况
+空间复杂度O(n)
 */
 public class Solution {
     public List<List<Integer>> subsets(int[] nums) {
