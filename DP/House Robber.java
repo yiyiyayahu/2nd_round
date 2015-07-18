@@ -8,6 +8,7 @@ determine the maximum amount of money you can rob tonight without alerting the p
 
 /*
 时间O(n) 空间O(n)
+用滚动数组，空间复杂度应该可以简化为O(1)
 */
 public class Solution {
     public int rob(int[] nums) {
