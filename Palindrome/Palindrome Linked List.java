@@ -34,3 +34,14 @@ public class Solution {
         return true;
     }
 }
+/*
+II. reverse second half of the linked list and compare with the first half
+*/
+
+/*
+III. recursively: use the recursion acting like a stack
+*/
+
+/*
+http://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/
+*/
