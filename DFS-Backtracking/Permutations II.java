@@ -5,7 +5,10 @@ For example,
 [1,1,2] have the following unique permutations:
 [1,1,2], [1,2,1], and [2,1,1].
 */
-
+/*
+开始忘记sort了。。。
+和之前subsetII对于重复的处理是一样的，都是前一个弄完了，后面的就可以直接跳过
+*/
 public class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
