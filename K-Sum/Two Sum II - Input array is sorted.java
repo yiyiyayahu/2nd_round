@@ -10,6 +10,10 @@ You may assume that each input would have exactly one solution.
 Input: numbers={2, 7, 11, 15}, target=9
 Output: index1=1, index2=2
 */
+
+/*
+add: O(1) find: O(n) space: O(n)
+*/
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {
         int[] indices = new int[2];
@@ -26,3 +30,9 @@ public class Solution {
         return indices;
     }
 }
+
+/*
+add: O(logn) store into one sorted array (binary search)
+find: O(n) two pointers
+space: O(n)
+*/
