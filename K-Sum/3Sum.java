@@ -11,6 +11,10 @@ The solution set must not contain duplicate triplets.
     (-1, 0, 1)
     (-1, -1, 2)
 */
+
+/*
+time: O(n^2) 注意对于重复数字的处理
+*/
 public class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
