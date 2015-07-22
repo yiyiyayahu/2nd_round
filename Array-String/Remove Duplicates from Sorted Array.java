@@ -12,6 +12,21 @@ It doesn't matter what you leave beyond the new length.
 
 public class Solution {
     public int removeDuplicates(int[] nums) {
+        if(nums == null || nums.length == 0) return 0;
+        
+        int len = nums.length;
+        int index = 1;
+        for(int i = 1; i < len; i++) {
+            if(nums[i] != nums[index-1]) {
+                nums[index++] = nums[i];
+            }
+        }
+        return index;
+    }
+}
+
+public class Solution {
+    public int removeDuplicates(int[] nums) {
         if(nums.length == 0) return 0;
         
         int tmp = nums[0];
