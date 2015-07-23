@@ -20,6 +20,35 @@ You may assume no duplicate exists in the array.
 暂时没想到一个很好的办法来简化code
 但是submit这么多次也是醉了
 */
+/*
+nums[start] < nums[mid]改成nums[start] <= nums[mid]就好了，就避免了[3,1],1这种情况
+*/
+public class Solution {
+    public int search(int[] nums, int target) {
+        if(nums == null || nums.length == 0) return -1;
+        int start = 0, end = nums.length-1;
+        while(start <= end) {
+            int mid = (start + end)/2;
+            if(nums[mid] == target) return mid;
+            
+            if(nums[start] <= nums[mid]) {
+            	if(nums[start] <= target && nums[mid] > target) {
+                    end = mid-1;
+                } else {
+                    start = mid + 1;
+                }
+            } else {
+                if(nums[end] >= target && nums[mid] < target) {
+                    start = mid + 1;
+                } else {
+                    end = mid - 1;
+                }
+                
+            }
+        }
+        return -1;
+    }
+}
 
 public class Solution {
     public int search(int[] nums, int target) {
