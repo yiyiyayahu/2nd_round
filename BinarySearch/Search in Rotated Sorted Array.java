@@ -9,6 +9,7 @@ You may assume no duplicate exists in the array.
 */
 
 /*
+time: O(logn) space: O(1)
 唉，这道题submit了好多次，开始写的是
   if(nums[end] >= target && nums[mid] < target) {
       start = mid + 1;
