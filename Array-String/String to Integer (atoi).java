@@ -23,21 +23,22 @@ If no valid conversion could be performed, a zero value is returned. If the corr
 /*
 这道题思路理清了就比较好做
 重点在于对边界的处理！！！
+养成好习惯，时刻监测是不是i<len
 */
 public class Solution {
     public int myAtoi(String str) {
         if(str == null || str.length() == 0) return 0;
-        int i = 0, result = 0;
+        int i = 0, result = 0, len = str.length();
         boolean isNeg = false;
-        while(str.charAt(i) == ' ') i++;
-        if(str.charAt(i) == '+') {
+        while(i < len && str.charAt(i) == ' ') i++;
+        if(i < len && str.charAt(i) == '+') {
             i++;
-        } else if(str.charAt(i) == '-') {
+        } else if(i < len && str.charAt(i) == '-') {
             isNeg = true; 
             i++;
         }
         if(!isNumeric(str.charAt(i))) return 0;
-        while(i < str.length()) {
+        while(i < len) {
             char c = str.charAt(i);
             if(!isNumeric(c)) break;
             if(result > Integer.MAX_VALUE/10 || (result==Integer.MAX_VALUE/10 &&c>='8')) {
