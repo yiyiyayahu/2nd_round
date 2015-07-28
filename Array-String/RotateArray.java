@@ -12,10 +12,10 @@ public class Solution {
         int i = 0, index = len-1;
         int tmp = nums[0];      
         
-    	for(int j = 0; j < Math.min(k,len-k); j++) {
-    		tmp = nums[j];
-    		i = j;
-    		while(index != j) {
+        for(int j = 0; j < Math.min(k,len-k); j++) {
+            tmp = nums[j];
+            i = j;
+            while(index != j) {
                 index = (i+k)%len;
                 int prev = nums[index];
                 nums[index] = tmp;
