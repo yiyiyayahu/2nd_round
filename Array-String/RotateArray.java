@@ -21,7 +21,7 @@ public class Solution {
                 nums[index] = tmp;
                 tmp = prev;
                 i = index;
-    		}
-    	}
+            }
+        }
     }
 }
