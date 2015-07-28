@@ -1,0 +1,4 @@
+对于integer overflow时候边界的处理
+
+比如判断result*10+digit是不是越界 （之后还可能if(isNeg) return -result;但是这个处理是ok的）
+if(result>Integer.MAX_VALUE/10 || (result==Integer.MAX_VALUE/10 &&digit>=8)) {
