@@ -16,7 +16,7 @@ public class Solution {
     		tmp = nums[j];
     		i = j;
     		while(index != j) {
-    			index = (i+k)%len;
+                index = (i+k)%len;
                 int prev = nums[index];
                 nums[index] = tmp;
                 tmp = prev;
