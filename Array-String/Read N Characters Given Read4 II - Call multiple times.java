@@ -15,6 +15,9 @@ The read function may be called multiple times.
 所以要定义几个变量
 leetcode那本书里面的解法，要简洁好多
 bufferSize=0就表示没有之前的留下来重新读就好了
+注意对offset和bufferSize的更新
+            offset = (offset+bytes)%4; （因为数组是4位的，所以%4，然后往前移动bytes大小就好了）
+            bufferSize = size - bytes; （buffer里剩余没读的size）
 */
 
 public class Solution extends Reader4 {
