@@ -6,6 +6,7 @@ The brackets must close in the correct order, "()" and "()[]{}" are all valid bu
 
 /*
 犯了好多错误啊。。。
+开始写的是Stack<String>。。。囧，显然type不对啊。。。
 在stack.pop()之前没有考虑stack是empty的情况
 最后跳出for循环也没考虑到stack有可能还不是empty
 唉，做的太急了，还是要确定了再提交。。。
