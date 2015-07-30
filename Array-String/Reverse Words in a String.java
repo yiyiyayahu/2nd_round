@@ -40,7 +40,7 @@ public class Solution {
         	if(s.charAt(i) == ' ') {
         		j = i;
         	} else if(i == 0 || s.charAt(i-1) == ' ') {
-        		if(sb.length() != 0) sb.append(' ');
+                if(sb.length() != 0) sb.append(' ');
                 sb.append(s.substring(i,j));
                 j = i-1;
             } 
