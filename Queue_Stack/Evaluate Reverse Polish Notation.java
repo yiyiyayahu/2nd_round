@@ -16,7 +16,7 @@ public class Solution {
         if(tokens == null || tokens.length == 0) return 0; 
         Stack<Integer> stack = new Stack<Integer>();
         for(String s : tokens) {
-            if(!isOperand(s)) stack.push(Integer.parseInt(s));
+            if(!isOperator(s)) stack.push(Integer.parseInt(s));
             else {
                 int num1 = stack.pop();
                 int num2 = stack.pop();
@@ -31,7 +31,7 @@ public class Solution {
         return stack.pop();
     }
     
-    public boolean isOperand(String s) {
+    public boolean isOperator(String s) {
         return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") ;
     }
 }
