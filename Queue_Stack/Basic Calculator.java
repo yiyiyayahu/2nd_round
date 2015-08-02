@@ -98,6 +98,7 @@ num： 当前遇到的数字
 1+2-(4+5)
 ret=1 -> sign=1 -> ret+=sign*num ret=3 -> stack存-1，3
 之后计算括号里面的，+: ret=4 -> ): ret+=5 ret=9 ret=ret*preSign+prevSet=9*(-1)+3=-6
+要注意可能是1+2-(4+5)+3，最后num不是0，还要再ret+=sign*num一下
 */
 public class Solution {
     public int calculate(String s) {
