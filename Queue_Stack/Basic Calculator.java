@@ -88,3 +88,49 @@ public class Solution {
 		}
 	}
 }
+
+/*
+还有一种很巧妙的方法
+sign: 遇到的符号，对下一个num有效
+num： 当前遇到的数字
+看到(: 把之前的ret和sign存起来，然后ret，sign重置，有点像开始了一轮新的计算，stack里面存的是连接
+看到): 记得要先ret+=sign*num
+1+2-(4+5)
+ret=1 -> sign=1 -> ret+=sign*num ret=3 -> stack存-1，3
+之后计算括号里面的，+: ret=4 -> ): ret+=5 ret=9 ret=ret*preSign+prevSet=9*(-1)+3=-6
+*/
+public class Solution {
+    public int calculate(String s) {
+        Stack<Integer> stack = new Stack<Integer>();
+        int num = 0, sign = 1;
+        int ret = 0;
+        
+        for(int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if(Character.isDigit(c)) {
+                num = num*10 + (c-'0');
+            } else if(c == '+') {
+                ret += sign * num;
+                sign = 1;
+                num = 0;
+            } else if(c == '-') {
+                ret += sign * num;
+                sign = -1;
+                num = 0;
+            } else if(c == '(') {
+                stack.push(ret);
+                stack.push(sign);
+                sign = 1;
+                ret = 0;
+            } else if(c == ')'){
+            	ret += sign * num;
+            	num = 0;
+                int prevSign = stack.pop();
+                int prevRet = stack.pop();
+                ret = ret * prevSign + prevRet;
+            }
+        }
+        if(num != 0) ret += sign * num;
+        return ret;
+    }
+}
