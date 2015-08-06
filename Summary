@@ -1,0 +1,4 @@
+把常见的错误或者注意写在这里
+
+对于string的操作：
+比如像wordladder那里，可以把s.toCharArray，String.valueOf(arr)就好了，因为是对string的每一位操作
