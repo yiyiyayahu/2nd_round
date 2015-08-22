@@ -12,6 +12,7 @@ A solution is ["cats and dog", "cat sand dog"].
 这道题其实是DFS加剪枝，剪枝的时候要用到DP （word break I主要就是DP）
 如果直接DFS的话有很多重复计算，会TLE的
 剪枝用DP，notFound[i]表示在(i+1,n)的区间里找不到可能的分解方法，如果是true的话，找到i就可以停止不用找下去了
+helper里面就是从当前开始的index往后找，找到一个放到sb里面，接着从当前的i+1开始再调用helper函数
 */
 public class Solution {
     public List<String> wordBreak(String s, Set<String> wordDict) {
