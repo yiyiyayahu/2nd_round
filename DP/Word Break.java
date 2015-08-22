@@ -7,6 +7,8 @@ dp[i]是true的条件是：
 1) dp[i]本来就在wordDict里面
 2) 在(0,i)中存在这样一个j -> d[j]是true，并且j+1到i的substring在wordDict里面
 程序就比较好写了。但是拼写错误神马的要注意：开始把wordDict写成dict了。。。
+
+time: O(n^2) space: O(n)
 */
 public class Solution {
     public boolean wordBreak(String s, Set<String> wordDict) {
