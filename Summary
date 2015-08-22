@@ -4,3 +4,4 @@
 比如像wordladder那里，可以把s.toCharArray，String.valueOf(arr)就好了，因为是对string的每一位操作
 
 
+word break I,II可以再做一下，题还挺好的
