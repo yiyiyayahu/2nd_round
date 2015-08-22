@@ -1,4 +1,15 @@
 /*
+Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of
+one or more dictionary words.
+
+For example, given
+s = "leetcode",
+dict = ["leet", "code"].
+
+Return true because "leetcode" can be segmented as "leet code".
+*/
+
+/*
 有点二了。。。这个很明显是DP，开始居然没想出来，因为想的是要存word对应true/false
 实际上只要存当前index之前的substring是不是就可以了呀
 也就是dp[i]代表wordBreak(s.substring(0,i+1), wordDict)
