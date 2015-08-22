@@ -8,7 +8,7 @@ char to int:
 Character.getNumericValue() returns the character's value as a digit.
 It returns -1 if the character is not a digit.
 If you want to get the numeric Unicode code point of a boxed Character object, you'll need to unbox it first:
-int value = (int)c.charValue();
+int value = (int) c;
 ==============
 
 word break I,II可以再做一下，题还挺好的
