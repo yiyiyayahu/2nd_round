@@ -18,7 +18,14 @@ Headp
 最小堆：根结点的键值是所有堆结点键值中最小者的堆。
 kth largest - min heap
 PriorityQueue<Integer> queue = new PriorityQueue<Integer>(k);
-java自带的PriorityQueue应该是最小堆
+java自带的PriorityQueue - min heap
+max heap:
+PriorityQueue<Integer> queue = new PriorityQueue<Integer>(k, new Comparator<Integer>() {
+    @Override
+    public int compare(Integer o1, Integer o2) {
+    	return o2-o1;
+    }
+});
 ==============
 word break I,II可以再做一下，题还挺好的
 number of islands写的很乱啊，可以再练一下
