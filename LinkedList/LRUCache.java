@@ -19,7 +19,6 @@ n.next.prev = n.prev
 这里n.prev和n.next都可能是null，都要考虑到
 
 还有就是map也要相应地更新呀，不管是set一个新的value还是removeTail都要把值给改了对不对
-试试dummyHead和dummyTail吧。估计能简单点
 */
 
 /*
@@ -29,7 +28,7 @@ n.next.prev = n.prev
 还有，在removeNode的时候要注意
 n.prev = null;
 n.next = null;
-不然Node n会乱指的。。。我觉得前面如果我这样处理的话也不会出现那个问题
+不然Node n会乱指的。。。之前那个版本我这样处理的话也不会出现那个问题
 */
 class Node {
     int key;
