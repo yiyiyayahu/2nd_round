@@ -89,6 +89,8 @@ public class LRUCache {
     public void removeNode(Node n) {
         n.prev.next = n.next;
         n.next.prev = n.prev;
+        n.prev = null;
+        n.next = null;
     }
 }
 
