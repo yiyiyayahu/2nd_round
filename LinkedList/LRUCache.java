@@ -21,6 +21,77 @@ n.next.prev = n.prev
 还有就是map也要相应地更新呀，不管是set一个新的value还是removeTail都要把值给改了对不对
 试试dummyHead和dummyTail吧。估计能简单点
 */
+
+/*
+恩恩，用dummyHead和dummyTail确实简单好多哇
+但是要注意head和tail提前要连起来喔，要在class的constructor里面写
+*/
+class Node {
+    int key;
+    int value;
+    Node prev;
+    Node next;
+    public Node(int key, int value) {
+        this.key = key;
+        this.value = value;
+    }
+}
+
+public class LRUCache {
+    HashMap<Integer, Node> map = new HashMap<Integer, Node>();
+    Node head;
+    Node tail;
+    int capacity;
+    int len;
+    
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        head = new Node(-1,-1);
+        tail = new Node(-1,-1);
+        head.next = tail;
+        tail.prev = head;
+    }
+    
+    public int get(int key) {
+        if(!map.containsKey(key)) return -1;
+        Node n = map.get(key);
+        removeNode(n);
+        addToHead(n);
+        return n.value;
+    }
+    
+    public void set(int key, int value) {
+        Node n = null;
+        if(!map.containsKey(key)) {
+            n = new Node(key, value);
+            if(len < capacity) len ++;
+            else {
+                map.remove(tail.prev.key);
+                removeNode(tail.prev);
+            }
+        } else {
+            n = map.get(key);
+            removeNode(n);
+            n.value = value;
+        }
+        map.put(key, n);
+        addToHead(n);
+    }
+    
+    public void addToHead(Node n) {
+        Node second = head.next;
+        head.next = n;
+        n.prev = head;
+        n.next = second;
+        second.prev = n;
+    }
+    
+    public void removeNode(Node n) {
+        n.prev.next = n.next;
+        n.next.prev = n.prev;
+    }
+}
+
 class Node {
     int key;
     int value;
