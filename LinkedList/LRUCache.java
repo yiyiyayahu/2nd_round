@@ -25,6 +25,11 @@ n.next.prev = n.prev
 /*
 恩恩，用dummyHead和dummyTail确实简单好多哇
 但是要注意head和tail提前要连起来喔，要在class的constructor里面写
+
+还有，在removeNode的时候要注意
+n.prev = null;
+n.next = null;
+不然Node n会乱指的。。。我觉得前面如果我这样处理的话也不会出现那个问题
 */
 class Node {
     int key;
