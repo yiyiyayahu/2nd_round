@@ -27,6 +27,7 @@ http://articles.leetcode.com/2011/09/regular-expression-matching.html
 这道题比较难的是这个*的处理上
 开始想的是，比如aaaa,a*，从s的0位开始查，match就i++，然后return isMatch(s.substring(i), p.substring(2))
 这样做的问题是，aaaa,a*aaaa，这个也是match的啊，但是我这样做的话就return false
+还有就是.*和ab是match的
 */
 public class Solution {
     public boolean isMatch(String s, String p) {
