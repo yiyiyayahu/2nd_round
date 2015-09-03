@@ -27,6 +27,7 @@ http://articles.leetcode.com/2011/09/regular-expression-matching.html
 这道题比较难的是这个*的处理上
 开始想的是，比如aaaa,a*，从s的0位开始查，match就i++，然后return isMatch(s.substring(i), p.substring(2))
 这样做的问题是，aaaa,a*aaaa，这个也是match的啊，但是我这样做的话就return false
+所以在while loop中间 i++之前也要查一次，如果后面的都match了，就直接return true
 还有就是.*和ab是match的
 */
 public class Solution {
@@ -42,15 +43,12 @@ public class Solution {
             if(p.charAt(0) != '.' && s.charAt(0) != p.charAt(0)) return false;
             return isMatch(s.substring(1), p.substring(1));
         } else {
-            //if no match, important
-            if(isMatch(s, p.substring(2))) return true;
-            
             int i = 0;
             while(i < s.length() && (s.charAt(i) == p.charAt(0) || p.charAt(0) == '.')) {
-                if(isMatch(s.substring(i+1), p.substring(2))) return true;
+                if(isMatch(s.substring(i), p.substring(2))) return true;
                 i++;
             }
+            return isMatch(s.substring(i), p.substring(2));
         }
-        return false;
     }
 }
