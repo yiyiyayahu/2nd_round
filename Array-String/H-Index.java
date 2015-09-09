@@ -49,6 +49,7 @@ Expected runtime complexity is in O(log n) and the input is sorted.
 
 /*
 如果是O(logn)那么就明显是二分法
+二分法就怕指针没挪好就死循环了，比如这里end=mid-1而不是end=mid...
 */
 public class Solution {
     public int hIndex(int[] citations) {
