@@ -12,8 +12,27 @@ All costs are positive integers.
 */
 
 /*
-应该是可以改成一维数组的，空间复杂度就小点
+改成六个变量来存就好了，space就是O(1) time O(n)
 */
+public class Solution {
+    public int minCost(int[][] costs) {
+        int n = costs.length;
+        if(n == 0) return 0;
+        int ret = 0;
+        
+        int r = 0, b = 0, g = 0;
+        for(int i = 0; i < n; i++) {
+            int rr = r, bb = b, gg = g;
+            r = costs[i][0] + Math.min(bb, gg);
+            b = costs[i][1] + Math.min(rr, gg);
+            g = costs[i][2] + Math.min(rr, bb);
+            
+        }
+        ret = Math.min(Math.min(r,b), g);
+        return ret;
+    }
+}
+
 public class Solution {
     public int minCost(int[][] costs) {
         int n = costs.length;
