@@ -11,6 +11,27 @@ Could you solve it with constant space complexity? (Note: The output array does 
 space complexity analysis.)
 */
 
+/*
+dp - 滚动数组 再熟练一下，我一般总是要把extra space的版本写出来再优化，试试能不能一遍就出来
+*/
+public class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        if(nums == null || nums.length == 0) return nums;
+        int n = nums.length;
+        int[] output = new int[n];
+        output[0] = 1; 
+        for(int i = 1; i < n; i++) {
+            output[i] = nums[i-1] * output[i-1];
+        }
+        int after = 1;
+        for(int i = n-2; i>=0; i--) {
+            after *= nums[i+1];
+            output[i] *= after;
+        }
+        return output;
+    }
+}
+
 public class Solution {
     public int[] productExceptSelf(int[] nums) {
         if(nums == null || nums.length == 0) return nums;
