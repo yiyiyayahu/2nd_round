@@ -13,6 +13,7 @@ Could you devise a constant space solution?
 /*
 先做出O(m+n)的解法
 constant space无非就是利用第一行和第一列来执行rows和cols的功能，只是要先把第一列检测一遍
+觉得这道题没啥意思其实
 */
 public class Solution {
     public void setZeroes(int[][] matrix) {
@@ -34,6 +35,43 @@ public class Solution {
                 if(rows[i] || cols[j]) 
                     matrix[i][j] = 0;
             }
+        }
+    }
+}
+
+
+public class Solution {
+    public void setZeroes(int[][] matrix) {
+        if(matrix.length == 0) return;
+        int m = matrix.length, n = matrix[0].length;
+        
+        boolean rowHasZero = false, colHasZero = false;
+        for(int j = 0; j < n; j++) {
+            if(matrix[0][j] == 0) rowHasZero = true;
+        }
+        for(int i = 0; i < m; i++) {
+            if(matrix[i][0] == 0) colHasZero = true;
+        }
+        for(int i = 1; i < m; i++) {
+            for(int j = 1; j < n; j++) {
+                if(matrix[i][j] == 0) {
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+        for(int i = 1; i < m; i++) {
+            for(int j = 1; j < n; j++) {
+                if(matrix[i][0]==0 || matrix[0][j]==0) 
+                    matrix[i][j] = 0;
+            }
+        }
+        
+        if(rowHasZero) {
+            for(int j = 0; j < n; j++) matrix[0][j] = 0;
+        }
+        if(colHasZero) {
+            for(int i = 0; i < m; i++) matrix[i][0] = 0;
         }
     }
 }
