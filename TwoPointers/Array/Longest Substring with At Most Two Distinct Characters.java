@@ -5,6 +5,28 @@ For example, Given s = “eceba”,
 
 T is "ece" which its length is 3. 
 */
+/*
+人家这个滑动窗口比我写的好多了
+cursor是前一个字符的最后那个位置
+*/
+public class Solution {
+    public int lengthOfLongestSubstringTwoDistinct(String s) {
+        if(s == null || s.length() == 0) return 0;
+        
+    	int start = 0, end = 1, cursor = -1;
+    	int maxLen = 0;
+    	for(; end < s.length();end++) {
+    		if(s.charAt(end) == s.charAt(end-1)) continue;
+    		if(cursor >= 0 && s.charAt(cursor) != s.charAt(end)) {
+    			maxLen = Math.max(maxLen, end-start);
+    			start = cursor+1;
+    		}
+    		cursor = end-1;
+    	}
+    	maxLen = Math.max(maxLen, end-start);
+    	return maxLen;  
+    }
+}
 
 public class Solution {
     public int lengthOfLongestSubstringTwoDistinct(String s) {
