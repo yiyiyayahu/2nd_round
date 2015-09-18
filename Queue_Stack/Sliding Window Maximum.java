@@ -29,6 +29,38 @@ Remove redundant elements and the queue should store only elements that need to 
 */
 
 /*
+自己的做法
+开始想的是用maxHeap来做，写完之后发现不太行诶，没办法remove
+然后用deque的话，code写了一段思路才清晰起来
+1）先把钱k个元素放进去，但是放的时候也要注意，如果deque里面的值比当前的小的话，其实是没用的，直接poll出来就好了
+2）到第k个的时候：
+    a 每次都更新下ret数组，把deque.peek放进去。这里要注意的是deque的头要不要poll出来
+    b 同样的，把nums[i]放入deque，之前把deque里面的值比当前的小的都poll出来
+3）记得最后再更新一下ret数组
+*/
+public class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if(nums == null || nums.length == 0) return nums;
+        int[] ret = new int[nums.length-k+1];
+        int index = 0;
+        Deque<Integer> deque = new ArrayDeque<Integer>();
+
+        for(int i = 0; i < nums.length; i++) {
+            if(i >= k) {
+            	ret[index++] = deque.peekFirst();
+            	if(deque.peekFirst() == nums[i-k]) deque.pollFirst();
+            }
+            
+            while(!deque.isEmpty() && nums[i] > deque.peekLast()) {
+            	deque.pollLast();
+            }
+            deque.offerLast(nums[i]);           
+        }
+        ret[index++] = deque.pollFirst();
+        return ret; 
+    }
+}
+/*
 https://leetcode.com/discuss/46578/java-o-n-solution-using-deque-with-explanation
 
 这道题要用Deque来解，还真是不知道这么一个数据结构
@@ -39,7 +71,6 @@ https://leetcode.com/discuss/46578/java-o-n-solution-using-deque-with-explanatio
 最后，其实留在queue的头部的就是当前的max
 好巧妙的做法呀
 */
-
 public class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
         if(nums == null || nums.length == 0) return nums;
