@@ -32,7 +32,7 @@ Remove redundant elements and the queue should store only elements that need to 
 自己的做法
 开始想的是用maxHeap来做，写完之后发现不太行诶，没办法remove
 然后用deque的话，code写了一段思路才清晰起来
-1）先把钱k个元素放进去，但是放的时候也要注意，如果deque里面的值比当前的小的话，其实是没用的，直接poll出来就好了
+1）先把前k个元素放进去，但是放的时候也要注意，如果deque里面的值比当前的小的话，其实是没用的，直接poll出来就好了
 2）到第k个的时候：
     a 每次都更新下ret数组，把deque.peek放进去。这里要注意的是deque的头要不要poll出来
     b 同样的，把nums[i]放入deque，之前把deque里面的值比当前的小的都poll出来
