@@ -12,6 +12,10 @@ The minimum number of jumps to reach the last index is 2. (Jump 1 step from inde
 */
 
 /*
+大家都说用贪心就可以了，不用dp的。这。。。贪心我好像一直没有学过诶
+*/
+
+/*
 我犯了和I一样的问题，这样写就会TimeoutException，因为对于nums中每个元素，我都往前更新数组
 其实时间复杂度就变成了O(n^2)了
 实际上只要算最远跳就可以了哈，再想想
