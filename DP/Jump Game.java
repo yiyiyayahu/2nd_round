@@ -11,6 +11,24 @@ A = [2,3,1,1,4], return true.
 A = [3,2,1,0,4], return false.
 */
 
+/*
+其实不用一维数组，用个int就行。算是greedy的解法
+只要每次在跳的最远的范围内找到那个最大的就可以了，然后那个maxSteps可以大于等于len-1就是true的
+i <= maxSteps && i < len这个判断条件蛮好的，code很简洁
+*/
+public class Solution {
+    public boolean canJump(int[] nums) {
+        if(nums == null || nums.length == 0) return false;
+        int len = nums.length;
+        int maxSteps = 0;
+        for(int i = 0; i <= maxSteps && i < len; i++) {
+            maxSteps = Math.max(maxSteps, nums[i] + i);
+            if(maxSteps >= len-1) return true;
+        }
+        return false;       
+    }
+}
+
 public class Solution {
     public boolean canJump(int[] nums) {
         if(nums == null || nums.length == 0) return true;
