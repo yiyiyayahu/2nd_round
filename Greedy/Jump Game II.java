@@ -13,6 +13,9 @@ The minimum number of jumps to reach the last index is 2. (Jump 1 step from inde
 
 /*
 大家都说用贪心就可以了，不用dp的。这。。。贪心我好像一直没有学过诶
+这题就是已知能到达终点，问最小的步数。
+
+依旧贪心去推，贪心的规则就是在能够到达的范围之内，选择一个能够到达最远距离的点，更新步数，和更新最远到达的范围
 */
 
 /*
