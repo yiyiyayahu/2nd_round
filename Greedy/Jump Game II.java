@@ -17,6 +17,26 @@ The minimum number of jumps to reach the last index is 2. (Jump 1 step from inde
 
 依旧贪心去推，贪心的规则就是在能够到达的范围之内，选择一个能够到达最远距离的点，更新步数，和更新最远到达的范围
 */
+
+public class Solution {
+    public int jump(int[] nums) {
+        if(nums == null || nums.length <= 1) return 0;
+        int len = nums.length;
+        int count = 0, end = 0;
+        for(int start = 0; start < len; ) {
+            int maxSteps = 0;
+            count ++;
+            for(int i = start; i <= end; i++) {
+                maxSteps = Math.max(maxSteps, nums[i] + i);
+                if(maxSteps >= len-1) return count;
+            }
+            start = end+1;
+            end = maxSteps;
+        }
+        return count;    
+    }
+}
+
 public class Solution {
     public int jump(int[] nums) {
         if(nums == null || nums.length == 0) return 0;
