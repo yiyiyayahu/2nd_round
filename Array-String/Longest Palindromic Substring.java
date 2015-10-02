@@ -5,6 +5,9 @@ You may assume that the maximum length of S is 1000, and there exists one unique
 
 /*
 就是从中间开始扩展
+开始expand只有一个变量center，但是这样是不行的：
+aba - ok
+abba的话center是在bb中间的，并不代表一个字母，所以用个left，right更方便
 */
 public class Solution {
     public String longestPalindrome(String s) {
