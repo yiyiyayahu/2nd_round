@@ -9,6 +9,30 @@ Note: There will be exactly one celebrity if he/she is in the party. Return the 
 */
 
 /*
+好神奇，人家用双指针就做出来了，就O(n)
+我开始也想着排除，但是是在knows(a,b) == knows(b,a)的情况下，但是其实knows(a,b)就可以把a排除掉了，名人是不认识其他人的
+但是有一点略略想不通啊，这样双指针下来就只留下来一个可能的值么，也就是l么？好神奇
+*/
+public class Solution extends Relation {
+    public int findCelebrity(int n) {
+        int l = 0, r = n-1;
+        while(l < r) {
+            if(knows(l, r)) l++;
+            else r --;
+        }
+        if(isCelebrity(n, l)) return l;
+        return -1;
+    }
+    public boolean isCelebrity(int n, int b) {
+        for(int i = 0; i < n; i++) {
+            if(i == b) continue;
+            if(knows(i, b) && !knows(b, i)) continue;
+            else return false;
+        }
+        return true;
+    }
+}
+/*
 不晓得这样做是不是最优的诶，看看别人的解法
 */
 
