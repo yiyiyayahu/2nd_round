@@ -73,6 +73,10 @@ public class Solution {
 
 /*
 开始的code长下面这样，总是不行，就是总是不晓得怎么把[2,6][6,2]这种duplicates去掉
+我觉得我这样写说明还是没有很好的理解dfs，开始分析的时候我就想过，如果从2,3，之类的一次除下去的话是不会出现duplicates的问题的
+而且也自然会把6放进去，而不是像我这样，先把2,6放进去，再算下面的，[2,2,3][2,3,2]这种
+啊我错就错在，每次都从2开始往上算，自然会有重复，如果加个start来track就好了
+再总结一下
 */
 
     public void helper(int n, List<Integer> list, List<List<Integer>> ret, int orig) {
