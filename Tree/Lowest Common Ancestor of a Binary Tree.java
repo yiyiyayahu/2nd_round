@@ -18,6 +18,11 @@ since a node can be a descendant of itself according to the LCA definition.
 
 /*
 CC150上面的原题，还是不好写的啊啊啊啊
+关键点是怎么能一边遍历一边返回可能的root
+    returns p if root's subtree includes p
+    returns q if root's subtree includes q
+    returns null if neither p nor q is in root's subtree
+    returns commonAncestor
 */
 /**
  * Definition for a binary tree node.
@@ -28,27 +33,23 @@ CC150上面的原题，还是不好写的啊啊啊啊
  *     TreeNode(int x) { val = x; }
  * }
  */
-public class Solution {
-    //returns p if root's subtree includes p
-    //returns q if root's subtree includes q
-    //returns null if neither p nor q is in root's subtree
-    //returns commonAncestor
+ 
+ public class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null) return null;
-        if(root == p && root == q) return root;
-        
+        if(root == p || root == q) return root;
+
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         if(left != null && left != p && left != q) return left;
         TreeNode right = lowestCommonAncestor(root.right, p, q);
         if(right != null && right != p && right != q) return right;
+
         
         if(left != null && right != null) {
-            //p and q are in different subtrees
-            return root;
-        } else if(root == p || root == q) {
+        //p and q are in different subtrees
             return root;
         } else {
             return left==null?right:left;
         }
-    }
+    }        
 }
