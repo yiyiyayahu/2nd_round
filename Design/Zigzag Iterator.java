@@ -20,6 +20,44 @@ It should return [1,4,8,2,5,9,3,6,7].
 */
 
 /*
+这个应该能扩展到n个list
+*/
+public class ZigzagIterator {
+    int index = 0, iterating = 1;
+    List<Integer> v1;
+    List<Integer> v2;
+    
+    public ZigzagIterator(List<Integer> v1, List<Integer> v2) {
+        this.v1 = v1;
+        this.v2 = v2;
+        if(v1.size() == 0) iterating = 2;
+    }
+
+    public int next() {
+        int ret = 0;
+        if(iterating == 1) {
+            ret = v1.get(index);
+            if(index < v2.size()) {
+            	iterating = 2;
+            } else {
+            	index ++;
+            }
+        } else {
+            ret = v2.get(index);
+            index ++;
+            if(index < v1.size()) {
+            	iterating = 1;
+            }            
+        }
+        return ret;
+    }
+
+    public boolean hasNext() {
+        return index < v1.size() || index < v2.size();
+    }
+}
+
+/*
 这个我只是简单地写了一下，其实扩展到n个这个我还是没有做好，java应该怎么弄呢，还是摆弄一下指针应该，是不是可以只用一个index来回走呢
 */
 public class ZigzagIterator {
