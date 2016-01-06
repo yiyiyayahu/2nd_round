@@ -47,7 +47,8 @@ public class Solution {
         return tmp.next;      
     }
 }
-//递归写起来简单些，但是不晓得算不算constant space诶。。。
+//递归写起来简单些，但是不是constant space，因为recursive用的是stack空间，应该是O(n)
+//stack存放参数和function返回地址的，push和pop。。
 public class Solution {
     public ListNode swapPairs(ListNode head) {
         if(head == null || head.next == null) return head;
