@@ -35,9 +35,6 @@ public class Solution {
         while(first != null && first.next != null) {
         	second = first.next;
             next = second.next;
-            
-            prev.next = null;
-            first.next = null;
 
             second.next = first;
             prev.next = second;
