@@ -50,3 +50,18 @@ public class Solution {
         return tmp.next;      
     }
 }
+//递归写起来简单些，但是不晓得算不算constant space诶。。。
+public class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head == null || head.next == null) return head;
+
+        ListNode p = head;
+        ListNode n = swapPairs(p.next.next);
+        
+        ListNode next = p.next;
+        p.next = n;
+        next.next = p;
+        
+        return next;
+    }
+}
