@@ -31,6 +31,8 @@ If you notice carefully in the flattened tree, each node's right child points to
 我开始的想法居然是先遍历一遍，再构造树。。。
 大姐。。。tree咱能想想recursive么。。。
 后来写code出了一个问题，就是left==null的情况没考虑
+还有就是其实根本不需要辅助函数返回一个TreeNode
+root.left就是flatten好的left，root.right就是flatten好的right
 */
 
 /**
@@ -42,6 +44,26 @@ If you notice carefully in the flattened tree, each node's right child points to
  *     TreeNode(int x) { val = x; }
  * }
  */
+ public class Solution {
+    public void flatten(TreeNode root) {
+        if(root == null) return;
+        
+        flatten(root.left);
+        flatten(root.right);
+        
+        TreeNode left = root.left;
+        TreeNode right = root.right;
+        if(left == null) return;
+        
+        root.right = left;
+        root.left = null;
+        while(left.right != null) left = left.right;
+        left.right = right;
+    }
+}
+
+
+
 public class Solution {
     public void flatten(TreeNode root) {
         flattenNode(root);
