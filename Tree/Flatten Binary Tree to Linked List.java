@@ -29,7 +29,10 @@ If you notice carefully in the flattened tree, each node's right child points to
 
 /*
 我开始的想法居然是先遍历一遍，再构造树。。。
-大姐。。。tree咱能想想recursive么。。。
+但是很显然这样很不高效，还有extra space，能不能在preorder的过程中做出来呢
+可以先把右边存起来，然后左边的遍历完了，一点点挪到右边，最后再把stack里面存着的right tree遍历加进去
+我这里用到一个stack，应该还可以优化不用stack的，再想想
+recursive比较好想其实
 后来写code出了一个问题，就是left==null的情况没考虑
 还有就是其实根本不需要辅助函数返回一个TreeNode
 root.left就是flatten好的left，root.right就是flatten好的right
@@ -44,6 +47,25 @@ root.left就是flatten好的left，root.right就是flatten好的right
  *     TreeNode(int x) { val = x; }
  * }
  */
+ public class Solution {
+    public void flatten(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode p = root;
+        while(p != null || !stack.isEmpty()) {
+            if(p.right != null) {
+                stack.push(p.right);
+            }
+            if(p.left != null) {
+                p.right = p.left;
+                p.left = null;
+            } else if(!stack.isEmpty()) {
+                TreeNode tmp = stack.pop();
+                p.right = tmp;
+            }
+            p = p.right;
+        }
+    }
+}
  public class Solution {
     public void flatten(TreeNode root) {
         if(root == null) return;
