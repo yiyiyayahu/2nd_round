@@ -30,3 +30,23 @@ public class Solution {
         return list;
     }
 }
+//额，这次是这么写的。。和之前好不一样啊
+public class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<Integer>();
+        
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode tmp = root;
+
+        while(tmp != null || !stack.isEmpty() ) {
+            if(tmp == null) {
+                tmp = stack.pop().right;
+            }else {
+                stack.push(tmp);
+                list.add(tmp.val);
+                tmp = tmp.left;
+            }
+        }
+        return list;
+    }
+}
