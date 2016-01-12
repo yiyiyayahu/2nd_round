@@ -26,31 +26,29 @@ public class Solution {
         ListNode fakehead = new ListNode(-1);
         fakehead.next = head;
 
-        ListNode s = head, begin = fakehead;
+        ListNode prev = fakehead, end = null, s = null, e = null;
+        int diff = n - m;
         while(m > 1) {
-            begin = begin.next;
-            s = s.next;
-            m--;
+        	prev = prev.next; 
+        	m --;
         }
-
-        ListNode e = head;
-        while(n > 1) {
-            e = e.next;
-            n--;
+        s = prev.next; 
+        e = s;
+        while(diff > 0) {
+        	e = e.next;
+        	diff--;
         }
-        ListNode end = e.next;
-        e.next = null;
-        begin.next = null;
+        end = e.next;
+        e.next = null; prev.next = null;
         
         ListNode newtail = end;
-        while(s != null) {
-            ListNode next = s.next;
-            s.next = newtail;
-            newtail = s;
-            s = next; 
-        } 
-
-        begin.next = newtail;
+        while(s !=  null) {
+        	ListNode next = s.next;
+        	s.next = newtail;
+        	newtail = s;
+        	s = next;
+        }
+        prev.next = newtail;
         return fakehead.next;
     }
 }
