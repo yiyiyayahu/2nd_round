@@ -28,6 +28,9 @@ global[i][j] = Math.max(global[i-1][j], local[i][j])
 1. k>=len的时候就转化为II transaction多少次都可以了,只要后面比前面大，咱就交易
 2. 数组长度其实是k+1
 这道题巧妙的是局部最优和全局最优，再多想想多做做这类题
+
+二维dp其实都可以压缩到一维
+然后因为dp[i][j]要看i-1,j-1和i-1,j的情况的,所以从后往前推比较方便
 */
 
 public class Solution {
