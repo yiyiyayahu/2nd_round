@@ -8,6 +8,7 @@ You may not engage in multiple transactions at the same time (ie, you must sell 
 */
 
 /*
+useful link: http://liangjiabin.com/blog/2015/04/leetcode-best-time-to-buy-and-sell-stock.html
 想法是这样的，中间取个点k，算k前面的单次交易maxProfit，k后面的单次交易maxProfit，最后两者一加和，取个最大的就好了
 这样就三次遍历就OK啦
 */
