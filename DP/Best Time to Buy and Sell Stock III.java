@@ -8,6 +8,35 @@ You may not engage in multiple transactions at the same time (ie, you must sell 
 */
 
 /*
+想法是这样的，中间取个点k，算k前面的单次交易maxProfit，k后面的单次交易maxProfit，最后两者一加和，取个最大的就好了
+这样就三次遍历就OK啦
+*/
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        if(len == 0) return 0;
+        int[] pre = new int[len];
+        int[] post = new int[len];
+
+        int currMin = prices[0];
+        for(int i = 1; i < len; i++) {
+            currMin = Math.min(currMin, prices[i]);
+            pre[i] = Math.max(pre[i-1], prices[i] - currMin);
+        }
+
+        int currMax = prices[len-1];
+        for(int i = len-2; i >= 0; i--) {
+            currMax = Math.max(currMax, prices[i]);
+            post[i] = Math.max(post[i+1], currMax - prices[i]);
+        }
+        int maxProfit = 0;
+        for(int i = 0; i < len; i++) {
+            maxProfit = Math.max(pre[i] + post[i], maxProfit);
+        }
+        return maxProfit;      
+    }
+}
+/*
 悲剧，TLE了
 我觉得我的时间复杂度应该是O(n^2)，也就是说有O(n)的解法？
 为啥第二遍刷我还是不记得
