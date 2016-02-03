@@ -24,7 +24,7 @@ public class Solution {
             int i = level, j = level;
             while(j < n-level) matrix[i][j++] = num++;
             i++;j--;
-            while(i < n-level) matrix[i++][j] = num ++;
+            while(i < n-level) matrix[i++][j] = num++;
             i--;j--;
             while(j >= level) matrix[i][j--] = num++;
             i--;j++;
