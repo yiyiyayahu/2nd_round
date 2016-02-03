@@ -44,12 +44,12 @@ public class Solution {
         }
         j--;i--;
         for(; j >= level; j--) {
-        	if(level == m-level-1) break;
+            if(level == m-level-1) break;
             list.add(matrix[i][j]);
         }
         i--;j++;
         for(; i > level; i--) {
-        	if(level == n-level-1) break;
+            if(level == n-level-1) break;
             list.add(matrix[i][j]);
         }    
         helper(matrix, level+1, list, m, n, limit);
