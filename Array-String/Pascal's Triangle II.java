@@ -29,3 +29,20 @@ public class Solution {
         return list;
     }
 }
+
+/*
+或者直接就用list来做
+*/
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        ArrayList<Integer> list  = new ArrayList<Integer>(rowIndex+1);
+        for(int i = 0; i <= rowIndex; i++) {
+            list.add(1);
+            for(int j = i-1; j > 0; j--) {
+                int sum = list.get(j) + list.get(j-1);
+                list.set(j, sum);
+            }
+        }
+        return list;
+    }
+}
