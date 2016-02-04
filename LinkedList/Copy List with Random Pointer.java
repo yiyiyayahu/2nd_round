@@ -10,7 +10,7 @@ Return a deep copy of the list.
 其实就是每个node除了自己的指针之外又多出一个random的pointer，指向哪个点不确定，但是因为是指针嘛，只能指向一个点
 copy就是clone出来一个一模一样的list
 
-难点就是next，ok，很好办，但是random的指针，可能你copy的过程中，这个node还没new出来，连不上
+难点就是random 因为random的指针，可能你copy的过程中，这个node还没new出来，连不上
 那我想的就是，有没有可能，我一遍遍历一边clone，但是random指针先指向上一个list中一些存在的点啊神马的
 后来发现，喔喔，我想起来之前怎么做的了，就是每个node都在clone出来一个node放在next的位置
 比如1-2-3变成1-1'-2-2'-3-3',这样就可以把random指针弄出来了
