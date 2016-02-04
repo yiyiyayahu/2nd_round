@@ -24,34 +24,30 @@ You should return [1,2,3,6,9,8,7,4,5].
 public class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> list = new ArrayList<Integer>();
-        int m = matrix.length;
-        if(m == 0) return list;
-        int n = matrix[0].length;
-        int limit = Math.min(m,n) / 2 - (Math.min(m,n)%2==0?1:0);       
-        helper(matrix, 0, list, m, n, limit);
-        return list;
-    }
-    public static void helper(int[][] matrix, int level, List<Integer> list, int m, int n, int limit) {
-        if(level > limit) return;
+        if(matrix.length == 0) return list;
         
-        int i = level, j = level;
-        for(; j < n-level; j++) {
-            list.add(matrix[i][j]);
+        int m = matrix.length, n = matrix[0].length;
+        int limit = Math.min(m,n)/2;
+        if(Math.min(m,n)%2==0) limit--;
+        int level = 0;
+        
+        while(level <= limit) {
+            int i = level, j = level;
+            while(j < n-level) list.add(matrix[i][j++]);
+            j--;i++;
+            while(i < m-level) list.add(matrix[i++][j]);
+            i--;j--;
+            while(j >= level) {
+                if(level == m-level-1) break;
+                list.add(matrix[i][j--]);
+            }
+            j++;i--;
+            while(i > level) {
+                if(level == n-level-1) break;
+                list.add(matrix[i--][j]);
+            }
+            level ++;
         }
-        i++;j--;
-        for(; i < m-level; i++) {
-            list.add(matrix[i][j]);
-        }
-        j--;i--;
-        for(; j >= level; j--) {
-            if(level == m-level-1) break;
-            list.add(matrix[i][j]);
-        }
-        i--;j++;
-        for(; i > level; i--) {
-            if(level == n-level-1) break;
-            list.add(matrix[i][j]);
-        }    
-        helper(matrix, level+1, list, m, n, limit);
+        return list;
     }
 }
