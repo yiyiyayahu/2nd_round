@@ -1,0 +1,7 @@
+1. Scope the problem: Don't make assumptions; Ask questions; Understand the constraints and use cases.
+
+2. Sketch up an abstract design that illustrates the basic components of the system and the relationships between them.
+
+3. Think about the bottlenecks these components face when the system scales.
+
+4. Address these bottlenecks by using the fundamentals principles of scalable system design.
