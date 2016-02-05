@@ -17,6 +17,8 @@ copy就是clone出来一个一模一样的list
 但是要注意的一点是：
 1. 还是null pointer，这个random也可能是null的要注意判断
 2. 弄完了要把以前的list还原回去，别不管了
+
+时间O(n) 空间O(1)
 */
 
 /**
@@ -53,5 +55,40 @@ public class Solution {
             curr = curr.next;
         }
         return ret;       
+    }
+}
+
+/*
+下面这个方法算是比较常规，就是用一个hashmap来做映射，key-旧节点 value-新节点
+第一次遍历，建立map的同时，把next连接好
+第二次遍历，把random连接好
+这样就完成了
+时间O(n) 空间O(n)
+*/
+public class Solution {
+    public RandomListNode copyRandomList(RandomListNode head) {
+        if(head == null) return head;
+        HashMap<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
+        RandomListNode n = head;
+        RandomListNode newHead = new RandomListNode(head.label);
+        map.put(n, newHead);
+        RandomListNode clone = newHead;
+        n = n.next;
+        
+        while(n != null) {
+          RandomListNode curr = new RandomListNode(n.label);
+          clone.next = curr;
+          map.put(n, curr);
+          clone = clone.next;
+          n = n.next;
+        }
+        clone = newHead;
+        n = head;
+        while(clone != null) {
+          clone.random = map.get(n.random);
+          clone = clone.next;
+          n = n.next;
+        }
+        return newHead;
     }
 }
