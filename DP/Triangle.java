@@ -22,8 +22,26 @@ Bonus point if you are able to do this using only O(n) extra space, where n is t
 其他的都是dp[j] = Math.min(dp[j], dp[j-1]) + list.get(j);
 但是我这个做法就是还要最后扫描一下数组，找到minTotal
 
-以前我是从下面向上做，最后就会归结到dp[0]那里，就少了一步扫描了
+从下面向上做方便一点，最后就会归结到dp[0]那里
 */
+
+public class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int len = triangle.size();
+        if(len == 0) return 0;
+        
+        int[] dp = new int[len];
+        for(int i = len-1; i >= 0; i--) {
+            List<Integer> list = triangle.get(i);
+            
+            for(int j = 0; j < list.size(); j++) {
+                if(i == len-1) dp[j] = list.get(j);
+                else dp[j] = list.get(j) + Math.min(dp[j],dp[j+1]);
+            }
+        }
+        return dp[0];
+    }
+}
 
 public class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
