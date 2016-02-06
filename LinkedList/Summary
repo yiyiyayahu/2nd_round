@@ -1,0 +1,5 @@
+Some problems need to be looked at again:
+
+Reverse Node in K Group这道，如果要constant space的话，是不是不能用recursive en 
+
+Odd Even List感觉写的不好，再想想
