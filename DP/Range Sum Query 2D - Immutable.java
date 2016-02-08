@@ -26,7 +26,41 @@ You may assume that row1 ≤ row2 and col1 ≤ col2.
 /*
 和上一题很像，只是略微复杂了点
 注意m==0的情况，就是matrix是[]
+如果sum初始化成int[m+1][n+1]可以避免很多要判断i-1,j-1是否在range里面的问题，代码就大大简化了
 */
+
+public class NumMatrix {
+    int[][] sum;
+    
+    public NumMatrix(int[][] matrix) {
+        int m = matrix.length;
+        if(m == 0) sum = null;
+        else {
+            int n = matrix[0].length;
+            sum = new int[m+1][n+1];
+    
+            for(int i = 1; i <= m; i++) {
+                for(int j = 1; j <= n; j++) {
+                    sum[i][j] = sum[i][j-1] + sum[i-1][j] - sum[i-1][j-1] + matrix[i-1][j-1];
+                }
+            }
+        }
+    }
+
+    public int sumRegion(int row1, int col1, int row2, int col2) {
+        if(sum == null) return 0;
+
+        return sum[row2+1][col2+1] - sum[row1][col2+1] - sum[row2+1][col1] + sum[row1][col1];
+    }
+}
+
+
+// Your NumMatrix object will be instantiated and called as such:
+// NumMatrix numMatrix = new NumMatrix(matrix);
+// numMatrix.sumRegion(0, 1, 2, 3);
+// numMatrix.sumRegion(1, 2, 3, 4);
+
+
 public class NumMatrix {
     int[][] sum;
     
