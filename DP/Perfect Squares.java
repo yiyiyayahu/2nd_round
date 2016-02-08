@@ -17,6 +17,7 @@ public class Solution {
         for(int i = 1; i <= n; i++) {
             int tmp = Integer.MAX_VALUE;
             for(int j = (int)(Math.sqrt(i)); j >= 1; j--) {
+                if(i == j*j) { tmp = 1; break;}
                 tmp = Math.min(tmp, dp[i-j*j]+1);
             }
             dp[i] = tmp;
