@@ -5,3 +5,10 @@ http://blog.csdn.net/linhuanmars/article/details/38468361
 
 =============
 Math.sqrt(n)返回的是double，要cast成int
+
+
+
+=============
+需要再做一遍的题目：
+1. best time to buy and sell stock IV
+2. maximal square
