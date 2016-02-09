@@ -40,3 +40,35 @@ public class Solution {
         return maxSquare * maxSquare;
     }
 }
+
+/*
+改进为一维的
+其实需要的就是上一轮的dp[j-1]的值，这一轮的dp[j-1]和当前的dp[j]
+然后因为dp[j-1]被更改过，要cache一下之前的dp[j-1]
+因为是一维的，如果当前元素为0，记得把dp[j]置为0
+同样为了code简洁，数组长度初始化为n+1
+*/
+public class Solution {
+    public int maximalSquare(char[][] matrix) {
+        if(matrix == null || matrix.length == 0) return 0;
+        
+        int m = matrix.length, n = matrix[0].length;
+        int[] dp = new int[n+1];
+        
+        int maxSquare = 0;
+        for(int i = 0; i < m; i++) {
+            int pre = 0;
+            for(int j = 0; j < n; j++) {
+                int tmp = dp[j+1];
+                if(matrix[i][j] == '1') {
+                    dp[j+1] = Math.min(pre, Math.min(dp[j], dp[j+1])) + 1;
+                    maxSquare = Math.max(maxSquare, dp[j+1]);
+                } else {
+                	dp[j+1] = 0;
+                }
+                pre = tmp;
+            }
+        }
+        return maxSquare * maxSquare;
+    }
+}
