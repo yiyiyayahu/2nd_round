@@ -35,11 +35,9 @@ public class Solution {
                 if(map.containsValue(s)) return false;
                 map.put(c, s);
             } else {
-                if(map.get(c).equals(s)) continue;
-                else return false;
+                if(!map.get(c).equals(s)) return false;
             }
         }
-        
         return true;
     }
 }
