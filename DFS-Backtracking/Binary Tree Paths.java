@@ -15,7 +15,7 @@ All root-to-leaf paths are:
 
 /*
 很简单的一道题，就用dfs就行
-然后dfs还是要注意不要把上一次的结果带入下一次调用，所以new StringBuilder(sb),不然比如调用root.left的时候会把sb改了，这样在root.right中就有多余的，结果就不对了
+然后dfs还是要注意不要把上一次的结果带入下一次调用，所以new StringBuilder(sb),不然调用root.left的时候会把sb改了，这样在root.right中就有多余的，结果就不对了
 */
 
 /**
