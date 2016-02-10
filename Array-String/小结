@@ -14,3 +14,11 @@ Collections.sort(list)
 ===============================
 char c to Character
 Character ch = new Character(c);
+
+
+
+
+
+===============================
+TODO:
+Majority Element I, II
