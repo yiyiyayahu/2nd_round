@@ -12,3 +12,5 @@ if(result>Integer.MAX_VALUE/10 || (result==Integer.MAX_VALUE/10 &&digit>=8))
 java自带的对一个list排序
 Collections.sort(list)
 ===============================
+char c to Character
+Character ch = new Character(c);
