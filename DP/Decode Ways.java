@@ -41,15 +41,15 @@ public class Solution {
         int[] dp = new int[len+1];
         dp[0] = 1; dp[1] = 1;
         for(int i = 1; i < len; i++) {
-            int curr = (int)(s.charAt(i)-'0');
-            int prev = (int)(s.charAt(i-1)-'0');
+            char curr = s.charAt(i);
+            char prev = s.charAt(i-1);
             char next = (i < len-1? s.charAt(i+1) : 'c');
             
-            int num = prev * 10 + curr;
-            if(curr == 0) {
-                if(prev >= 3 || prev == 0) return 0; 
+            int num = (prev-'0')*10 + (curr-'0');
+            if(curr == '0') {
+                if(prev >= '3' || prev == '0') return 0; 
                 dp[i+1] = dp[i];
-            } else if(next != '0' && (num>=10 && num<=26) ) {
+            } else if(next != '0' && (num >= 10 && num <= 26)) {
                 dp[i+1] = dp[i] + dp[i-1];
             } else {
                 dp[i+1] = dp[i];
