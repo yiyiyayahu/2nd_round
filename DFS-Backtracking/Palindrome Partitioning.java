@@ -12,6 +12,10 @@ Return
   ]
 */
 
+/*
+很欣慰的是，再看以前的代码，我发现我确实进步了，现在对于backtracking的思路掌握的还可以，撒花~~~
+*/
+
 public class Solution {
     public List<List<String>> partition(String s) {
         List<List<String>> ret = new ArrayList<List<String>>();
@@ -43,8 +47,7 @@ public class Solution {
         if(len == 1) return true;
         int start = 0, end = len-1;
         while(start <= end) {
-            if(s.charAt(start++) == s.charAt(end--)) continue;
-            else return false;
+            if(s.charAt(start++) != s.charAt(end--)) return false;
         }
         return true;
     }
