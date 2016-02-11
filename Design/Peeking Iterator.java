@@ -39,7 +39,7 @@ class PeekingIterator implements Iterator<Integer> {
             peek = iter.next();
             hasPeeked = true;
 	    }
-        return peek;
+	    return peek;
 	}
 
 	// hasNext() and next() should behave the same as in the Iterator interface.
