@@ -31,9 +31,9 @@ public class Solution {
                 int n = num - coins[i];
                 if(n >= 0) tmp = Math.min(tmp, dp[n]);
             }
-            dp[num] = (tmp == Integer.MAX_VALUE) ? Integer.MAX_VALUE : tmp+1;
+            dp[num] = (tmp==Integer.MAX_VALUE) ? Integer.MAX_VALUE : tmp+1;
         }
-        if(dp[amount] == Integer.MAX_VALUE) return -1;
-        return dp[amount];
+
+        return (dp[amount]==Integer.MAX_VALUE) ? -1 : dp[amount];
     }
 }
