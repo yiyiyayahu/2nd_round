@@ -13,6 +13,7 @@ Note:
 /*
 和ugly number II的解法差不多，唯一的区别就是从3个2，3，5固定的质数扩展到k个
 一直不清楚提示的Heap是什么解法，可以再研究一下
+Heap的做法时间复杂度不是很好，比如用最大堆来找最小的，那么heap的操作要用掉O(logk)
 */
 public class Solution {
     public int nthSuperUglyNumber(int n, int[] primes) {
