@@ -12,6 +12,8 @@ Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 
 dp[i] = min(dp[k-1])+1 if(k到i是palindrome)
         0(if0到k是palindrome)
 果断TLE 哭
+
+哦，其实我的做法还可以，只是每次我都检测一遍是不是回文有点重复了，可以用一个数组, isPal[i][j]来缓存i到j是不是回文
 */
 
 public class Solution {
