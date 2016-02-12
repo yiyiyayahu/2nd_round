@@ -18,6 +18,7 @@ Hint:
 这个L1，L2，L3其实都是之前的ugly number！
 所以用一个array来maintain算出的ugly number，然后用三个指针三个index指向array的element，就是L1,L2,L3的值
 自己其实没想出来，看了下答案。。。
+又做了一次，想出来啦，开森！但是还是看了题目里的hint的
 */
 public class Solution {
     public int nthUglyNumber(int n) {
