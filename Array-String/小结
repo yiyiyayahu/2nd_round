@@ -20,5 +20,6 @@ Character ch = new Character(c);
 
 
 ===============================
-TODO:
-Majority Element I, II
+String to int:
+String s = "123";
+int num = Integer.parseInt(s);
