@@ -82,11 +82,8 @@ public class WordDictionary {
     }
     
     public boolean helper(String word, int i, TrieNode start) {
-        if(i == word.length()) {
-            if(start != null && start.isLeaf()) return true;
-            return false;
-        }
         if(start == null) return false;
+        if(i == word.length()) return start.isLeaf();
         
         TrieNode tmp = start;
         char c = word.charAt(i);
