@@ -19,6 +19,41 @@ isMatch("ab", ".*") → true
 isMatch("aab", "c*a*b") → true
 */
 
+
+/*
+又重新写了一遍，其实这道题用recursive做还是可以的
+但是我跪在了：判断slen plen上，有两处：
+1. if(plen == 0) return slen == 0;
+2. if(next != '*') {
+        if(slen < 1) return false;
+        。。。
+    }
+*/
+public class Solution {
+    public boolean isMatch(String s, String p) {
+        int slen = s.length(), plen = p.length();
+        if(plen == 0) return slen == 0;
+        
+        char c = p.charAt(0);
+        if(plen == 1) {
+            if(slen != 1) return false;
+            return c == s.charAt(0) || c == '.';
+        }
+        
+        char next = p.charAt(1);
+        if(next != '*') {
+            if(slen < 1) return false;
+            if(c != '.' && s.charAt(0) != c) return false;
+            return isMatch(s.substring(1), p.substring(1));
+        } 
+        int i = 0;
+        while(i < slen && (s.charAt(i) == c || c == '.')) {
+            if(isMatch(s.substring(i), p.substring(2))) return true;
+            i++;
+        }
+        return isMatch(s.substring(i), p.substring(2));
+    }
+}
 /*
 这道题好难写啊啊啊
 考虑两个字符就比较好，然后recursive
