@@ -39,6 +39,7 @@ dp[i][j] =
 2）如果p是*，有两种可能，这里还要看p里面*前的那个char prev：
         a) 如果prev和当前的s.charAt(i)match，那么一种是这个*代表一个prev -dp[i-1][j]，比如aa，a*，检测到*的时候，发现当前的a和*前的a一样
            当然也可以a*不match任何的序列 - dp[i][j-2]
+           （比如"a"， "aa*"，如果不考虑dp[i][j-2]的话就return false）
         b) prev和当前的s不match，那么这个prev*组合不match任何序列 - dp[i][j-2]
 */
 public class Solution {
