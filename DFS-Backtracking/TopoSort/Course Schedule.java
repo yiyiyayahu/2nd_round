@@ -49,6 +49,49 @@ DFS(G, v) :
 那么这个course schedule的问题是呢，有可能有cycle
 有cycle的处理就是，如果我在上面这个过程中，发现，诶，怎么已经visited过，那么就是cycle return false
 */
+
+/*
+下面这个是简单一点的写法
+首先对int[][] prerequisites做一点预处理，这样就不用像我那样每次都搜一遍了，而是先搜好
+因为我那个对于每个numCourse都要遍历一遍二维数组，而这个呢，只要遍历一遍就可以了
+
+然后因为只返回boolean，其实没让我算degree
+那用visited[i]=2表示完全找到，这个node就是一个sink node，或者说这个node point to的那个node也已经找过了
+而visited[i]=1表示刚刚开始找，那如果下次再遇见它的话，就说明在loop里面了，就要return false
+*/
+public class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int len = prerequisites.length;
+        if(len == 0) return true;
+        List<List<Integer>> graph = new ArrayList<List<Integer>>();
+        for(int i = 0; i < numCourses; i++) {
+            graph.add(new ArrayList<Integer>());
+        }
+        for(int i = 0; i < len; i++) {
+            graph.get(prerequisites[i][1]).add(prerequisites[i][0]);
+        }
+        
+        int[] visited = new int[numCourses];
+        for(int i = 0; i < numCourses; i++) {
+            if(!dfs(graph, i, visited)) return false;
+        }
+        return true;
+    }
+    public boolean dfs(List<List<Integer>> graph, int course, int[] visited) {
+        if(visited[course] == 2) return true;
+        if(visited[course] == 1) return false;
+        
+        visited[course] = 1;
+        for(int i = 0; i < graph.get(course).size(); i++) {
+            int next = graph.get(course).get(i);
+            if(!dfs(graph, next, visited)) return false;
+        }
+        visited[course] = 2;
+        return true;
+    }
+}
+
+
 public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         boolean[] visited = new boolean[numCourses];
