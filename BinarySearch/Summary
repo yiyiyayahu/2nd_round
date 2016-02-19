@@ -1,2 +1,11 @@
 二分法要注意不要进入死循环
 left和right的指针一定要挪动，不要出现不挪动的情况
+
+我以前的写法都是会把times==mid单独列出来，然后直接return blabla的，但是现在我发现，似乎这样写：就是大概有个套路？
+仔细研究一下binary search
+if(times > mid) {
+    end = mid-1;
+} else {
+    start = mid+1;
+}
+return start;
