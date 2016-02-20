@@ -50,6 +50,7 @@ public class Solution {
 
 /*
 看到的好一点的解法，就是不用像我上面那样遍历两遍string，但是最后还要遍历一次数组，其实差不多啦，看是string长还是数组长了
+而且这个还要多分配一个array
 */
 
 public class Solution {
