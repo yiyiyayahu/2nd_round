@@ -10,6 +10,56 @@ You should return the indices: [0,9].
 */
 
 /*
+这个解法的优化是，与其再重新start++那么从头找，不如看看能跳过几个word那种长度的单词，明儿再想想，好难写啊。。。。
+*/
+public class Solution {
+    public List<Integer> findSubstring(String s, String[] words) {
+        Map<String,Integer> map = new HashMap<String,Integer>();
+        for(String word:words){
+            if(map.containsKey(word)){
+                map.put(word,map.get(word)+1);
+            }else{
+                map.put(word,1);
+            }
+        }
+        int length = words[0].length();
+        List<Integer> result = new ArrayList<Integer>();
+        for(int i=0;i<length;i++){
+            //just start from different point...
+            Map<String,Integer> tmp = new HashMap<String,Integer>();
+            int start = i;
+            int count = 0;
+            for(int j=i;j+length<=s.length();j+=length){
+                String word = s.substring(j,j+length);
+                if(map.containsKey(word)){
+                    tmp.put(word,tmp.getOrDefault(word,0)+1);
+                    count+=1;
+                    while(tmp.get(word)>map.get(word)){ //At most greater than zero..
+                        String removeWord = s.substring(start,start+length);
+                        if(tmp.get(removeWord)>1){
+                            //greater than 0..
+                            tmp.put(removeWord,tmp.get(removeWord)-1);
+                        }else{
+                            tmp.remove(removeWord);
+                        }
+                        start+=length;
+                        count-=1;
+                        if(removeWord.equals(word))
+                            break;
+                    }
+                    if(count==words.length)
+                        result.add(start);
+                }else{
+                    tmp.clear();
+                    count = 0;
+                    start = j+length;
+                }
+            }
+        }
+        return result;
+    }
+}
+/*
 哭了，下面这个是原来可以过的解法，结果现在TLE了。。。
 */
 public class Solution {
