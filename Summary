@@ -35,7 +35,7 @@ PriorityQueue<Integer> queue = new PriorityQueue<Integer>(k, new Comparator<Inte
 word break I,II可以再做一下，题还挺好的
 number of islands写的很乱啊，可以再练一下
 spiral matrix虽然不难，但是很难写对，再练一下
-
+Substring with Concatenation of All Words这道题实在是。。又难想又难写，我发现two pointer的string题好难处理啊，苦
 
 
 
