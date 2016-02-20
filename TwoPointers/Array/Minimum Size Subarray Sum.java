@@ -11,6 +11,28 @@ If you have figured out the O(n) solution, try coding another solution of which 
 */
 
 /*
+code写的简洁一点
+*/
+public class Solution {
+    public int minSubArrayLen(int s, int[] nums) {
+        int len = nums.length;
+        int minLen = len+1;
+        int sum = 0;
+        
+        int start = 0, end = start;
+        while(start < len) {
+            while(sum < s && end < len) {
+                sum += nums[end++];
+            }
+            int tmp = (sum>=s) ? end-start:len+1;
+            minLen = Math.min(minLen, tmp);
+            sum -= nums[start++];
+        }
+        if(minLen == len+1) return 0;
+        return minLen;
+    }
+}
+/*
 这道题还蛮简单的，就是two pointer一点点移，时间复杂度O(n)
 我这里又没仔细检查array的bound
 sum += nums[++end]; end指针后移的时候没有注意看end是不是最后一位，前面要加一句：if(end == len-1) break;
