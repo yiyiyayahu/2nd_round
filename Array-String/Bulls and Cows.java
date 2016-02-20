@@ -47,3 +47,33 @@ public class Solution {
         return sb.toString();
     }
 }
+
+/*
+看到的好一点的解法，就是不用像我上面那样遍历两遍string，但是最后还要遍历一次数组，其实差不多啦，看是string长还是数组长了
+*/
+
+public class Solution {
+    public String getHint(String secret, String guess) {
+        int bulls = 0, cows = 0;
+        StringBuilder sb = new StringBuilder();
+    
+        int[] secretCounts = new int[10];
+        int[] guessCounts = new int[10];
+        for(int i = 0; i < secret.length(); i++) {
+            int valS = secret.charAt(i) - '0';
+            int valG = guess.charAt(i) - '0';
+            if(valS == valG) {
+                bulls ++;
+            } else {
+                secretCounts[valS] ++;
+                guessCounts[valG]++;
+            }
+        }
+        for(int i = 0; i < 10; i++) {
+            cows += Math.min(secretCounts[i], guessCounts[i]);
+        }
+
+        sb.append(bulls).append("A").append(cows).append("B");
+        return sb.toString();
+    }
+}
