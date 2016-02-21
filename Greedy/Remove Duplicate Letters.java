@@ -18,6 +18,9 @@ greedy我脚着就是简单粗暴型选手
 写code要注意几点，也是我开始没有考虑到的，导致很多test case没过
 1. 其实我看到一个char c，我就应该把counts[c]--，因为已经遇到过了
 2. 如果这个stack里面已经有c就不用把所有大于它的字符pop出来了
+
+写出来了之后觉得这道题也不难啊，为啥开始想不出。。。我开始想到了counts，但是stack没想出，然后看到了tags里面有stack想到了stack但是还是没想出。。。
+我觉得就是我没有想到简单粗暴的把之前所有的character都去掉这件事儿。。。再做两道greedy感受一下
 */
 public class Solution {
     public String removeDuplicateLetters(String s) {
