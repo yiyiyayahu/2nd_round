@@ -20,3 +20,8 @@ greedy algorithm 其实一直没学过，所以一直不太会。。。
 
 2. Dijstkra algorithm
 必须要所有edge是non-negative的！
+
+如果用greedy的话，要proof of correctness
+两种方法：
+1. induction，就证明每一步的greedy都是对的
+2. exchange argument，类似反证法，就是假设选出的greedy的不行，看能不能有更好的
