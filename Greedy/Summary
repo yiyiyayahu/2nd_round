@@ -1,0 +1,22 @@
+greedy algorithm 其实一直没学过，所以一直不太会。。。
+
+现在的理解是：一直选择当前最佳的解法。
+但是这个解法很多问题不适合，就是适合的条件还蛮苛刻的。。。我怎么看到底是不是greedy来解呢！（是不是看看每次都greedy的话有没有反例？）
+
+因为要最佳，很可能给的input是sort过的嘛，先举几个例子
+
+很简单的introduction
+比如美元的面值，cents, 25, 10, 5, 1 给定sum，怎么选可以让更少的金币组成这个sum
+那如果sum = 31， 从最大的开始选起，25+5+1 得到的是最优解
+但是不是经常work的
+
+1. activity schedule
+就是每个activity有start time和finish time，怎么安排使得不冲突的activity安排的最多
+那解法呢就是按照每个activity的finish time从小到大排序
+然后固定第一个，从后面扫描比finish time大的start time作为第二个。。。从而排到多少activity就是最后的数量
+
+那这个可以work的原因呢：
+比如s1, s2，s2的finish time比s1大，有没有可能选s2而不选s1得到的解法更优呢？显然没有。就是s2后续的activity的start time肯定比s1的finish time也大，所以没意义
+
+2. Dijstkra algorithm
+必须要所有edge是non-negative的！
