@@ -13,6 +13,7 @@ Here is an example of version numbers ordering:
 
 /*
 这个是没有用到split的解法
+这样会快很多诶，因为split本身就要遍历一次string，而我现在边遍历边比较的话就遍历一次就可以了~~~ 以后遇到string纯处理的题，尽量少用split
 */
 public class Solution {
     public int compareVersion(String version1, String version2) {
