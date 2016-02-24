@@ -11,6 +11,36 @@ Here is an example of version numbers ordering:
 0.1 < 1.1 < 1.2 < 13.37
 */
 
+/*
+这个是没有用到split的解法
+*/
+public class Solution {
+    public int compareVersion(String version1, String version2) {
+    	char[] v1 = version1.toCharArray();
+    	char[] v2 = version2.toCharArray();
+    	
+    	int i1 = 0, i2 = 0;
+    	while(i1 < v1.length || i2 < v2.length) {
+    		int num1 = 0, num2 = 0;
+    		while(i1 < v1.length && v1[i1] != '.') {
+    			num1 *= 10;
+    			num1 += v1[i1]-'0';
+    			i1 ++;
+    		}
+    		while(i2 < v2.length && v2[i2] != '.') {
+    			num2 *= 10;
+    			num2 += v2[i2]-'0';
+    			i2 ++;
+    		}   		
+    		if(num1 > num2) return 1;
+    		if(num1 < num2) return -1; 
+    		i1++;i2++;
+    	}
+    	return 0;
+    }
+}
+
+
 public class Solution {
     public int compareVersion(String version1, String version2) {
         String[] arr1 = version1.split("\\.");
