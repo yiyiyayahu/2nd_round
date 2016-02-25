@@ -52,3 +52,10 @@ Substring with Concatenation of All Words这道题实在是。。又难想又难
 
 对于dp的题，一定就直接想递推式，要么就是从前往后推，要么就是从后往前推，我容易犯的一个毛病是，从前往后推 推着推着就想recursive了，就乱了，现在这点有改进
 dfs呢，一般就是要把所有情况都考虑到，难一点的题要加上剪枝，这个要注意看一下
+
+
+==================
+很多考到int的题都要考虑下溢出！
+Integer.MIN_VALUE是"-2147483648"，要比Integer.MAX_VALUE大
+比如Fraction to Recurring Decimal这道题，没办法把这个直接转换成正数。这样就溢出了！！！太变态了，所以要用long
+那如果long/long结果还是long，这点也要注意！！！
