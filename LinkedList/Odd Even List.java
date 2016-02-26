@@ -25,6 +25,30 @@ The first node is considered odd, the second node even and so on ...
  *     ListNode(int x) { val = x; }
  * }
  */
+ 
+ /*
+ 看到网上的一个解法，写的很巧妙，就是链接断开的时候不要急，一点一点断开，这样依次挪一下就可以了
+ */
+ public class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        if(head == null || head.next == null) return head;
+        
+        ListNode oddHead = head, oddTail = head;
+        ListNode evenHead = head.next, evenTail = head.next;
+        ListNode ret = head;
+        while(evenTail != null && evenTail.next != null) {
+            oddTail.next = evenTail.next;
+            evenTail.next = evenTail.next.next;
+            oddTail.next.next = evenHead;
+            
+            oddTail = oddTail.next;
+            evenTail = evenTail.next;
+        }
+        return ret;
+    }
+}
+
+
 public class Solution {
     public ListNode oddEvenList(ListNode head) {
         if(head == null || head.next == null) return head;
