@@ -59,3 +59,8 @@ dfs呢，一般就是要把所有情况都考虑到，难一点的题要加上�
 Integer.MIN_VALUE是"-2147483648"，要比Integer.MAX_VALUE大
 比如Fraction to Recurring Decimal这道题，没办法把这个直接转换成正数。这样就溢出了！！！太变态了，所以要用long
 那如果long/long结果还是long，这点也要注意！！！
+
+==================
+ArrayList functions
+list.set(index, element)
+list.insert(index, element)
