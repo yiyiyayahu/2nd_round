@@ -64,3 +64,7 @@ Integer.MIN_VALUE是"-2147483648"，要比Integer.MAX_VALUE大
 ArrayList functions
 list.set(index, element)
 list.insert(index, element)
+
+String s = s.toLowerCase();
+Character.isDigit(char c)
+Character.isLetter(char c)
