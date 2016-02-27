@@ -13,6 +13,10 @@ Time complexity:
 Because the total number of steps equals to the height of the tree h, 
 at each step, calculating the height will cost time O(h - current step) 
 so the time complexity is h + (h - 1) + (h - 2) + ... + 1 = O(h^2) = O(log(n)^2).
+
+还有一个解法更牛
+https://leetcode.com/discuss/75517/three-solutions-and-explanations
+再研究一下！
 */
 public class Solution {
     public int countNodes(TreeNode root) {
