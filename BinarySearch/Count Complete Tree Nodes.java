@@ -6,6 +6,42 @@ In a complete binary tree every level, except possibly the last, is completely f
 It can have between 1 and 2h nodes inclusive at the last level h.
 */
 
+
+/*
+优化了一下
+一直TLE。。。后来和可爱的室友们讨论了一下，我的复杂度也还好啊，O(h^2) = O((logn)^2)，也没有重复计算神马的
+结果。。。真相是(int)(Math.pow(2, height))换成(1<<height)就过了。。。。因为pow毕竟是转换成了float型。。。
+*/
+public class Solution {
+    public int countNodes(TreeNode root) {
+        if(root == null) return 0;
+        
+        int height = -1;
+        TreeNode left = root;
+        while(left != null) {
+            height ++;
+            left = left.left;
+        }
+        return helper(root, height);
+    }
+
+    public int helper(TreeNode root, int height) {
+        if(root == null) return 0;
+        
+        TreeNode tmp = root.right;
+        int rightHeight = 0;
+        while(tmp != null) {
+            rightHeight ++;
+            tmp = tmp.left;
+        }
+
+        if(rightHeight == height) {
+            return (1<<height) + helper(root.right, rightHeight-1);
+        } else {
+            return (1<<(height-1)) + helper(root.left, height-1);
+        }
+    }
+}
 /*
 这个解法还蛮牛的，就是遍历的过程中把count算出来
 https://leetcode.com/discuss/81091/simple-java-solution-o-log-n-2-108-ms-with-explanation
@@ -38,11 +74,9 @@ public class Solution {
 其实是完全可以优化的，很明显的问题就是我从root开始，每一层都在遍历左边，遍历右边，找height
 
 接下来我想到的第一种优化就是把左边的height传进去，但是右边的还是要遍历
-可是还是TLE了。。。这次的没过的test case要比上一个长一点。。。。
+可是还是TLE了。。。这次的没过的test case要比上一个长一点。。。。（不是不是，其实重点在Math.pow用时太大。。。。）
 
-想一下算法复杂度哈，
-最坏的情况就是N个点都遍历了，然后每个点都找了两次height
-h*2 + (h - 1)*4 + (h - 2)*8 + ... + 1*2^h-1 ？不晓得算的对不对。。。
+想一下算法复杂度哈
 */
 public class Solution {
     public int countNodes(TreeNode root) {
@@ -63,39 +97,5 @@ public class Solution {
         if(leftlevel == rightlevel) return (int)(Math.pow(2, leftlevel)-1);
         
         return countNodes(root.left) + 1 + countNodes(root.right);
-    }
-}
-
-/*
-简单优化了一下
-*/
-public class Solution {
-    public int countNodes(TreeNode root) {
-        if(root == null) return 0;
-        
-        int height = -1;
-        TreeNode left = root;
-        while(left != null) {
-            height ++;
-            left = left.left;
-        }
-        return helper(root, height);
-    }
-
-    public int helper(TreeNode root, int height) {
-        if(root == null) return 0;
-        
-        TreeNode tmp = root.right;
-        int rightHeight = 0;
-        while(tmp != null) {
-            rightHeight ++;
-            tmp = tmp.left;
-        }
-
-        if(rightHeight == height) {
-            return (int)(Math.pow(2, height)) + helper(root.right, rightHeight-1);
-        } else {
-            return (int)(Math.pow(2, height-1)) + helper(root.left, height-1);
-        }
     }
 }
