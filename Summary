@@ -68,3 +68,10 @@ list.insert(index, element)
 String s = s.toLowerCase();
 Character.isDigit(char c)
 Character.isLetter(char c)
+
+===================
+面试的时候先不要急不要慌
+1. 搞清楚题意
+2. 说思路的时候慢一点整理一下再慢慢说，不要着急
+大概我的一些variable是怎么define的
+比如recursive的function的话我的function主要是用来干什么的？
