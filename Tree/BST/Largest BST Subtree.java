@@ -26,6 +26,10 @@ Can you figure out ways to solve it with O(n) time complexity?
 下面参照了下其他人的解法，发现其实我只是想把这些变量传递，而int传递不了，那换成数组就好了嘛
 这里要注意下更新，尤其是low和high的问题，在长度为3的数组中，low放在了index=1的位置，high放在了index=2的位置
 遍历左右子树的过程中，要两套不同的int[],显然不可以share。。。
+
+与validateBST不同的是，这个是从下往上传递low和high的
+比如 4  这个tree，validateBST的话，到left也就是1这个节点的时候，high已经赋值为4了，但是呢，这里是从下往上做的，到1的时候left和right都是没有赋值的，1遍历好之后，这个数组的low是1，high也是1
+    1 3
 */
 
 
