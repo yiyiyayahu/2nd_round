@@ -1,0 +1,21 @@
+总体来说Math这块我还是比较薄弱。。。可能最近短练，虽然知道思路，但是距离快速写出代码还有一段距离。。。
+哭了，咋办，没时间了。抓紧抓紧，不到最后一刻不要轻言放弃！！！
+
+1. Integer的话要注意overflow的问题！
+什么乘啊之类的，很容易就超范围了，比如下面这个我想算到底最大的divisor是多少对吧，这样一直乘，肯定就overflow了
+还有就是Integer.MIN_VALUE我没法儿直接转成正的，比Integer.MAX_VALUE大1。。。
+===================================
+这里我要注意一下，之前我写的
+        while(x / div > 0) {
+            div *= 10;
+        }
+        div = div/10;
+这样貌似会导致div overflow，比如x=1000000001，再乘个10绝对就overflow了，div的数值就不对了
+何必这么麻烦，直接while(x / div >= 10)就好了
+
+2. 一定要考虑下negative number，不要想当然以为都是positive
+比如palindrome number, pow(x,n)。。。都要考虑input的
+
+3. Math这类题吧，虽然和数字有关，但是很可能和什么two pointer啦，binary search啦，dp啦，bit manipulation，recursive结合。
+我觉得two pointer和bit manipulation的概率要大一些
+比如1<<n就是2^n这样的
