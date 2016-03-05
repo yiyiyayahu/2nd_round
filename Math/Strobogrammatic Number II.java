@@ -12,7 +12,7 @@ Try to use recursion and notice that it should recurse with n - 2 instead of n -
 */
 
 /*
-这次只用了6ms，最开始那个做法是27ms
+这次只用了6ms，下面那个做法是27ms
 其实我还是可以做出来的。。。但是最开始确实思路比较混乱，然后慢慢想明白的，不知道面试的时候会怎样，可能还是不是很熟练吧，才会想很久
 */
 public class Solution {
