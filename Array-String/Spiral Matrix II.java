@@ -34,3 +34,27 @@ public class Solution {
         return matrix;
     }
 }
+
+
+public class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] ret = new int[n][n];
+        int start = 1;
+        for(int level = 0; level <= (n-1)/2; level++) {
+            int i = level, j = level;
+            for(int j1 = j; j1 < n-j; j1++) {
+                ret[i][j1] = start++;
+            }
+            for(int i1 = i+1; i1 < n-i; i1++) {
+                ret[i1][n-1-j] = start++;
+            }
+            for(int j1 = n-2-j; j1 >= j; j1--) {
+                ret[n-1-i][j1] = start++;
+            }
+            for(int i1 = n-2-i; i1 > i; i1--) {
+                ret[i1][j] = start++;
+            }
+        }
+        return ret;
+    }
+}
