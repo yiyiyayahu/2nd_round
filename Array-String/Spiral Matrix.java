@@ -51,3 +51,32 @@ public class Solution {
         return list;
     }
 }
+
+
+public class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> list = new ArrayList<Integer>();
+        if(matrix.length == 0) return list;
+        
+        int m = matrix.length, n = matrix[0].length;
+        int limit = (Math.min(m,n)-1)/2;
+        
+        for(int level = 0; level <= limit; level ++) {
+            int i = level, j = level;
+            
+            for(int j1 = j; j1 < n-j; j1++) {
+                list.add(matrix[i][j1]);
+            }
+            for(int i1 = i+1; i1 < m-i; i1++) {
+                list.add(matrix[i1][n-1-j]);
+            }
+            for(int j1 = n-2-j; j1 >= j && m-1-i != i; j1--) {
+                list.add(matrix[m-1-i][j1]);
+            }
+            for(int i1 = m-2-i; i1 > i && n-1-j != j; i1--) {
+                list.add(matrix[i1][j]);
+            }
+        }
+        return list;
+    }
+}
