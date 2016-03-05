@@ -13,6 +13,14 @@ Could you do this in-place?
 貌似和上次犯了同样的错误，总之这个循环要注意一下
 其实我是一圈一圈的rotate的，就是先最外圈，再里面一圈，所以i从0到n，j从i到n-1-i，而不是从0开始
 这次写的和第一次刷的code是不一样的，我觉得这样想比较好
+
+三刷写的还是不太好，注意j<n-1-i而不是j<n-i，不然又重复转了
+其实这道题思路就是 (cc150上面讲解蛮好的)
+int tmp = top[i]
+top[i] = left[i]
+left[i] = bottom[i]
+bottom[i] = right[i]
+right[i] = tmp
 */
 public class Solution {
     public void rotate(int[][] matrix) {
