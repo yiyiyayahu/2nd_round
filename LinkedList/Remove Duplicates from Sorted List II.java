@@ -47,3 +47,30 @@ public class Solution {
         return fakehead.next;
     }
 }
+
+
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head == null || head.next == null) return head;
+        
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        
+        ListNode curr = dummy;
+        
+        while(curr.next != null) {
+            boolean isDup = false;
+            ListNode tmp = curr.next;
+            while(tmp.next != null && tmp.next.val == tmp.val) {
+                isDup = true;
+                tmp.next = tmp.next.next;
+            } 
+            if(!isDup) curr = curr.next;
+            else {
+                curr.next = tmp.next;
+                isDup = false;
+            }
+        }
+        return dummy.next;
+    }
+}
