@@ -34,3 +34,21 @@ public class Solution {
         return count;
     }
 }
+
+public class Solution {
+    public int countPrimes(int n) {
+        int total = 0;
+        boolean[] notPrime = new boolean[n];
+        for(int i = 2; i * i < n; i++) {
+            if(notPrime[i]) continue;
+            for(times=i; i * times < n; times++) {
+                notPrime[i*times] = true;
+                times ++;
+            }
+        }
+        for(int i = 2; i < n; i++) {
+            if(!notPrime[i]) total ++;
+        }
+        return total;
+    }
+}
