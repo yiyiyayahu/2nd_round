@@ -1,1 +1,4 @@
 http://nillhex.com/2015/07/29/leetcode-summary-dfs-and-bfs-backtracking-part/
+
+往result里面加的时候经常新建一个object是因为list是随着recusion不断改的，如果不新建的话，result里面很可能就不是原来想要放进去的结果，这点要注意！
+result.add(new ArrayList<Integer>(list));
