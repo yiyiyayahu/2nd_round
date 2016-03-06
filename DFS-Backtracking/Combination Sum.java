@@ -18,6 +18,35 @@ A solution set is:
 if(i > 0 && candidates[i] == candidates[i-1]) continue;这个是为了去重~
 time: O(2^n) space: O(2^n) 虽然有剪枝，但是不晓得是不是还是这个量级的???
 */
+/*
+再循环里面剪枝才叫剪枝。。如果newTarget已经<0了就没必要再循环下去了
+上面的这个解法5ms，下面的那个要15ms。。。差别好大
+*/
+public class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        Arrays.sort(candidates);
+        helper(candidates, 0, target, new ArrayList<Integer>(), ret);
+        return ret;
+    }
+    
+    public void helper(int[] candidates, int curr, int target, List<Integer> list, List<List<Integer>> ret) {
+        if(target == 0) {
+            ret.add(new ArrayList<Integer>(list));
+            return;
+        }
+        
+        for(int i = curr; i < candidates.length; i++) {
+            if(i>0 && candidates[i] == candidates[i-1]) continue;
+            int newTarget = target-candidates[i];
+            if(newTarget < 0) break;
+            list.add(candidates[i]);
+            helper(candidates, i, newTarget, list, ret);
+            list.remove(list.size()-1);
+        }
+    }
+}
+
 
 public class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
