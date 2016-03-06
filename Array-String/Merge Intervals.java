@@ -50,3 +50,41 @@ public class Solution {
         return lists;
     }
 }
+
+public class Solution {
+    public List<Interval> merge(List<Interval> intervals) {
+        List<Interval> ret = new ArrayList<>();
+        if(intervals.size() == 0) return ret;
+        
+        Collections.sort(intervals, new Comparator<Interval>() {
+            @Override
+            public int compare(Interval in1, Interval in2) {
+                if(in1.start < in2.start) return -1;
+                else if(in1.start > in2.start) return 1;
+                return in1.end - in2.end;
+            }
+        });
+        
+        int i = 0, len = intervals.size();
+        Interval first = null, next = null;
+        while(i < len) {
+            if(first == null) first = intervals.get(i);
+            if(i+1 < len) next = intervals.get(i+1);
+            else {
+                ret.add(first);
+                break;
+            }
+            
+            if(first.end < next.start) {
+                ret.add(first);
+                first = null; 
+            } else {
+                int end = Math.max(first.end, next.end);
+                first = new Interval(first.start, end);
+            }
+            i++; 
+        }
+
+        return ret;
+    }
+}
