@@ -23,3 +23,6 @@ Character ch = new Character(c);
 String to int:
 String s = "123";
 int num = Integer.parseInt(s);
+
+int to String:
+String.valueOf(num);
