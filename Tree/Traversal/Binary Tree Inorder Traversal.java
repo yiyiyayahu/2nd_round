@@ -76,6 +76,8 @@ public class Solution {
 /*
 用一个n来track，有点模拟走过路线的意思，来保证重复路线没有走过！很巧妙诶，还是自己想不出肿么办
 time: O(n) space: O(logn)
+
+其实这个解法就是说我是应该接着往左边走，还是左边已经走过了，要开始右边了，当n==null的时候就说明，左边没有了，这时候就add value，然后遍历右边的节点就好了
 */
 public class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
