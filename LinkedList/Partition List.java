@@ -37,3 +37,41 @@ public class Solution {
         return dummyHead.next;
     }
 }
+
+/*
+cc150上面最原始的做法
+*/
+public class Solution {
+    public ListNode partition(ListNode head, int x) {
+        //s1 - beforeStart, s2 - beforeEnd, l1 - afterStart, l2 - afterEnd
+        ListNode s1 = null, s2 = null;
+        ListNode l1 = null, l2 = null;
+        
+        ListNode tmp = head;
+        while(tmp != null) {
+            ListNode next = tmp.next;
+            tmp.next = null;
+            if(tmp.val < x) {
+                if(s1 == null) {
+                    s1 = tmp;
+                    s2 = s1;
+                } else {
+                    s2.next = tmp;
+                    s2 = s2.next;
+                }
+            } else {
+                if(l1 == null) {
+                    l1 = tmp;
+                    l2 = l1;
+                } else {
+                    l2.next = tmp;
+                    l2 = l2.next;
+                }
+            }
+            tmp = next;
+        }
+        if(s1 == null) return l1;
+        s2.next = l1;
+        return s1;
+    }
+}
