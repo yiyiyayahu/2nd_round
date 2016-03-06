@@ -30,6 +30,7 @@ Bonus points if you could solve it both recursively and iteratively.
  
 /*
 时间复杂度O(n)，空间的话是O(logn)还是O(n)啊啊啊啊，有个blog上面说的是O(logn)啊
+空间是O(logn), 因为只recursive了depth of the tree
 */
 public class Solution {
     public boolean isSymmetric(TreeNode root) {
