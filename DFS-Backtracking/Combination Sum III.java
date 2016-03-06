@@ -43,3 +43,28 @@ public class Solution {
         }
     }
 }
+
+
+public class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        helper(k, n, 1, new ArrayList<Integer>(), ret);
+        return ret;
+    }
+    
+    public void helper(int k, int sum, int curr, List<Integer> list, List<List<Integer>> ret) {
+        if(sum == 0 && list.size() == k) {
+            ret.add(new ArrayList<Integer>(list));
+            return;
+        }
+        if(list.size() >= k) return;
+        
+        for(int i = curr; i <= 9; i++) {
+            int newTarget = sum - i;
+            if(newTarget < 0) break;
+            list.add(i);
+            helper(k, newTarget, i+1, list, ret);
+            list.remove(list.size()-1);
+        }
+    }
+}
