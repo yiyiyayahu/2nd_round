@@ -18,6 +18,9 @@ A solution set is:
 
 /*
 while(i < candidates.length-1 && candidates[i+1] == candidates[i]) i++; 这个是为了去重！！！木有想粗来
+意思就是[1,1,2,5,6,7]
+从index=0开始的1，然后向后recursive [1,1,....]，所以不能像I一样在之前就去重
+但是这个时候，从index=1开始的1就没必要了，所以要去掉
 */
 
 public class Solution {
