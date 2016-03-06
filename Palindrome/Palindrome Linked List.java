@@ -17,6 +17,29 @@ Could you do it in O(n) time and O(1) space?
  I. use a stack, traverse the linked list twice
     time: O(n) space: O(n)
  */
+ /*
+ 只要traverse前半段就可以了，如果是奇数，跳过中间的node
+ */
+ public class Solution {
+    public boolean isPalindrome(ListNode head) {
+        Stack<Integer> stack = new Stack<Integer>();
+        ListNode slow = head, fast = head;
+        
+        while(fast != null && fast.next != null) {
+            stack.push(slow.val);
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if(fast != null) slow = slow.next;
+        
+        while(slow != null) {
+            if(slow.val != stack.pop()) return false;
+            slow = slow.next;
+        }
+        return true;
+    }
+}
+ 
 public class Solution {
     public boolean isPalindrome(ListNode head) {
         Stack<ListNode> stack = new Stack<ListNode>();
