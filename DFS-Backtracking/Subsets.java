@@ -44,7 +44,35 @@ public class Solution {
     }
 }
 
-
+/*
+这个是cc150上面的做法，因为每个元素可以放入-1和不放入-0，所以可以用一个bit vector来表示 0-2^n-1
+比如[1,2,3] 000-001-----111这么多种, 000表示空，001表示[1]
+然后判断每一位是不是1很巧妙，用了bit manipulation，(i&1) == 1表示这一位是1，101 & 001 = 1，然后往后挪一位接着比101->10 ...
+*/
+public class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        int max = 1 << nums.length;
+        for(int k = 0; k < max; k++) {
+            List<Integer> list = convertIntToSet(k, nums);
+            ret.add(list);
+        }
+        return ret;
+    }
+    
+    public List<Integer> convertIntToSet(int k, int[] nums) {
+        List<Integer> list = new ArrayList<Integer>();
+        int index = 0;
+        for(int i = k; i > 0; i >>= 1) {
+            if((i&1) == 1) {
+                list.add(nums[index]);
+            }
+            index ++;
+        }
+        return list;
+    }
+}
 
 public class Solution {
     public List<List<Integer>> subsets(int[] nums) {
