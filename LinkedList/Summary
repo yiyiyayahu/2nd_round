@@ -1,3 +1,8 @@
+linked list基本考察的点无非就是指针挪来挪去的，翻转啊，删除啊，移动啊这类的。
+挪的过程中注意指针不能是null啊，该断掉的线断掉不然会一直一直连下去
+常用的解法是recursive，merge，fastRunner
+fastRunner可以用来找cycle，找倒数第k个点，找mid
+
 Some problems need to be looked at again:
 
 Reverse Node in K Group这道，如果要constant space的话，是不是不能用recursive en 
