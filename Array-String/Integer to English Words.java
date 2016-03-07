@@ -6,7 +6,6 @@ For example,
 12345 -> "Twelve Thousand Three Hundred Forty Five"
 1234567 -> "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
 */
-
 public class Solution {
     public String numberToWords(int num) {
         StringBuilder sb = new StringBuilder();
@@ -20,15 +19,13 @@ public class Solution {
         for(int i = 0; i < 4; i++) {
             if(arr[i] == 0) continue;
             sb.append(helper(arr[i]));
-            if(i == 0) sb.append(" Billion ");
-            if(i == 1) sb.append(" Million ");
-            if(i == 2) sb.append(" Thousand ");
+            if(i == 0) sb.append("Billion ");
+            if(i == 1) sb.append("Million ");
+            if(i == 2) sb.append("Thousand ");
         }
         if(sb.charAt(sb.length()-1) == ' ') sb.deleteCharAt(sb.length()-1);
         return sb.toString();
     }
-    
-
     public String helper(int n) {
         String[] strOnes = {"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
         String[] strTens = {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
@@ -37,22 +34,19 @@ public class Solution {
         StringBuilder sb = new StringBuilder();
 
         if(n/100 > 0) {
-            sb.append(strOnes[n/100-1]).append(" Hundred");
+            sb.append(strOnes[n/100-1]).append(" Hundred ");
             n = n%100;
         }
         if(n >= 10 && n <= 19) {
-            if(sb.length() != 0) sb.append(" ");
-            sb.append(strTens[n-10]);
+            sb.append(strTens[n-10]).append(" ");
             return sb.toString();
         } 
         if(n/10 > 0) {
-            if(sb.length() != 0) sb.append(" "); 
-            sb.append(strTys[n/10-2]);
+            sb.append(strTys[n/10-2]).append(" ");
             n = n%10;
         }
         if(n != 0) {
-            if(sb.length() != 0) sb.append(" "); 
-            sb.append(strOnes[n-1]);
+            sb.append(strOnes[n-1]).append(" ");
         }
         return sb.toString();
     }
