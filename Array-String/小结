@@ -29,3 +29,9 @@ String.valueOf(num);
 
 ===============================
 sb.deleteCharAt(sb.length()-1)
+
+
+===============================
+很多时候java自带的比较函数并不好
+比如1<<n就比Math.pow(2,n)效率高很多
+包括Math.min, Math.max其实效率都会相对低一点
