@@ -18,9 +18,34 @@ All inputs will be in lower-case.
 对于这两个排序的要求，其实我都是用的java自带的函数，这样真的可以么？
 一个是Arrays.sort()
 还有一个是Collections.sort(list);
-
-可以先对strs排个序
 */
+
+/*
+这样写code就简洁一些
+    if(!map.containsKey(key)) map.put(key, new ArrayList<String>());
+    map.get(key).add(s);
+*/
+public class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> ret = new ArrayList<>();
+        if(strs.length == 0) return ret;
+       
+        HashMap<String, ArrayList<String>> map = new HashMap<>();
+        for(String s : strs) {
+            char[] arr = s.toCharArray();
+            Arrays.sort(arr);
+            String key = String.valueOf(arr);
+            if(!map.containsKey(key)) map.put(key, new ArrayList<String>());
+            map.get(key).add(s);
+        }
+        for(String key : map.keySet()) {
+            List<String> l = map.get(key);
+            Collections.sort(l);
+            ret.add(l);
+        }
+        return ret;
+    }
+}
 
 public class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
