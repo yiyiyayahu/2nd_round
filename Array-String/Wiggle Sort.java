@@ -14,7 +14,7 @@ For example, given nums = [3, 5, 2, 1, 6, 4], one possible answer is [1, 6, 2, 5
 同理呢，[3,5,6,7]...检测到6的时候发现不对，5和6交换，也没问题，因为本身5就比3大，那6比3就更大了
 
 我开始觉得有问题呢，可能是我的思维方式是向后比较
-[3,5,2,1]，我会3和5比，5和2比，2和1比，但是应该也没有问题喔
+[3,5,2,1]，我会3和5比，5和2比，2和1比，不过一样的啦，没有关系的
 */
 
 public class Solution {
@@ -23,6 +23,20 @@ public class Solution {
             int tmp = nums[i-1];
             if( (i%2==1) == (nums[i] < tmp) ) {
                 nums[i-1] = nums[i];
+                nums[i] = tmp;
+            }
+        }
+    }
+}
+
+public class Solution {
+    public void wiggleSort(int[] nums) {
+        if(nums == null || nums.length == 0) return;
+        
+        for(int i = 0; i < nums.length-1; i++) {
+            int tmp = nums[i+1];
+            if( (i%2==1) == (nums[i] < tmp) ) {
+                nums[i+1] = nums[i];
                 nums[i] = tmp;
             }
         }
