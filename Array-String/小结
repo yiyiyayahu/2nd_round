@@ -26,3 +26,6 @@ int num = Integer.parseInt(s);
 
 int to String:
 String.valueOf(num);
+
+===============================
+sb.deleteCharAt(sb.length()-1)
