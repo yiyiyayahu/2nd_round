@@ -29,7 +29,7 @@ public class Solution {
         Queue<String> queue = new LinkedList<String>();
         queue.add(beginWord);
         int level = 1;
-        wordList.add(endWord);
+
         while(!queue.isEmpty()) {
             int size = queue.size();
             level ++;
