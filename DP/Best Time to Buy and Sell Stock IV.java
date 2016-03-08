@@ -7,6 +7,49 @@ Note:
 You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
 */
 
+
+/*
+我觉得还是这个思路比较好想：
+f[i][k] ： 1）只进行k-1次交易
+           2）进行k次交易：a) i is not involved b) i is involved: prices[i] - prices[j]
+
+f[i][k] = max |- f[i][k-1]
+              |- max |- f[i-1][k]
+                     |- f[j-1][k-1] + prices[i] - prices[j]   0<j<i
+Let : maxCurr = f[j-1][k-1] - prices[j] (j starting from i-1, calculate maxCurr while iterating)
+*/
+
+public class Solution {
+    public int maxProfit(int k, int[] prices) {
+        if(prices == null || prices.length == 0) return 0;
+        
+        int len = prices.length;
+        if( k >= len/2 ) return profitNoLimit(prices);
+        
+        int[][] f = new int[len][k+1];
+        for(int j = 1; j <= k; j++) {
+            int maxCurr = 0 - prices[0];
+            for(int i = 1; i < len; i++) {
+                maxCurr = Math.max(maxCurr, i>1 ? f[i-2][j-1]-prices[i-1] : 0-prices[i-1]);
+                int tmp = maxCurr + prices[i];
+                if(tmp < f[i-1][j]) tmp = f[i-1][j];
+                f[i][j] = Math.max(f[i][j-1], tmp);
+            }
+        }
+        return f[len-1][k];
+    }
+    
+    public int profitNoLimit(int[] prices) {
+        int profit = 0;
+        for(int i = 1; i < prices.length; i++) {
+            if(prices[i] > prices[i-1]) {
+                profit += prices[i] - prices[i-1];
+            }
+        }
+        return profit;
+    }
+}
+
 /*
 General thinking: DP
  - either the (i-1)th day is involved or not
