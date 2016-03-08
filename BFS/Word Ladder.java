@@ -26,29 +26,29 @@ All words contain only lowercase alphabetic characters.
 */
 public class Solution {
     public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
-        Queue<String> queue = new LinkedList<>();
+        Queue<String> queue = new LinkedList<String>();
         queue.add(beginWord);
         int level = 1;
         wordList.add(endWord);
-        while (!queue.isEmpty()) {
+        while(!queue.isEmpty()) {
             int size = queue.size();
-            level++;
-            for (int i = 0; i < size; i++) {
-                String s = queue.poll();
-                char[] w = s.toCharArray();
-                for (int j = 0; j < w.length; j++) {
-                    char c = w[j];
-                    for (int k = 0; k < 26; k++) {
-                        w[j] = (char)(k + 'a');
-                        String temp = new String(w);
-                        if (endWord.equals(temp))
-                            return level;
-                        if (wordList.contains(temp)) {
-                            queue.add(temp);
-                            wordList.remove(temp);
+            level ++;
+            for(int i = 0; i < size; i++) {
+                String w = queue.remove();
+                char[] arr = w.toCharArray();
+                for(int j = 0; j < w.length(); j++) {
+                    char orig = arr[j];
+                    for(char c = 'a'; c <= 'z'; c++) {
+                        if(c == orig) continue;
+                        arr[j] = c;
+                        String tmp = String.valueOf(arr);
+                        if(tmp.equals(endWord)) return level;
+                        if(wordList.contains(tmp)) {
+                            wordList.remove(tmp);
+                            queue.add(tmp);
                         }
                     }
-                    w[j] = c;
+                    arr[j] = orig;
                 }
             }
         }
