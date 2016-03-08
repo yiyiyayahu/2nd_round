@@ -19,6 +19,46 @@ All words have the same length.
 All words contain only lowercase alphabetic characters.
 */
 
+/*
+我觉得这样写和下面的没啥区别啊。。。咋就以前的code现在TLE了，苦
+不过看runtime，确实差好多，最新的这个是103ms，之前的写法吧是804ms
+莫非就是一个是把getOneDiff单拿出来，然后我这种recursive调用低效？不晓得诶。。
+*/
+public class Solution {
+    public int ladderLength(String beginWord, String endWord, Set<String> wordList) {
+        Queue<String> queue = new LinkedList<>();
+        queue.add(beginWord);
+        int level = 1;
+        wordList.add(endWord);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            level++;
+            for (int i = 0; i < size; i++) {
+                String s = queue.poll();
+                char[] w = s.toCharArray();
+                for (int j = 0; j < w.length; j++) {
+                    char c = w[j];
+                    for (int k = 0; k < 26; k++) {
+                        w[j] = (char)(k + 'a');
+                        String temp = new String(w);
+                        if (endWord.equals(temp))
+                            return level;
+                        if (wordList.contains(temp)) {
+                            queue.add(temp);
+                            wordList.remove(temp);
+                        }
+                    }
+                    w[j] = c;
+                }
+            }
+        }
+        return 0;
+    }
+}
+
+/*
+这种写法已经TLE了。。。囧
+*/
 public class Solution {
     public int ladderLength(String beginWord, String endWord, Set<String> wordDict) {
         Queue<String> queue = new LinkedList<String>();
