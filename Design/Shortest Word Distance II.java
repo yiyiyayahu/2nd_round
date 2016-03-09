@@ -13,6 +13,41 @@ Note:
 You may assume that word1 does not equal to word2, and word1 and word2 are both in the list. 
 */
 
+/*
+不用向最开始那样循环里面套循环。。。只要O(n+m)就行了
+*/
+public class WordDistance {
+    HashMap<String, List<Integer>> map = new HashMap<>();
+    
+    public WordDistance(String[] words) {
+        for(int i = 0; i < words.length; i++) {
+            if(!map.containsKey(words[i])) map.put(words[i], new ArrayList<Integer>());
+            map.get(words[i]).add(i);
+        }
+    }
+
+    public int shortest(String word1, String word2) {
+        List<Integer> list1 = map.get(word1);
+        List<Integer> list2 = map.get(word2);
+        int index1 = 0, index2 = 0;
+        int minDist = Integer.MAX_VALUE;
+        
+        while(index1 < list1.size() && index2 < list2.size()) {
+            int pos1 = list1.get(index1);
+            int pos2 = list2.get(index2);
+            int diff = Math.abs(pos1 - pos2);
+            
+            if(diff < minDist) minDist = diff;
+            if(pos1 < pos2) {
+                index1 ++;
+            } else {
+                index2 ++;
+            }
+        }
+        return minDist;
+    }
+}
+
 public class WordDistance {
     HashMap<String, ArrayList<Integer>> map;
 
