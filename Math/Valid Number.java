@@ -25,7 +25,7 @@ You should gather all requirements up front before implementing one.
 "1e+1" -> true
 "1e-1" -> true
 
-所以e之前必须要都是数字，.之后必须全部是数字，需要一哥isNumBefore的boolean
+所以e之前必须要都是数字，.之后必须全部是数字，需要一个isNumBefore的boolean
 */
 public class Solution {
     public boolean isNumber(String s) {
