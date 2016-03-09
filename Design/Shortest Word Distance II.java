@@ -14,7 +14,7 @@ You may assume that word1 does not equal to word2, and word1 and word2 are both 
 */
 
 /*
-不用向最开始那样循环里面套循环。。。只要O(n+m)就行了
+不用向最开始那样循环里面套循环。。。只要O(n)就行了
 */
 public class WordDistance {
     HashMap<String, List<Integer>> map = new HashMap<>();
