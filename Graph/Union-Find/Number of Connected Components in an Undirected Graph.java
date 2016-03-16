@@ -47,6 +47,8 @@ union[0,2] 找到0的root是1，然后把1的parent改为2 - [1,2,2,3,4,5]
 
 再进一步的优化是prevent the tree from growing too tall
 就是merge的时候比较一下两边的大小，smaller tree to be the child of the root of the larger tree
+
+接着优化，就是这个tree还可以再flatten一点，用path compression - 知道root之后，可以把这个path上面的parent都设为root，这样这个tree就很矮了
 */
 public class Solution {
     public int countComponents(int n, int[][] edges) {
@@ -68,5 +70,53 @@ public class Solution {
             if(id[i] == i) count++;
         }
         return count;
+    }
+}
+/*
+下面的这个是优化版的，就是weighted+path compression，总是把small的merge到大的里面，并且进一步flatten这个tree
+path compression - make every other node in the path points to its grandparent
+find O(logN) depth of p/q
+union O(1) given root
+*/
+public class Solution {
+    public int countComponents(int n, int[][] edges) {
+        int[] root = new int[n];
+        int[] size = new int[n];
+        Set<Integer> set = new HashSet<Integer>();
+        
+        for(int i = 0; i < n; i++) {
+            root[i] = i;
+            size[i] = i;
+        }
+        
+        for(int i = 0; i < edges.length; i++) {
+            int node1 = edges[i][0], node2 = edges[i][1];
+            
+            if(size[node1] <= size[node2]) {
+                union(root, node1, node2);
+                size[node2] += size[node1];
+            } else {
+                union(root, node2, node1);
+                size[node1] += size[node2];
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            set.add(findRoot(root, i));
+        }
+        return set.size();
+    }
+    //path compression
+    private int findRoot(int[] root, int p) {
+        while(p != root[p]) {
+            root[p] = root[root[p]];
+            p = root[p];
+        }
+        return p;
+    }
+    
+    private void union(int[] root, int p, int q) {
+        int pid = findRoot(root, p); 
+        int qid = findRoot(root, q);
+        root[pid] = qid;
     }
 }
