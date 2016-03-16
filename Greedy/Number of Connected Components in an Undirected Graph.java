@@ -37,6 +37,16 @@ union find主要解决的就是这种connected components in a graph的问题，
 这时候再遇到一个[0,2]呢，要把0的root更新为2， 同时把所有和0在一个set里面的都更新为2，数组变为[2,2,2,3,4,5]
 
 这个解法的缺点在于union需要O(n)，虽然find只要O(1)，但是总体需要O(n^2) 因为要做N个循环的union
+
+然后union find的改进做法就是instead of updating all，just update the parent
+[0,1,2,3,4,5] 遇到一个[0,1] - [1,1,2,3,4,5]
+union[0,2] 找到0的root是1，然后把1的parent改为2 - [1,2,2,3,4,5]
+但是find的话要一直find到root，比如调用find(0)要沿着这个去找 - find(1) - find(2) 因为id[2]==2 说明是root，返回2
+所以这个解法呢union是O(N) find也是O(N)
+缺点是很有可能这个tree too tall - find too expensive
+
+再进一步的优化是prevent the tree from growing too tall
+就是merge的时候比较一下两边的大小，smaller tree to be the child of the root of the larger tree
 */
 public class Solution {
     public int countComponents(int n, int[][] edges) {
