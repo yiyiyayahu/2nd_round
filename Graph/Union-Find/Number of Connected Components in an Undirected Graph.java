@@ -78,6 +78,47 @@ path compression - make every other node in the path points to its grandparent
 find O(logN) depth of p/q
 union O(1) given root
 */
+/*4ms 撒花*/
+public class Solution {
+    public int countComponents(int n, int[][] edges) {
+        int[] root = new int[n];
+        int[] size = new int[n];
+        int count = n;
+        
+        for(int i = 0; i < n; i++) {
+            root[i] = i;
+            size[i] = i;
+        }
+        
+        for(int i = 0; i < edges.length; i++) {
+            int node1 = edges[i][0], node2 = edges[i][1];
+            int p = findRoot(root, node1); 
+            int q = findRoot(root, node2);
+            
+            if(p == q) continue;
+            if(size[p] <= size[q]) {
+                root[p] = q;
+                size[q] += size[p];
+            } else {
+                root[q] = p;
+                size[p] += size[q];
+            }
+            count --;
+        }
+
+        return count;
+    }
+    //path compression
+    private int findRoot(int[] root, int p) {
+        while(p != root[p]) {
+            root[p] = root[root[p]];
+            p = root[p];
+        }
+        return p;
+    }
+}
+
+
 public class Solution {
     public int countComponents(int n, int[][] edges) {
         int[] root = new int[n];
