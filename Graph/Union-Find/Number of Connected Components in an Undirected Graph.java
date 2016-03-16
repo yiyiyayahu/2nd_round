@@ -118,7 +118,9 @@ public class Solution {
     }
 }
 
-
+/*
+不是那么简洁的code
+*/
 public class Solution {
     public int countComponents(int n, int[][] edges) {
         int[] root = new int[n];
@@ -159,5 +161,46 @@ public class Solution {
         int pid = findRoot(root, p); 
         int qid = findRoot(root, q);
         root[pid] = qid;
+    }
+}
+
+
+/*
+20ms DFS
+我开始一直在纠结这个array的顺序的问题，在想要不要sort，但是sort之后还是没啥用
+所以既然[1,0]和[0,1]一样，可以都把他们放到map里面
+下面的这个是在discuss里面看到的
+*/
+public class Solution {
+    public int countComponents(int n, int[][] edges) {
+        Map<Integer, ArrayList<Integer>> map = new HashMap<>();
+        Set<Integer> set = new HashSet<>();
+        int count = 0;
+        
+        for(int i = 0; i < n; i++) {
+            map.put(i, new ArrayList<Integer>());
+        }
+        
+        for(int[] edge : edges) {
+            map.get(edge[0]).add(edge[1]);
+            map.get(edge[1]).add(edge[0]);
+        }
+        
+        for(int i = 0; i < n; i++) {
+            if(!set.contains(i)) {
+                count ++;
+                dfs(i, map, set);
+            }
+        }
+        return count;
+    }
+    
+    public void dfs(int curr, Map<Integer, ArrayList<Integer>> map, Set<Integer> set) {
+        set.add(curr);
+        for(int node : map.get(curr)) {
+            if(!set.contains(node)) {
+                dfs(node, map, set);
+            }
+        }
     }
 }
