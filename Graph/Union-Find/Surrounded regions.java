@@ -117,8 +117,8 @@ public class Solution {
             for(int j = 0; j < n; j++) {
                 if(board[i][j] == 'O') {
                     int p = i*n + j;
-                    if(i > 0 && board[i-1][j] == 'O') uf.union(p, p-m);
-                    if(i < m-1 && board[i+1][j] == 'O') uf.union(p, p+m);
+                    if(i > 0 && board[i-1][j] == 'O') uf.union(p, p-n);
+                    if(i < m-1 && board[i+1][j] == 'O') uf.union(p, p+n);
                     if(j > 0 && board[i][j-1] == 'O') uf.union(p, p-1);
                     if(j < n-1 && board[i][j+1] == 'O') uf.union(p, p+1);
                 }
