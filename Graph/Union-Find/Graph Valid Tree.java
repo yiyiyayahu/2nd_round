@@ -18,6 +18,54 @@ Note: you can assume that no duplicate edges will appear in edges. Since all edg
 
 */
 
+/*
+其实就是要满足两点：
+1. no cycles
+2. one connected component
+
+优化的解法真的好快啊，只要1ms
+开始我是想着要检查所有node的root是一个才可以return true
+但是实际上只要edges.length == n-1并且没有cycle就可以说明只有一个connected component了
+*/
+public class Solution {
+    public boolean validTree(int n, int[][] edges) {
+        if(n <= 0) return false;
+        if(edges.length != n-1) return false;
+        
+        int[] root = new int[n];
+        int[] size = new int[n];
+        
+        for(int i = 0; i < n; i++) {
+            root[i] = i;
+            size[i] = i;
+        }
+        
+        for(int i = 0; i < edges.length; i++) {
+            int node1 = edges[i][0], node2 = edges[i][1];
+            int p = findRoot(root, node1), q = findRoot(root, node2);
+            if(p == q) return false;
+            
+            if(size[p] <= size[q]) {
+                root[p] = q;
+                size[q] += size[p];
+            } else {
+                root[q] = p;
+                size[p] += size[q];
+            }
+        }
+        return true;
+    }
+    
+    public int findRoot(int[] root, int p) {
+        while(root[p] != p) {
+            root[p] = root[root[p]];
+            p = root[p];
+        }
+        return p;
+    }
+}
+
+
 public class Solution {
     public boolean validTree(int n, int[][] edges) {
         if(n <= 0) return false;
