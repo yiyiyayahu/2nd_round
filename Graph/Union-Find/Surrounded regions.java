@@ -68,3 +68,84 @@ public class Solution {
         }
     }
 }
+
+
+/*
+下面这个union find的解法其实复杂度并不好，只是最近在学习union find
+做法是这样的：
+1. 先遍历一遍board，把所有connected 'O' -> root
+2. 遍历一遍边界，把所有边界的'O'的root放到一个set里面
+3. 最后遍历一遍board，把所有不是和边界'O'同一个root的'O'设为'X'
+*/
+public class Solution {
+    class UF {
+        int[] id;
+    
+        public UF(int m, int n) {
+            id = new int[m * n];
+            for(int i = 0; i < m * n; i++) {
+                id[i] = i;
+            }
+        }
+    
+        public int find(int p) {
+            while(p != id[p]) {
+                id[p] = id[id[p]];
+                p = id[p];
+            }
+            return p;
+        }
+    
+        public boolean isConnected(int p, int q) {
+            int pRoot = find(p);
+            int qRoot = find(q);
+            return pRoot == qRoot;
+        }
+    
+        public void union(int p, int q) {
+            int pRoot = find(p);
+            int qRoot = find(q);
+            id[pRoot] = qRoot;
+        }
+    }
+    
+    public void solve(char[][] board) {
+        if(board.length == 0) return;
+        int m = board.length, n = board[0].length;
+        UF uf = new UF(m, n);
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(board[i][j] == 'O') {
+                    int p = i*n + j;
+                    if(i > 0 && board[i-1][j] == 'O') uf.union(p, p-m);
+                    if(i < m-1 && board[i+1][j] == 'O') uf.union(p, p+m);
+                    if(j > 0 && board[i][j-1] == 'O') uf.union(p, p-1);
+                    if(j < n-1 && board[i][j+1] == 'O') uf.union(p, p+1);
+                }
+            }
+        }
+        
+        Set<Integer> set = new HashSet<>();
+        for(int i = 0; i < m; i++) {
+            int p = uf.find(i*n);
+            if(!set.contains(p)) set.add(p);
+            int q = uf.find(i*n + n-1);
+            if(!set.contains(q)) set.add(q);
+        }
+        for(int j = 0; j < n; j++) {
+            int p = uf.find(j);
+            if(!set.contains(p)) set.add(p);
+            int q = uf.find((m-1)*n+j);
+            if(!set.contains(q)) set.add(q);
+        }
+        
+        for(int i = 0; i < m; i ++) {
+            for(int j = 0; j < n; j++) {
+                int p = i*n+j;
+                if(board[i][j] == 'O' && !set.contains(uf.find(p)) ) {
+                    board[i][j] = 'X';
+                } 
+            }
+        }
+    }
+}
