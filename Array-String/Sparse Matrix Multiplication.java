@@ -36,7 +36,38 @@ res[i][j] = sum(k=0~n-1) A[i][k] * B[k][p]
 但是时间复杂度还是不好- 380ms，莫非我要map套map？
 
 map套map也没有优化很多，230ms
+
+后来发现，其实没必要A和B都构成map，只要A弄个map就可以了，因为构建map时间空间复杂度都挺高，只要找A不是0的元素，看B有没有对应的就可以了 146ms
 */
+
+public class Solution {
+    public int[][] multiply(int[][] A, int[][] B) {
+        Map<Integer, Map<Integer, Integer>> mapA = new HashMap<>();
+        
+        int m = A.length, n = A[0].length, p = B[0].length;
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j ++) {
+                if(A[i][j] != 0) {
+                    if(!mapA.containsKey(i)) mapA.put(i, new HashMap<Integer, Integer>());
+                    mapA.get(i).put(j, A[i][j]);
+                }
+            }
+        }
+
+        int[][] res = new int[m][p];
+        
+        for(int j = 0; j < p; j++) {
+            for(int i : mapA.keySet()) {
+                for(int k : mapA.get(i).keySet()) {
+                    if(B[k][j] != 0) res[i][j] += mapA.get(i).get(k) * B[k][j];
+                }
+            }
+        }
+
+        return res;
+    }
+}
+
 public class Solution {
     public int[][] multiply(int[][] A, int[][] B) {
         Map<Integer, Map<Integer, Integer>> mapA = new HashMap<>();
