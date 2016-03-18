@@ -33,8 +33,48 @@ res[i][j] = sum(k=0~n-1) A[i][k] * B[k][p]
 但是我后来遍历的时候，很难check一个pair在不在里面，因为是object嘛。。。
 所以我后来就改为了mapA - i对应一个list of pair，pair里面存j和A[i][j]的值，B同理
 
-但是时间复杂度还是不好，莫非我要map套map？
+但是时间复杂度还是不好- 380ms，莫非我要map套map？
+
+map套map也没有优化很多，230ms
 */
+public class Solution {
+    public int[][] multiply(int[][] A, int[][] B) {
+        Map<Integer, Map<Integer, Integer>> mapA = new HashMap<>();
+        Map<Integer, Map<Integer, Integer>> mapB = new HashMap<>();
+        
+        int m = A.length, n = A[0].length, p = B[0].length;
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j ++) {
+                if(A[i][j] != 0) {
+                    if(!mapA.containsKey(i)) mapA.put(i, new HashMap<Integer, Integer>());
+                    mapA.get(i).put(j, A[i][j]);
+                }
+            }
+        }
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < p; j++) {
+                if(B[i][j] != 0) {
+                    if(!mapB.containsKey(j)) mapB.put(j, new HashMap<Integer, Integer>());
+                    mapB.get(j).put(i, B[i][j]);
+                }
+            }
+        }
+        int[][] res = new int[m][p];
+        
+        for(int i : mapA.keySet()) {
+            for(int j : mapB.keySet()) {
+                Map<Integer, Integer> mA = mapA.get(i), mB = mapB.get(j);
+                for(int k : mA.keySet()) {
+                    if(mB.containsKey(k)) {
+                        res[i][j] += mA.get(k) * mB.get(k);
+                    }
+                }
+            }
+        }
+
+        return res;
+    }
+}
 
 public class Solution {
     class Pair {
