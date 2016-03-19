@@ -26,7 +26,6 @@ Common logic in two different places should be refactored into a common method.
 /*
 我觉得我这个写法好别扭啊。。。看看别人怎么写的
 */
-
 public class Vector2D {
     int x = 0;
     int y = -1;
@@ -40,20 +39,16 @@ public class Vector2D {
     }
 
     public boolean hasNext() {
-        return getNext() != null;
-    }
-    
-    public Integer getNext() {
-        if(x >= list.size()) return null;
+        if(x >= list.size()) return false;
         List<Integer> l = list.get(x);
         y++;
         while(y >= l.size()) {
             x ++;
             y = 0;
-            if(x >= list.size()) return null;
+            if(x >= list.size()) return false;
             l = list.get(x);
         }
-        return l.get(y);
+        return true;
     }
 }
 
