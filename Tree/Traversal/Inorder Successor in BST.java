@@ -50,3 +50,25 @@ public class Solution {
         return null;
     }
 }
+
+/*
+这个解法好巧妙的说
+1. 如果tmp.val > p.val, 那我先缓存一下tmp，tmp向左移看看能不能在左子树里面找到另外一个离p更近的，如果不能找到就直接返回res，找到就更新res
+2. 如果tmp.val <= p.val，那么tmp不可能是res，就tmp右移，在右子树里面接着找
+*/
+public class Solution {
+    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+        if(root == null || p == null) return null;
+        TreeNode res = null;
+        TreeNode tmp = root;
+        while(tmp != null) {
+            if(tmp.val > p.val) {
+                res = tmp;
+                tmp = tmp.left;
+            } else {
+                tmp = tmp.right;
+            }
+        }
+        return res;
+    }
+}
