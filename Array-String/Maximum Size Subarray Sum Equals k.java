@@ -17,7 +17,9 @@ Can you do it in O(n) time?
 这道题我记得去西雅图玩儿的时候小陈有说过。。。可是开始还是没想出来，只做出了O(n)的解法
 后来呢，我的想法是arr[i]存i-n的total的值，这样就有点像two sum- [i,j] = arr[j] - arr[i-1]找到这样两个值相减等于k，然后再用一个maxLen track最大的就可以了
 但是用arr呢查找很慢，要O(n)，所以就想到hashmap
-我做的i-n的做法感觉不太好呢？其实可以改进写出来的，再想想
+我做的i-n的做法感觉不太好呢？
+不是的，从前往后和从后往前的做法是一样的，我之所以做的不好是，我先precompute了这样一个hashmap出来，但是有些时候key相同的话会被覆盖，不管选择哪种覆盖都不好
+所以一边走一边做就可以了，不用precompute
 
 从前面向后找，每次放入map的key是[0,i]的total，value是index i
 如果找到k呢，就maxLen设为i+1
@@ -43,5 +45,26 @@ public class Solution {
             if(!map.containsKey(sum)) map.put(sum, i);
         }
         return maxLen;
+    }
+}
+
+public class Solution {
+    public int maxSubArrayLen(int[] nums, int k) {
+        if(nums.length == 0) return 0;
+
+        int len = nums.length;
+        Map<Integer, Integer> map = new HashMap<>();
+        int sum = 0, maxNum = 0;
+        for(int i = len-1; i>=0; i--) {
+            sum += nums[i];
+            if(sum == k) maxNum = Math.max(maxNum, len-i);
+            if(map.containsKey(sum-k)) {
+                int j = map.get(sum-k);
+                if(j-i > maxNum) maxNum = j-i;
+            }
+            if(!map.containsKey(sum)) map.put(sum, i);
+        }
+        
+        return maxNum;        
     }
 }
