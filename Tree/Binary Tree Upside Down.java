@@ -48,3 +48,31 @@ public class Solution {
         return left;
     }
 }
+
+/*
+iterative的解法
+核心思想就是
+node.left = parent.right;
+node.right = parent
+
+code按照顺序写下来就可以了
+*/
+
+public class Solution {
+    public TreeNode upsideDownBinaryTree(TreeNode root) {
+        if(root == null || root.left == null) return root;
+    
+        TreeNode curr = root, parent = null, parentRight = null;
+        
+        while(curr != null) {
+            TreeNode left = curr.left;
+            curr.left = parentRight;
+            parentRight = curr.right;
+            curr.right = parent;
+            parent = curr;
+            curr = left;
+        }
+        
+        return parent;   
+    }
+}
