@@ -22,6 +22,31 @@ Not sure? Think about how you would implement hasNext(). Which is more complex?
 Common logic in two different places should be refactored into a common method.
 */
 
+/*
+两个iterator的做法
+*/
+public class Vector2D {
+    private Iterator<List<Integer>> outerIter;
+    private Iterator<Integer> innerIter;
+    
+    public Vector2D(List<List<Integer>> vec2d) {
+        outerIter = vec2d.iterator();
+    }
+
+    public int next() {
+        return innerIter.next();
+    }
+
+    public boolean hasNext() {
+        if(innerIter != null && innerIter.hasNext()) return true;
+        while(outerIter.hasNext()) {
+            List<Integer> l = outerIter.next();
+            innerIter = l.iterator();
+            if(innerIter.hasNext()) return true;
+        }
+        return false;
+    }
+}
 
 /*
 我觉得我这个写法好别扭啊。。。看看别人怎么写的
