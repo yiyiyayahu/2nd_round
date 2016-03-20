@@ -12,6 +12,20 @@ Returns the index of the first occurrence of needle in haystack, or -1 if needle
 唉，还是手生了啊
 */
 
+/*
+leetcode出的那本书上的解法。。。好巧妙简洁的写法，牛！
+*/
+public class Solution {
+    public int strStr(String haystack, String needle) {
+        for(int i = 0; ; i++) {
+            for(int j = 0; ; j++) {
+                if(j == needle.length()) return i;
+                if(i+j == haystack.length()) return -1;
+                if(needle.charAt(j) != haystack.charAt(i+j)) break;
+            }
+        }
+    }
+}
 public class Solution {
     public int strStr(String haystack, String needle) {
         if(haystack == null || needle == null) return -1;
