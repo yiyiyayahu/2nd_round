@@ -21,6 +21,34 @@ Your algorithm should use only constant space. You may not modify the values in 
  *     ListNode(int x) { val = x; }
  * }
  */
+/*
+这个和下面的差不多，但是感觉自己思路清晰了一些
+*/
+public class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head == null || head.next == null) return head;
+        
+        ListNode fake = new ListNode(-1);
+        fake.next = head;
+        
+        ListNode prev = fake;
+        ListNode fst = head;
+        
+        while(fst != null && fst.next != null) {
+            ListNode sec = fst.next;
+            ListNode next = sec.next;
+            
+            prev.next = sec;
+            fst.next = next;
+            sec.next = fst;
+            
+            prev = fst;
+            fst = next;
+        }
+        return fake.next;
+    }
+}
+
 public class Solution {
     public ListNode swapPairs(ListNode head) {
         if(head == null || head.next == null) return head;
