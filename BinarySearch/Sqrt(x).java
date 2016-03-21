@@ -13,6 +13,10 @@ Compute and return the square root of x.
 
 所以，二分的终点确定比较重要，在运算中想通过是否小于0来判断溢出，是不可靠的，
 最好的办法就是在二分之前，要求end小于sqrt(INT_MAX)。sqrt(INT_MAX)是个常量，所以不算cheat。
+
+其实这里return的话只要return end就可以。。。不return start是因为tmp < x的时候start后移可能就变大了 但是end前移是ok的
+为什么返回end呢： 考虑return哪个的时候可以考虑循环终止时候的情况，这里就是start==end：
+start==end，如果这个时候tmp<x，start后移了一位，跳出循环，那说明前一个小，后一个大（不然end为什么会向前挪）返回end ok
 */
 public class Solution {
     public int mySqrt(int x) {
@@ -32,6 +36,6 @@ public class Solution {
                 end = mid - 1;
             }
         }
-        return (start+end)/2;
+        return end;
     }
 }
