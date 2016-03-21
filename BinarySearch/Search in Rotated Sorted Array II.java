@@ -19,11 +19,12 @@ time: O(n) space: O(1)
 其实最后那种情况，我觉得可以写个辅助函数，check左边，如果是true的话直接返回就可以了，不然的话再遍历右边。不过只是个简单的优化啦
 */
 /*
-我后来又写了一次，发现犯了好大的错喔
+我后来又写了一次
 if(nums[start] < nums[mid]) {}
 else if(nums[mid] < nums[end]) {}
 else {start++;}
-就是这三个条件就很乱，没有完整的cover很多case，导致else里面很难handle，当然我觉得也是可以改好的啦
+这个其实没有handle[3,1,1]，1的情况，就是最后一个else，start不一定要++
+加一个if(target == nums[start]) return true;就好了
 */
 public class Solution {
     public boolean search(int[] nums, int target) {
