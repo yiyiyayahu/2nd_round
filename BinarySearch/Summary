@@ -1,3 +1,32 @@
+binary search小结
+
+1. 最基本的binary search就是在一个数组中找target，返回index
+while(start <= end) {
+    int mid = (start+end)/2;
+    if(nums[mid] == target) return mid;
+    else if(nums[mid] < target) start = mid+1;
+    else end = mid-1;
+}
+return -1;
+
+这里呢，
+首先要想while的条件是什么，如果仅仅是start<end可以么，如果target正好在最后一个值
+    [2,3,4,5] target = 5 start = 0 -> 2 -> 3 = end，所以这里要start<=end
+其次呢，start和end指针都要移动，如果仅仅是start=mid或者end=mid，是会进入死循环的
+最后就是返回结果，那如果都遍历完了，就说明没有找到，return -1
+
+然后上面的case仔细想想关于死循环的问题，如果是这样
+while(start < end) {
+    if(...) start = mid + 1;
+    else end = mid;
+}
+这样会陷入死循环么？好像不会诶。。。死循环的情况一般在于start=end=mid, 可是这里start=end的时候就跳出循环了所以就不会导致死循环
+
+2. 然后有一些变形
+Search in Rotated Sorted Array I, II
+Find Minimum in Rotated Sorted Array I, II
+
+
 二分法要注意不要进入死循环
 那可以用一个len=2的arr来检验，比如[0,1]看看会不会进入死循环
 left和right的指针一定要挪动，不要出现不挪动的情况
