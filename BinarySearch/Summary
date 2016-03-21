@@ -23,6 +23,9 @@ while(start < end) {
 这样会陷入死循环么？好像不会诶。。。死循环的情况一般在于start=end=mid, 可是这里start=end的时候就跳出循环了所以就不会导致死循环
 
 2. 然后有一些变形
+简单变形 - search insert position
+    - target不一定完完全全存在在array里面，但是要返回insert的position，这时候如果没找到就不返回-1了，而是返回start
+    
 Search in Rotated Sorted Array I, II
 Find Minimum in Rotated Sorted Array I, II
 
