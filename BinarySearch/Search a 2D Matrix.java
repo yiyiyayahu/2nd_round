@@ -43,6 +43,39 @@ public class Solution {
         int m = matrix.length, n = matrix[0].length;
         
         int up = 0, down = m-1;
+        while(up <= down) {
+            int mid = (up + down)/2;
+            if(matrix[mid][0] == target) {
+                return true;
+            } else if(matrix[mid][0] < target) {
+                up = mid + 1;
+            } else {
+                down = mid - 1;
+            }
+        }
+        if(down < 0) down = 0;
+        
+        int left = 0, right = n-1;
+        while(left <= right) {
+            int mid = (left + right)/2;
+            if(matrix[down][mid] == target) {
+                return true;
+            } else if(matrix[down][mid] < target) {
+                left = mid+1;
+            } else {
+                right = mid-1;
+            }
+        }
+        return false;
+    }
+}
+
+public class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if(matrix.length == 0) return false;
+        int m = matrix.length, n = matrix[0].length;
+        
+        int up = 0, down = m-1;
         while(up < down) {
             int mid = (up + down)/2;
             if(matrix[mid][0] == target) {
