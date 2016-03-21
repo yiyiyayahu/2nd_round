@@ -22,7 +22,7 @@ while(start < end) {
 }
 这样会陷入死循环么？好像不会诶。。。死循环的情况一般在于start=end=mid, 可是这里start=end的时候就跳出循环了所以就不会导致死循环
 
-2. 然后有一些变形
+2. 变形
 简单变形 - search insert position
     - target不一定完完全全存在在array里面，但是要返回insert的position，这时候如果没找到就不返回-1了，而是返回start
     
@@ -45,6 +45,11 @@ Search in Rotated Sorted Array I, II
             }
 Find Minimum in Rotated Sorted Array I, II
     - 这个和前面不太一样的是，while(start<end)而不是等于，然后其实跳出条件就是start==end，两个都指向最小的那个，然后return nums[start]
+
+3. 还有一种就是数值的题
+sqrt(x) - start=1，end=n/2+1 一点点趋近
+pow(x, n) <- 由pow(x,n/2)推出
+
 
 二分法要注意不要进入死循环
 那可以用一个len=2的arr来检验，比如[0,1]看看会不会进入死循环
