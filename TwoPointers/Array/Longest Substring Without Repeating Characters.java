@@ -5,6 +5,47 @@ For "bbbbb" the longest substring is "b", with the length of 1.
 */
 
 /*
+但是下面的做法是iterate两次的，其实原来的做法蛮好的，做一个小小的改进就可以啦
+就是与其检测index[c] != 0然后把start到index[c]之间都清空，不如直接看这个是否index[c]>=start，这样就不用清空了
+
+有个小问题就是index也有0的问题，所以一种呢，就是初始化全部为-1 Arrays.fill(index, -1);还有一种就是存index+1这种。但是一定要注意处理喔
+嗯呐，就酱
+*/
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int[] index = new int[256];
+        int start = 0;
+        int maxLen = 0;
+        for(int end = 0; end < s.length(); end++) {
+            char c = s.charAt(end);
+            if(index[c] > start) {
+                start = index[c] ;
+            }
+            index[c] = end+1;
+            maxLen = Math.max(maxLen, end-start+1);
+        }
+        return maxLen;           
+    }
+}
+
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int[] index = new int[256];
+        Arrays.fill(index, -1);
+        int start = 0;
+        int maxLen = 0;
+        for(int end = 0; end < s.length(); end++) {
+            char c = s.charAt(end);
+            if(index[c] >= start) {
+                start = index[c] + 1;
+            }
+            index[c] = end;
+            maxLen = Math.max(maxLen, end-start+1);
+        }
+        return maxLen;           
+    }
+}
+/*
 Leetcode上面的解法总是很简洁。。。其实我没有必要存一个index的arr，反正我发现repeated的character，要把之前的start-repeated的位置中间的char对应的值都重置
 所以我可以直接用一个boolean arr，然后发现exist[s.charAt(j)]的时候，头指针i一直后移直到exist[s.charAt(j)]=false，同时i也移到了相应的位置
 好巧妙
