@@ -45,6 +45,11 @@ Search in Rotated Sorted Array I, II
             }
 Find Minimum in Rotated Sorted Array I, II
     - 这个和前面不太一样的是，while(start<end)而不是等于，然后其实跳出条件就是start==end，两个都指向最小的那个，然后return nums[start]
+    
+    
+Search a 2D Matrix I, II
+    - I可以转换为一维数组来做，这样比较不容易出错
+    - II其实是每次都exclude 1/4块
 
 3. 还有一种就是数值的题
 sqrt(x) - start=1，end=n/2+1 一点点趋近
