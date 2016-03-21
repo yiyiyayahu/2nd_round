@@ -18,7 +18,7 @@ You may assume no duplicate exists in the array.
 关于binary search比较重要的两点一个是返回值，是返回start对应的呢还是肿么，还有就是结束条件，会不会进入死循环之类的，那我们一般只要考虑两个元素这种情况就可以
 [1,2] - 直接返回start
 但是如果[1,2]只是其中一步，还要进入循环呢，这时候start=0,mid=0,end=1 -> end=mid=0, 循环跳出，这时候start=end=0，都指向元素1
-[2,1] - start=0,mid=0,end=1-> start=mid+1=1 -> start=end=0, 都指向元素1
+[2,1] - start=0,mid=0,end=1-> start=mid+1=1 -> start=end=1, 都指向元素1
 所以发现，当start==end的时候，指向的就是最小值，所以返回nums[start]就可以了
 */
 public class Solution {
