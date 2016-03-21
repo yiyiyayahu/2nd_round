@@ -27,6 +27,22 @@ while(start < end) {
     - target不一定完完全全存在在array里面，但是要返回insert的position，这时候如果没找到就不返回-1了，而是返回start
     
 Search in Rotated Sorted Array I, II
+    - 这个题呢，就是看看左边是sort过的还是右边是sort过的从而判断target可能在哪边，然后指针相应的移
+    可是还是容易出问题。。。就是下面的code [3,1] 1会觉得找不到从而返回-1. start=mid=0的时候，会跳到下面，但是target>nums[mid]的条件又不满足，end直接跳回到-1.。。
+    所以解决办法呢，就是判断左边是不是sort过的时候加一个等号if(nums[start] <= nums[mid])
+            if(nums[start] < nums[mid]) {
+                if(target >= nums[start] && target < nums[mid]) {
+                    end = mid - 1;
+                } else {
+                    start = mid + 1;
+                }
+            } else {
+                if(target > nums[mid] && target <= nums[end]) {
+                    start = mid + 1;
+                } else {
+                    end = mid + 1;
+                }
+            }
 Find Minimum in Rotated Sorted Array I, II
 
 
