@@ -10,7 +10,8 @@ Given word = "word", return the following list (order does not matter):
 这道题不是很好想啊。。。囧，我一直没想出来
 其实是这样的，一个character我可以选择abbreviate或者不abbreviate，如果不abbr的话呢，count就加1, 如果abbr，加进去的同时count置0
 比如第二个char-o 1ord/2rd
-这里要注意sb的处理。。。这里倒是很巧妙的通过控制长度的方法控制了最后的值。。。但是一般来说按照我的风格我会新分配一些区间新建一些StringBuilder
+要注意sb的处理。。。这里倒是很巧妙的通过控制长度的方法控制了最后的值。。。就是setLength之后append的那些乱七八糟的就都去掉了
+但是一般来说按照我的风格我会新分配一些区间新建一些StringBuilder= =  赶脚自己好笨啊
 */
 
 public class Solution {
