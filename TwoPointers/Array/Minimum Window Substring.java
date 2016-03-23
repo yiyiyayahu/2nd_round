@@ -13,6 +13,46 @@ If there are multiple such windows, you are guaranteed that there will always be
 */
 
 /*
+下面的code似乎比之前的思路清晰点
+*/
+public class Solution {
+    public String minWindow(String s, String t) {
+        int slen = s.length(), tlen = t.length();
+        if(slen < tlen) return "";
+        
+        int start = 0, end = start;
+        int[] T = new int[256];
+        int[] foundT = new int[256];
+        int charsFound = 0;
+        String minWindow = "";
+
+        for(int i = 0; i < t.length(); i++) {
+            T[t.charAt(i)] ++;
+        }
+        
+        while(start < slen) {
+            while(end < slen && charsFound < tlen) {
+                char c = s.charAt(end);
+                if(foundT[c] < T[c]) charsFound ++;
+                if(T[c] > 0) foundT[c] ++;
+                end ++;
+            }
+            if(charsFound == tlen) {
+                if(minWindow.equals("") || end-start < minWindow.length()) {
+                    minWindow = s.substring(start, end);
+                }
+            }
+            char curr = s.charAt(start);
+            if(T[curr] > 0) {
+                foundT[curr] --;
+                if(foundT[curr] < T[curr]) charsFound --;
+            }
+            start ++;
+        }
+        return minWindow;
+    }
+}
+/*
 唉，这道题写了好久，总是有错误
 思想就是：
 1. 对于T弄个hashmap来存T有哪些字符，每个字符出现了多少次
