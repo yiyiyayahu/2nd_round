@@ -13,6 +13,45 @@ You should return [1,2,3,6,9,8,7,4,5].
 */
 
 /*
+leetcode那本书上面的code真的是so。。简洁！
+思想是这样的，比如考虑最外面那一圈
+从左到右 - n个element
+从上到下 - m-1个element
+从右到左 - n-1个element
+从下到上 - m-2个element
+那结束条件呢，就是到某一步可以遍历的element数目为0，说明整个矩阵遍历完毕！
+这样就很不容易出错啦
+*/
+public class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> elements = new ArrayList<>();
+        if(matrix.length == 0) return elements;
+        int m = matrix.length, n = matrix[0].length;
+        int row = 0, col = -1;
+        
+        while(true) {
+            for(int i = 0; i < n; i++) {
+                elements.add(matrix[row][++col]);
+            }
+            if(--m == 0) break;
+            for(int i = 0; i < m; i++) {
+                elements.add(matrix[++row][col]);
+            }
+            if(--n == 0) break;
+            for(int i = 0; i < n; i++) {
+                elements.add(matrix[row][--col]);
+            }
+            if(--m == 0) break;
+            for(int i = 0; i < m; i++) {
+                elements.add(matrix[--row][col]);
+            }
+            if(--n == 0) break;
+        }
+        return elements;
+    }
+}
+
+/*
 这道题出了好多错。。。
 1. matrix.length==0的时候return list; []
 2. [2,3]只有一行的时候我还会调回来遍历下2.。。。{2,3,2}
