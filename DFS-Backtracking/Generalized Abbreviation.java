@@ -36,3 +36,31 @@ public class Solution {
         sb.setLength(sbOriginSize);
     }
 }
+
+/*
+my style... LOL
+*/
+public class Solution {
+    public List<String> generateAbbreviations(String word) {
+        List<String> res = new ArrayList<String>();
+        dfs(0, word.toCharArray(), new StringBuilder(), 0, res);
+        return res;
+    }
+    
+    public void dfs(int pos, char[] word, StringBuilder sb, int count, List<String> list) {
+        if(pos == word.length) {
+            StringBuilder tmp = new StringBuilder(sb);
+            if(count > 0) tmp.append(count);
+            list.add(tmp.toString());
+            return;
+        } 
+        
+        //abbreviate word[pos]
+        dfs(pos+1, word, sb, count+1, list);
+        //not abbreviate word[pos]
+        StringBuilder tmp2 = new StringBuilder(sb);
+        if(count > 0) tmp2.append(count);
+        tmp2.append(word[pos]);
+        dfs(pos+1, word, tmp2, 0, list);
+    }
+}
