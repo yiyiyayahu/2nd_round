@@ -4,6 +4,36 @@ You may assume that the maximum length of S is 1000, and there exists one unique
 */
 
 /*
+palindrome可以找到这样一个center从中间往外面扩展。但是因为可能是两个字母中间为center，比如bb，所以一共有2n-1个center
+O(n^2)
+下面这个解法只用了13ms诶
+很简洁的code
+*/
+public class Solution {
+    public String longestPalindrome(String s) {
+        int start = 0, end = 0;
+        
+        for(int i = 0; i < s.length(); i++) {
+            int len1 = expand(s, i, i);
+            int len2 = expand(s, i, i+1);
+            int len = Math.max(len1, len2);
+            if(len > end-start) {
+                start = i-(len-1)/2;
+                end = i + len/2;
+            }
+        }
+        return s.substring(start, end+1);
+    }
+    private int expand(String s, int left, int right) {
+        int L = left, R = right;
+        while(L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+            L --;
+            R ++;
+        }
+        return R-L-1;
+    }
+}
+/*
 就是从中间开始扩展
 开始expand只有一个变量center，但是这样是不行的：
 aba - ok
