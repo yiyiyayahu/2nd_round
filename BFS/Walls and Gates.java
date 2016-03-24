@@ -24,8 +24,37 @@ After running your function, the 2D grid should be:
 
 /*
 感觉这道题好像google当年的校园面的一道诶。。。想当初，我可是45分钟做两道题的节奏。。。
-开始想的是dfs，后来觉得bfs简单诶，只要找到gate，然后把周围的更新，一圈一圈来就可以了
+开始想的是dp，dfs，后来觉得bfs简单诶，只要找到gate，然后把周围的更新，一圈一圈来就可以了
+
+dfs明明是可以的，也很简洁！自己没想出还赖人家算法。。。dfs哭晕在厕所，bfs可以，为啥我不可以
+看看人家的简洁的code，我就给跪了
 */
+public class Solution {
+    private static int[] d = {0,1,0,-1,0};
+    
+    public void wallsAndGates(int[][] rooms) {
+        if(rooms.length == 0) return;
+        
+        for(int i = 0; i < rooms.length; i++) {
+            for(int j = 0; j < rooms[0].length; j++) {
+                if(rooms[i][j] == 0) {
+                    dfs(rooms, i, j);
+                }
+            }
+        }
+    }
+    
+    public void dfs(int[][] rooms, int i, int j) {
+        for(int k = 0; k < 4; k++) {
+            int p = i + d[k], q = j + d[k+1];
+            if(p>=0 && p<rooms.length && q>=0 && q<rooms[0].length && rooms[p][q] > rooms[i][j]+1) {
+                rooms[p][q] = rooms[i][j]+1;
+                dfs(rooms, p, q);
+            }
+        }
+    }
+}
+
 
 public class Solution {
     private class Pair {
