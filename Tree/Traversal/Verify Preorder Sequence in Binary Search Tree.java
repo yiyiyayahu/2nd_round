@@ -8,6 +8,27 @@ Could you do it using only constant space complexity?
 */
 
 /*
+Time: O(n) Space: O(1)的做法，不用stack，感觉快了好多诶。。。只要4ms
+不用stack的trick就是reuse原来的arr，然后通过指针移动达到和stack类似的效果
+比如[9,8,10,5,12] i=-1 -> i=0 -> i=1 -> i--,i--=-1 preorder[0]=10 min=10
+我觉得不是很好想，下面那个stack的还比较好想一点
+*/
+public class Solution {
+    public boolean verifyPreorder(int[] preorder) {
+        if(preorder.length < 2) return true;
+        
+        int min = Integer.MIN_VALUE, i = -1;
+        for(int val : preorder) {
+            if(val < min) return false;
+            while(i >= 0 && val > preorder[i]) {
+                min = preorder[i--];
+            }
+            preorder[++i] = val;
+        }
+        return true;
+    }
+}
+/*
 有了下面那个TLE的解法之后现在思路就清晰多了
 一开始拿到这道题的时候有些懵，总想着构造这样一个tree，实际上没有必要
 考虑一下不太行的情况，无非就是[9,8,10,5,12]这种，从10开始已经应该是比9大的了，但是遇到5就应该是invalid preorder了
