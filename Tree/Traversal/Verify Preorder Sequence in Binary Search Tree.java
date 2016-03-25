@@ -8,7 +8,7 @@ Could you do it using only constant space complexity?
 */
 
 /*
-我这个做法不好，已经TLE了，好多重复计算
+我这个做法不好，已经TLE了，好多重复计算，时间复杂度O(n^2)
 思路是这样的preorder[i]肯定是当前的root value了，然后从i+1开始往后找，所有开始小于这个root value的都是left subtree，
 看到一个大于它的就说明right subtree开始了，但是如果在right这边发现有一个比root value小，那就return false了，不然就recursive的去找
 */
