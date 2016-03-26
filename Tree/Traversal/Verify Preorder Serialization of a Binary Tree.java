@@ -41,6 +41,8 @@ Return false
 
 但是这样做有一个问题，就是1,#,#,#,#应该是invalid的，但是我这种做法会return true
 改了一下，就是发现stack.size()==1并且peek是#的时候，这个tree本来不应该有其他东西了，如果这时候string还没完，就return false
+
+时间O(n)，空间O(n) 20ms感觉很一般诶
 */
 public class Solution {
     public boolean isValidSerialization(String preorder) {
