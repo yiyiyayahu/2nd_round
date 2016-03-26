@@ -64,4 +64,24 @@ public class Solution {
         return stack.size()==1 && stack.peek().equals("#");
     }
 }
+
+/*
+一个巧妙的用indgree和outdegree的做法
+一个node，indegree是1，outdegree是2，就是指2个child，1个parent
+新加入一个node的话呢，肯定用掉一个indegree的名额，但是如果不是null的话呢就又加入两个outdegree
+用一个int diff来track indgree和outdegree的差值，其实也就是可以填的坑
+如果发现坑没了，自然就是return false
+然后最后遍历结束应该是diff==0
+*/
+public class Solution {
+    public boolean isValidSerialization(String preorder) {
+        String[] arr = preorder.split(",");
+        int diff = 1;
+        for(String s : arr) {
+            if(--diff < 0) return false;
+            if(!s.equals("#")) diff += 2;
+        }
+        return diff == 0;
+    }
 }
+
