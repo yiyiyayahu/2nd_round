@@ -81,7 +81,7 @@ public class Solution {
 }
 
 
-//人家这个写法简洁好多诶。。。这个算是从上往下count，root的count是1，如果root.left
+//人家这个写法简洁好多诶。。。这个算是从上往下count，root的count是1，如果root.left满足条件，count设为2，往下传，不然count重置为1
 public class Solution {
     public int longestConsecutive(TreeNode root) {
         return (root==null)?0:Math.max(dfs(root.left, 1, root.val), dfs(root.right, 1, root.val));
