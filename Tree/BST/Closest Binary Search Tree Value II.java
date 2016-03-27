@@ -18,9 +18,35 @@ Without parent pointer we just need to keep track of the path from the root to t
 You would need two stacks to track the path in finding predecessor and successor node separately.
 */
 
-
 /*
-用一个maxHeap来做倒是ok的，时间复杂度是O(nlogk)
+不用maxHeap来做，因为是BST嘛，那in-order traversal出来的就是一个sorted的list，然后一边遍历一边更新就可以了 
+我觉得这里LinkedList就相当于一个queue。。。但是因为要返回List<Integer>所以就直接用LinkedList比较方便？
+O(n) 2ms
+*/
+public class Solution {
+    public List<Integer> closestKValues(TreeNode root, double target, int k) {
+        LinkedList<Integer> list = new LinkedList<>();
+        
+        traverse(root, target, k, list);
+        return list;
+    }
+    
+    public void traverse(TreeNode root, double target, int k, LinkedList<Integer> list) {
+        if(root == null) return;
+        traverse(root.left, target, k, list);
+        if(list.size() < k) {
+            list.addLast(root.val);
+        } else {
+            if(Math.abs(target-list.get(0)) > Math.abs(target-root.val)) {
+                list.removeFirst();
+                list.addLast(root.val);
+            }
+        }
+        traverse(root.right, target, k, list);
+    }
+}
+/*
+用一个maxHeap来做倒是ok的，时间复杂度是O(nlogk) 8ms
 但是提示说用两个stack分别存predecessor和successor，再想想
 */
 /**
