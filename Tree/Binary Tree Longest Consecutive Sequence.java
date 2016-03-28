@@ -80,7 +80,36 @@ public class Solution {
     }
 }
 
-
+/*
+受count univalue的启发，小改进了一下，利用返回的是正数还是负数表示是否involve
+但是还要注意longest=1的时候表示root还是involve的
+*/
+public class Solution {
+    public int longestConsecutive(TreeNode root) {
+        return Math.abs(helper(root));
+    }
+    
+    public int helper(TreeNode root) {
+        if(root == null) return 0;
+        if(root.left == null && root.right == null) return 1;
+        
+        int left = helper(root.left);
+        int right = helper(root.right);
+        int longest = Math.max(Math.abs(left), Math.abs(right));
+        
+        boolean isInvolved = false;
+        if(left > 0 && root.left.val==root.val+1 && left+1 > longest) {
+            longest = left+1;
+            isInvolved = true;
+        }
+        if(right > 0 && root.right.val==root.val+1 && right+1 > longest) {
+            longest = right+1;
+            isInvolved = true;
+        }
+        if(!isInvolved && longest != 1) longest = 0-longest;
+        return longest;
+    }
+}
 //人家这个写法简洁好多诶。。。这个算是从上往下count，root的count是1，如果root.left满足条件，count设为2，往下传，不然count重置为1
 public class Solution {
     public int longestConsecutive(TreeNode root) {
