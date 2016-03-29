@@ -1,0 +1,33 @@
+就是类似range sum query那种题, to get prefix sum
+如果频繁的update和query的话，O(n)的复杂度不是很好，所以需要寻找一个O(logn)的解法
+
+ * Space complexity for fenwick tree is O(n)
+ * Time complexity to create fenwick tree is O(nlogn)
+ * Time complexity to update value is O(logn)
+ * Time complexity to get prefix sum is O(logn)
+
+https://www.youtube.com/watch?v=CWDQJGaN1gY
+https://github.com/mission-peace/interview/blob/master/src/com/interview/tree/FenwickTree.java
+
+
+<Query>
+GetParent:
+1. find 2's complement
+2. AND with original number
+3. substract from original number
+index -= index&(-index)
+
+<Update>
+GetNext:
+1. find 2's complement
+2. AND with original number
+3. add to original number
+index += index&(-index)
+
+
+Note: To find 2's complement (that is: -index)
+1. flip every bit of index
+2. add one to the end
+For example 5->-5
+0000 0101 -> 1111 1010 -> 1111 1011
+thus, 5 & -5 = 1
