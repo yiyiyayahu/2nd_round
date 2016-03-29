@@ -26,6 +26,8 @@ Note:
 */
 
 /*
+https://www.topcoder.com/community/data-science/data-science-tutorials/binary-indexed-trees/
+这道题居然是binary indexed tree，之前不太晓得这个data structure诶，而且同类型的题目有四道，要好好研究一下，看来下面的是很naive的做法
 题目倒是不难。。。
 不过开始还是想复杂了，最开始觉得sum[i][j]是从(0,0)-(i,j)的和，其实没必要啦，只要每一行都maintain一个当前行的sum就可以了
 还有，我觉得很奇怪诶。。就是有可能input是invalid，那constructor里面也可以直接return的？
