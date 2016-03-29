@@ -51,3 +51,9 @@ Note: To find 2's complement (that is: -index)
 For example 5->-5
 0000 0101 -> 1111 1010 -> 1111 1011
 thus, 5 & -5 = 1
+
+
+
+还有一种是segment tree，用到divide and conqer的思想，可以用来search[i,j]中最小的值 O(logn)
+https://www.youtube.com/watch?v=ZBHKZF5w4YU&annotation_id=32b44f2a-e16f-4fb3-821d-cf0834915b9c&src_vid=CWDQJGaN1gY&feature=cards
+https://github.com/mission-peace/interview/blob/master/src/com/interview/tree/SegmentTreeMinimumRangeQuery.java
