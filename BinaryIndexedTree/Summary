@@ -9,6 +9,26 @@
 https://www.youtube.com/watch?v=CWDQJGaN1gY
 https://github.com/mission-peace/interview/blob/master/src/com/interview/tree/FenwickTree.java
 
+实际上是构造一个tree，来存sum，但是与其是sum[i] = sum(elements from 0-i) 每个i存的sum区间是不一样的
+0 - dummy node
+            0
+    1   2     4    8
+        3   5  6  9 10
+               7    11
+parent和child的区别都是只有rightmost 1是flip的
+第一行，all starting from 0： 1 = 0+2^0 存[0,0](starting from 0, store 1 element sum) 
+                              2 = 0+2^1 [0,1]  4 = 0+2^2 [0,3]  8 = 0+2^3 [0,7]
+第二行  3=2^1+2^0 [2,2](starting from 2, store 1 element sum)
+        5=2^2+2^0 [4,4]  6=2^2+2^1 [4,5]  9=2^3+2^0 [8,8] 10=2^3+2^1 [8,9]
+第三行  7=2^2+2^1+2^0 把前两个合并，那就是从6开始算一个element的和[6,6]  11=2^3+2^1+2^0 [10,10]
+
+然后可以看出，每个分支都是连着的，比如算[0,9]的sum index=index+1，找到10，然后发现10是[8,9] sum加上10的位置的结果，再找parent，也就是8，
+8正好存的是[0,7]的sum，再加上8的结果，再找到parent，是0，就说明找完了，所以sum[8,9] + sum[0,7] = sum[0,9]
+
+同理update的时候呢，也是update一整支，比如update index1 index变为2，starting from 2开始要update index=2也就是sum[0,1] 
+然后找到child，update index=3 也就是sum[2,2]就可以了
+
+所以这样就保证了update和query都是O(logn)的复杂度
 
 <Query>
 GetParent:
