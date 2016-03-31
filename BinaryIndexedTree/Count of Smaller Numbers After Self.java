@@ -24,7 +24,8 @@ Google
 然后这道题有用BST的，有用binary indexed tree的，有用mergesort的。。。好难，哭了
 感觉mergesort比binary indexed tree快诶，mergesort才11ms
 
-mergesort的时间复杂度是O(nlogn)
+是list操作的问题，时间复杂度都是O(nlogn)
+binary indexed tree如果先Integer[] result, 然后Arrays.asList(result)就快很多，只要8ms
 */
 public class Solution {
     public List<Integer> countSmaller(int[] nums) {
@@ -112,12 +113,15 @@ getCount(1-1,tree)=0 同时update tree tree[1]++->1 1->2 tree[2]++ -> 2 -> 4 tre
 getCount(4-1,tree)=0->getCount(2,tree)=2 ->2 同时update tree tree[4]++
 
 可是为什么是getCount(tmp[i]-1, tree)呢,因为update的时候自己也++了，所以不能算自己？因为tmp[i]-1是第一个小于tmp[i]的数？
+
+这种解法就很慢，改为Integer[] array就提高好多
+list.add(0, getCount(tmp[i]-1, tree));
 */
 public class Solution {
     public List<Integer> countSmaller(int[] nums) {
-        List<Integer> list = new ArrayList<>();
+        Integer[] result = new Integer[nums.length];
         int len = nums.length;
-        if(len == 0) return list;       
+        if(len == 0) return new ArrayList<>();       
 
         int min = nums[0];
         for(int i = 0; i < len; i++) {
@@ -132,11 +136,10 @@ public class Solution {
         
         int[] tree = new int[max+1];
         for(int i = len-1; i >= 0; i--) {
-            list.add(0, getCount(tmp[i]-1, tree));
+            result[i] = getCount(tmp[i]-1, tree);
             update(tmp[i], tree);
         }
-        return list;
-    }
+        return Arrays.asList(result);
 
     public int getCount(int i, int[] tree) {
         int count = 0;
