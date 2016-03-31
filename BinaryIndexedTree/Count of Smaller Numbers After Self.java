@@ -111,7 +111,7 @@ getCount(2-1,tree)=0 同时update tree tree[2]++->1  2->4 tree[4]++ ->1 [0,0,1,0
 getCount(1-1,tree)=0 同时update tree tree[1]++->1 1->2 tree[2]++ -> 2 -> 4 tree[4]++ -> 2 [0,1,2,0,2]
 getCount(4-1,tree)=0->getCount(2,tree)=2 ->2 同时update tree tree[4]++
 
-可是为什么是getCount(tmp[i]-1, tree)呢,因为update的时候自己也++了，所以不能算自己，-1的？因为tmp[i]-1是第一个小于tmp[i]的数
+可是为什么是getCount(tmp[i]-1, tree)呢,因为update的时候自己也++了，所以不能算自己？因为tmp[i]-1是第一个小于tmp[i]的数？
 */
 public class Solution {
     public List<Integer> countSmaller(int[] nums) {
