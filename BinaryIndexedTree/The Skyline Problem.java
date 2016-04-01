@@ -29,7 +29,7 @@ maxHeap - > height
 1. divide the buildings into [x,y,isLeft] [x,y,isRight]
 2. sort it according to x (some trick in sorting)
 3. when hit [x,y,isLeft] and compare the curr height to the maximum height, if it is larger than the maximum height, it is a turning point
-   when hit [x,y,isRight], the current height can be poped up, and if the current maximum height is larger, it is a turning point as well
+   when hit [x,y,isRight], the current height can be poped up, and if the current maximum height is different from previous one, it is a turning point as well
    if the maxHeap isEmpty, then it means that it is hitting an end
     
 -> so we can just add current height to maxHeap when isLeft, and remove the current height from maxHeap when isRight
