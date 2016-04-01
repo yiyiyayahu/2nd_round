@@ -157,3 +157,73 @@ public class Solution {
         }
     }
 }
+
+/*
+BST的做法
+就是insert的过程中计算count，通过node的leftcnt和selfcnt的值，这个我觉得算是最好想的一个了！
+总算把所有做法都做了一遍！！！
+*/
+public class Solution {
+    public List<Integer> countSmaller(int[] nums) {
+        int len = nums.length;
+        if(len == 0) return new ArrayList<>();
+        
+        BST bst = new BST();
+        Integer[] count = new Integer[len];
+        for(int i=len-1; i >= 0; i--) {
+            count[i] = bst.insert(nums[i]);
+        }
+        return Arrays.asList(count);
+    }
+    
+    private class BST {
+        BSTNode root;
+        
+        private int insert(int value) {
+            BSTNode curr = root;
+            
+            if(root == null) {
+                root = new BSTNode(value);
+                return 0;
+            }
+            
+            int count = 0;
+            while(true) {
+                if(value > curr.val) {
+                    count += curr.selfcnt + curr.leftcnt;
+                    if(curr.right != null) curr = curr.right;
+                    else { 
+                        curr.right = new BSTNode(value); 
+                        break; 
+                    }
+                } else if(value < curr.val) {
+                    curr.leftcnt ++;
+                    if(curr.left != null) curr = curr.left;
+                    else {
+                        curr.left = new BSTNode(value);
+                        break;
+                    }
+                } else {
+                    count += curr.leftcnt;
+                    curr.selfcnt ++;
+                    break;
+                }
+            }
+            return count;
+        }
+    }
+    
+    private class BSTNode {
+        int val;
+        BSTNode left;
+        BSTNode right;
+        int selfcnt;
+        int leftcnt;
+        
+        private BSTNode(int value) {
+            this.val = value;
+            this.selfcnt = 1;
+            this.leftcnt = 0;
+        }
+    }
+}
