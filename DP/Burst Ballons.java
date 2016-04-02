@@ -23,8 +23,8 @@ Return 167
 /*
 这个dp觉得好难想啊
 我觉得dp最好的方法就是draw a grid, fill in the number
-dp的思路呢就是先想找dp这个arr是一维还是二维的，然后想递推是，最后想初始条件
-那这道题呢，显然是二维数组，dp[i][j]表示[i,j)的maxCoints (not including j)
+dp的思路呢就是先想找dp这个arr是一维还是二维的，然后想递推式，最后想初始条件
+那这道题呢，显然是二维数组，dp[i][j]表示[i,j)的maxCoins (not including j)
 
 那就以题目中的例子[3,1,5,8]，这样的话grid应该存这些：
     0    1     2      3       4
