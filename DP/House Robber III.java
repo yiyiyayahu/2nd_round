@@ -34,6 +34,35 @@ Maximum amount of money the thief can rob = 4 + 5 = 9.
  */
  
 /*
+改进了一下，因为下面那个解法总是会遍历每个node好多次
+root -chosen的时候，遍历一遍left，right没chosen的情况
+然后not chosen的时候，又要遍历一下left，right没选中的情况
+
+后来想想着缓存一下，就是用一个int[2]的array，total[0]存当前node被chosen时候的最大值，total[1]存当前node not chosen的最大值
+这样每个node只要遍历一遍就可以了
+
+唉，我不知道是昨天晚上状态不好还是什么，现在想题啊还是做题啊都有点慢，抓紧起来啊啊啊，多多练习！
+*/
+public class Solution {
+    public int rob(TreeNode root) {
+        int[] total = new int[2];
+        dfs(root, total);
+        return Math.max(total[0], total[1]);
+    }
+
+    //total[0] - chosen; total[1] - not chosen
+    public void dfs(TreeNode node, int[] total) {
+        if(node == null) return;
+        int[] left = new int[2];
+        int[] right = new int[2];
+        dfs(node.left, left);
+        dfs(node.right, right);
+        
+        total[0] = node.val + left[1] + right[1];
+        total[1] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+    }
+}
+/*
 这个解法会TLE，只是个思路。。。有很多重复计算，再想想如何把结果存起来。。。
 */
 public class Solution {
