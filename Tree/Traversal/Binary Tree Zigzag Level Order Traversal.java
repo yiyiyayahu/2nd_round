@@ -16,7 +16,39 @@ return its zigzag level order traversal as:
   [15,7]
 ]
 */
+/*
+flip from true to false, false to true
+flag ^= true;
 
+true ^ true -> false
+false ^ true -> true
+*/
+public class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        if(root == null) return ret;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        List<Integer> list = new ArrayList<Integer>();
+        
+        boolean leftToRight = true;
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            for(int i = 0; i < size; i++) {
+                TreeNode n = queue.remove();
+                if(leftToRight) list.add(n.val);
+                else list.add(0, n.val);
+                
+                if(n.left != null) queue.add(n.left);
+                if(n.right != null) queue.add(n.right);
+            }
+            leftToRight ^= true;
+            ret.add(list);
+            list = new ArrayList<Integer>();
+        }
+        return ret;           
+    }
+}
 /*
 这道题嘛，我就加了个int来track一下每一层是leftToRight还是RightToLeft了，感觉也没什么意义啊，和level traversal是一样的
 java可以直接加到ArrayList的前面，如果不可以呢，
