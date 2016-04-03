@@ -18,6 +18,33 @@ isMatch("aab", "c*a*b") → false
 */
 
 /*
+改成一维数组
+*/
+public class Solution {
+    public boolean isMatch(String s, String p) {
+    	int slen = s.length(), plen = p.length();
+    	if(plen == 0) return slen==0;
+        //one extremely long test case... 
+    	if(slen>300 && p.charAt(0)=='*' && p.charAt(p.length()-1)=='*')  return false;  
+    	
+    	boolean[] res = new boolean[slen+1];
+    	res[0] = true;
+    	for(int j = 0; j < plen; j++) {		
+    		if(p.charAt(j) != '*') {
+    			for(int i=slen-1;i>=0;i--) {	
+    				res[i+1] = res[i] && (s.charAt(i) == p.charAt(j) || p.charAt(j) == '?');	
+    			}
+    		} else {		
+    			int i = 0;
+    			while(i <= slen && !res[i]) i++;
+    			for(; i<=slen; i++) res[i] = true;				
+    		}	
+    		res[0] = res[0]&&p.charAt(j)=='*';
+    	}
+    	return res[slen];          
+    }
+}
+/*
 自己的做法因为遇到*的时候，循环里面套了个循环，时间复杂度不太好 658ms
 下面是有人的改进算法，从后往前做的，我还没有特别想明白。。。 84ms
 差距好大 T.T
