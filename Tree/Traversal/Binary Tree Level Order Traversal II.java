@@ -23,6 +23,29 @@ return its bottom-up level order traversal as:
 */
 public class Solution {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        if(root == null) return ret;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        List<Integer> list = new ArrayList<Integer>();
+        
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            for(int i = 0; i < size; i++) {
+                TreeNode n = queue.remove();
+                list.add(n.val);
+                if(n.left != null) queue.add(n.left);
+                if(n.right != null) queue.add(n.right);
+            }
+            ret.add(0, list);
+            list = new ArrayList<Integer>();
+        }
+        return ret;        
+    }
+}
+
+public class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         
         if(root == null) return result;
