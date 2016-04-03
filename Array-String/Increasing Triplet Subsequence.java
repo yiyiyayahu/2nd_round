@@ -15,6 +15,23 @@ return false.
 */
 
 /*
+mock interview了一下，发现代码比上次简洁诶。。。果然思路清晰怎么都好办，不晓得我onsite会肿么样。。。哭
+就是track min和max，如果min和max都更新过了，找到一个值比max大就ok了
+*/
+public class Solution {
+    public boolean increasingTriplet(int[] nums) {
+        if(nums.length < 3) return false;
+        int min = nums[0], max = Integer.MIN_VALUE;
+        for(int i = 1; i < nums.length; i++) {
+            if(nums[i] > max && max != Integer.MIN_VALUE) return true;
+            if(nums[i] <= min) min = nums[i];
+            else if(nums[i] < max || max==Integer.MIN_VALUE) max = nums[i];
+        }
+        return false;
+    }
+}
+
+/*
 这道题我fail了好多次。。。囧
 我的思路很简单，就是一个smallest和一个secondSmall还有一个total
 如果遍历，发现诶，后面的比较小诶，而且这个时候secondSmall还没找到，那这个元素妥妥的是最小的啊，更新
