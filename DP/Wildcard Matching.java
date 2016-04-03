@@ -18,7 +18,7 @@ isMatch("aab", "c*a*b") → false
 */
 
 /*
-改成一维数组
+改成一维数组 34ms
 */
 public class Solution {
     public boolean isMatch(String s, String p) {
