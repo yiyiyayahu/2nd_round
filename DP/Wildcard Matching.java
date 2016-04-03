@@ -24,8 +24,6 @@ public class Solution {
     public boolean isMatch(String s, String p) {
     	int slen = s.length(), plen = p.length();
     	if(plen == 0) return slen==0;
-        //one extremely long test case... 
-    	if(slen>300 && p.charAt(0)=='*' && p.charAt(p.length()-1)=='*')  return false;  
     	
     	boolean[] res = new boolean[slen+1];
     	res[0] = true;
