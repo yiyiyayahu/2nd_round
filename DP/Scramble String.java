@@ -78,3 +78,47 @@ public class Solution {
         return true;
     }
 }
+
+/*
+dp的做法，怎么觉得也没好到哪里去呢
+*/
+public class Solution {
+    public boolean isScramble(String s1, String s2) {
+        int len = s1.length();
+        
+        int[] arr = new int[26];
+        for(int i = 0; i < len; i++) {
+            int index = s1.charAt(i)-'a';
+            arr[index] ++;
+        }
+        for(int i = 0; i < len; i++) {
+            int index = s2.charAt(i)-'a';
+            arr[index] --;
+            if(arr[index] < 0) return false;
+        }   
+        
+        if(len <= 3 || s1.equals(s2)) return true;
+        
+        boolean[][][] dp = new boolean[len][len][len+1];
+        
+        for(int k = 1; k <= len; k++) {
+            for(int i = 0; i <= len-k; i++) {
+                for(int j = 0; j <= len-k; j++) {
+                    if(k==1) {
+                        dp[i][j][k] = (s1.charAt(i)==s2.charAt(j));
+                        continue;
+                    }
+                    dp[i][j][k] = false;
+                    for(int l = 1; l <= k-1; l++) {
+                        if((dp[i][j][l] && dp[i+l][j+l][k-l]) || (dp[i][j+k-l][l] && dp[i+l][j][k-l])) {
+                            dp[i][j][k] = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return dp[0][0][len];
+    }
+}
