@@ -18,6 +18,10 @@ buy[i] - max profit if I buy on day i
 sell[i] - max profit if I sell on day i
 maxProfit = Math.max(maxProfit, sell[i])
 递推公式呢，就应该是
+buy[i] = -prices[i] + Math.max(sell[i-2],sell[i-3]...,sell[0])
+sell[i] = prices[i] + Math.max(buy[i-1],buy[i-2]....,buy[0])
+初始化buy[0] = -prices[0], sell[0]=0
+然后因为在i从小往大的process中呢，我就可以用两个variable maxSell和maxBuy来分别track上面这两个Math.max(...)
 */
 public class Solution {
     public int maxProfit(int[] prices) {
