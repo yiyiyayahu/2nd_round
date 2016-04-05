@@ -120,3 +120,36 @@ public class Solution {
         return true;
     }
 }
+
+/*
+用一个hashmap会好一点吧
+*/
+public class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int len = prerequisites.length;
+        if(len == 0) return true;
+
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for(int[] p : prerequisites) {
+            if(!map.containsKey(p[0])) map.put(p[0], new ArrayList<Integer>());
+            map.get(p[0]).add(p[1]);
+        }
+        int[] visited = new int[numCourses];
+        for(int i = 0; i < numCourses; i++) {
+            if(!dfs(i, visited, map)) return false;
+        }
+        return true;
+    }
+
+    public boolean dfs(int i, int[] visited, Map<Integer, List<Integer>> map) {
+        if(visited[i] == 1) return false;
+        if(!map.containsKey(i) || visited[i] == 2) return true;
+        visited[i] = 1;
+        List<Integer> courses = map.get(i);
+        for(int c : courses) {
+            if(!dfs(c, visited, map)) return false;
+        }
+        visited[i] = 2;
+        return true;
+    }
+}
