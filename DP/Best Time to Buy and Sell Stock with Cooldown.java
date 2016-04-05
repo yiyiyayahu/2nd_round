@@ -13,6 +13,35 @@ transactions = [buy, sell, cooldown, buy, sell]
 */
 
 /*
+还是觉得自己想的这个思路容易记住一些
+buy[i] - max profit if I buy on day i
+sell[i] - max profit if I sell on day i
+maxProfit = Math.max(maxProfit, sell[i])
+递推公式呢，就应该是
+*/
+public class Solution {
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        if(len == 0) return 0;
+        
+        int[] buy = new int[len];
+        int[] sell = new int[len];
+        buy[0] = -prices[0]; sell[0] = 0;
+        int maxProfit = 0;
+        
+        int maxBuy = buy[0], maxSell = 0;
+        for(int i = 1; i < len; i++) {
+            if(i > 1) maxSell = Math.max(maxSell, sell[i-2]);
+            maxBuy = Math.max(maxBuy, buy[i-1]);
+            buy[i] = maxSell - prices[i];
+            sell[i] = maxBuy + prices[i];
+            maxProfit = Math.max(maxProfit, sell[i]);
+        }
+        return maxProfit;
+    }
+}
+
+/*
 这道题我现有的第二个解法的思路，但是时间复杂度是O(n^2) 肯定是不理想的，怎么转化为n呢
 其实是这样的，比如我第i-1天卖掉或买入，从第i天的角度看，不一定是最优的，就像我之前写的j在0到i之间来了个loop是一样的
 但是其实不需要loop，只要看前面的result，然后改进一下就行了
