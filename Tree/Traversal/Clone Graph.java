@@ -66,3 +66,26 @@ public class Solution {
         return ret;
     }
 }
+
+/*
+DFS的解法
+*/
+public class Solution {
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        Map<UndirectedGraphNode,UndirectedGraphNode> map = new HashMap<>();
+        return dfs(node, map);
+    }
+    
+    public UndirectedGraphNode dfs(UndirectedGraphNode node, Map<UndirectedGraphNode,UndirectedGraphNode> map) {
+        if(node == null) return null;
+        
+        if(map.containsKey(node)) return map.get(node);
+        UndirectedGraphNode clone = new UndirectedGraphNode(node.label);
+        map.put(node, clone);
+        for(UndirectedGraphNode n : node.neighbors) {
+            clone.neighbors.add(dfs(n, map));
+        }
+     
+        return clone;
+    }
+}
