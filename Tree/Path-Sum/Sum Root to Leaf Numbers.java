@@ -33,3 +33,27 @@ public class Solution {
         if(n.right != null) helper(n.right, tmp);
     }
 }
+
+/*
+开始尝试用Integer来传递，发现失败。。。还是用int[1]好了
+但是为什么呢，Integer不是一个object？
+*/
+public class Solution {
+    public int sumNumbers(TreeNode root) {
+        int[] sum = new int[1];
+        dfs(root, 0, sum);
+        return sum[0];
+    }
+
+    public void dfs(TreeNode root, int curr, int[] sum) {
+        if(root == null) return;
+
+        curr = curr * 10 + root.val;
+        if(root.left == null && root.right == null) {
+            sum[0] += curr;
+            return;
+        }
+        dfs(root.left, curr, sum);
+        dfs(root.right, curr, sum);
+    }
+}
