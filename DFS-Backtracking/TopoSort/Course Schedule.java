@@ -123,6 +123,7 @@ public class Solution {
 
 /*
 用一个hashmap会好一点吧
+额，其实不是的，因为key就是numCourses，可以直接对应index的，所以用List<List<Integer>>也蛮好搜的
 */
 public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
