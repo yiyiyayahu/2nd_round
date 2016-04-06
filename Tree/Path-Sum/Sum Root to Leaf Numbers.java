@@ -37,6 +37,7 @@ public class Solution {
 /*
 开始尝试用Integer来传递，发现失败。。。还是用int[1]好了
 但是为什么呢，Integer不是一个object？
+Integer是一个object，但是是immutable的，所以我加完了之后并不会改变原来的值
 */
 public class Solution {
     public int sumNumbers(TreeNode root) {
