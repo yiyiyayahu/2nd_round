@@ -11,7 +11,39 @@ Recover the tree without changing its structure.
 那怎么找呢，就是inorder traversal的时候发现prev.val > curr.val，那这个prev和curr可能是两个不对的点，但是也不一定。prev一定是不对的
 比如inorder - [6,5,4,7]那不应该6和5互换，而应该6和4互换，所以遍历的过程中再更新second
 不过这道题要求constant space，我这个还是用到stack，所以还是O(n)，再想想
+
+下面这个用了recursive，其实也不是constant space，而且我觉得思想差不多，当然我的code还可以简化一下
 */
+
+public class Solution {
+    TreeNode first;
+    TreeNode second;
+    TreeNode prev;
+    public void recoverTree(TreeNode root) {
+        if(root == null) return;
+        first = null; second = null; prev = null;
+        inorder(root);
+        if(first != null && second != null) {
+            int tmp = first.val;
+            first.val = second.val;
+            second.val = tmp;
+        }
+    }
+    public void inorder(TreeNode curr) {
+        if(curr == null) return;
+        //prev is the inorder previous node from curr
+        inorder(curr.left);
+        if(prev == null) prev = curr;
+        else {
+            if(prev.val > curr.val) {
+                if(first == null) first = prev;
+                second = curr;
+            }
+            prev = curr;
+        }
+        inorder(curr.right);
+    }
+}
 
 public class Solution {
     public void recoverTree(TreeNode root) {
