@@ -70,7 +70,46 @@ public class Solution {
 }
 
 /*
-这个解法在输入很大很长的时候会出现stack overflow。。。虽然我并不是很清楚为什么，难道一定要bfs么。。我觉得我思路还蛮清晰的诶
+我其实还是不太清楚为什么dfs里面需要i>1,i<m-2,j>1,j<m-2，就是需要遍历在里面那圈。。。不然就会stack overflow，是因为会重复遍历么，再想想
+*/
+
+public class Solution {
+    public void solve(char[][] board) {
+        if(board.length == 0) return;
+        int m = board.length, n = board[0].length;
+        //flip all O on the edges and the adjacent O to #
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(i == 0 || i == m-1 || j == 0 || j == n-1) {
+                    if(board[i][j] == 'O') dfs(board, i, j, '#');
+                }
+            }
+        }
+        //flip back # to O
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(board[i][j] == 'O') board[i][j] = 'X';
+                if(board[i][j] == '#') board[i][j] = 'O';
+            }
+        }
+    }
+
+    public void dfs(char[][] board, int i, int j, char replace) {
+        int m = board.length, n = board[0].length;
+        if(i < 0 || i >= m || j < 0 || j >= n) return;
+
+        if(board[i][j] == 'O') {
+            board[i][j] = replace;
+            if(i > 1) dfs(board, i-1, j, replace);
+            if(i < m-2) dfs(board, i+1, j, replace);
+            if(j > 1) dfs(board, i, j-1, replace);
+            if(j < n-2) dfs(board, i, j+1, replace);
+        }
+    }
+}
+
+/*
+错误代码！！！这个解法在输入很大很长的时候会出现stack overflow。。。
 */
 public class Solution {
     public void solve(char[][] board) {
