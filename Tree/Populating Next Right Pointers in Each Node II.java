@@ -62,3 +62,33 @@ public class Solution {
         connect(root.left);
     }
 }
+
+/*
+这个解法是我自己写的，虽然不是很巧妙，但是怎么说呢，不要去想以前巧妙的思路，一步一步分析问题一步一步解决，相信自己总会做出来的就可以了
+这道题和I的区别无非就是left，right子节点都可能是null，不知道怎么连嘛。那就构造这样一个函数好啦
+*/
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        if(root == null) return;
+        
+        TreeLinkNode curr = root;
+        while(curr != null) {
+            for(TreeLinkNode tmp = curr; tmp != null; tmp = tmp.next) {
+                if(tmp.left == null && tmp.right == null) continue;
+                
+                if(tmp.left != null && tmp.right != null) tmp.left.next = tmp.right;
+                TreeLinkNode next = getNextChild(tmp.next);
+                if(tmp.right != null) tmp.right.next = next;
+                else tmp.left.next = next;
+            }
+            curr = getNextChild(curr);
+        }
+    }
+    
+    public TreeLinkNode getNextChild(TreeLinkNode root) {
+        if(root == null) return null;
+        if(root.left == null && root.right == null) return getNextChild(root.next);
+        if(root.left != null) return root.left;
+        else return root.right;
+    }
+}
