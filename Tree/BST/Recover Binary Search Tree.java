@@ -12,7 +12,7 @@ Recover the tree without changing its structure.
 比如inorder - [6,5,4,7]那不应该6和5互换，而应该6和4互换，所以遍历的过程中再更新second
 不过这道题要求constant space，我这个还是用到stack，所以还是O(n)，再想想
 
-下面这个用了recursive，其实也不是constant space，而且我觉得思想差不多，当然我的code还可以简化一下
+下面这个用了recursive，其实也不算是严格的constant space，而且我觉得思想差不多，当然我的code还可以简化一下
 */
 
 public class Solution {
