@@ -69,7 +69,43 @@ public class Solution {
     }
 }
 
+/*
+这个解法在输入很大很长的时候会出现stack overflow。。。虽然我并不是很清楚为什么，难道一定要bfs么。。我觉得我思路还蛮清晰的诶
+*/
+public class Solution {
+    public void solve(char[][] board) {
+        if(board.length == 0) return;
+        int m = board.length, n = board[0].length;
+        //flip all O on the edges and the adjacent O to #
+        for(int i = 0; i < m; i++) {
+            if(board[i][0] == 'O') dfs(board, i, 0, '#');
+            if(board[i][n-1] == 'O') dfs(board, i, n-1, '#');
+        }
+        for(int j = 0; j < n; j++) {
+            if(board[0][j] == 'O') dfs(board, 0, j, '#');
+            if(board[m-1][j] == 'O') dfs(board, m-1, j, '#');
+        }
+        //flip back # to O
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(board[i][j] == 'O') board[i][j] = 'X';
+                if(board[i][j] == '#') board[i][j] = 'O';
+            }
+        }
+    }
 
+    public void dfs(char[][] board, int i, int j, char replace) {
+        if(i < 0 || i >= board.length || j < 0 || j >= board[0].length) return;
+        int[] index = {-1,0,1,0,-1};
+        if(board[i][j] == 'O') {
+            board[i][j] = replace;
+            dfs(board, i-1, j, replace);
+            dfs(board, i+1, j, replace);
+            dfs(board, i, j-1, replace);
+            dfs(board, i, j+1, replace);
+        }
+    }
+}
 /*
 下面这个union find的解法其实复杂度并不好，只是最近在学习union find
 做法是这样的：
