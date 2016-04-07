@@ -57,6 +57,34 @@ public class Solution {
                 curr = curr.left;
             } else {
                 curr = stack.pop();
+            
+                if(prev != null && prev.val > curr.val) {
+                    if(first == null) first = prev;
+                    second = curr;
+                }
+                prev = curr;
+                curr = curr.right;
+            }
+        }
+        int tmp = first.val;
+        first.val = second.val;
+        second.val = tmp;        
+    }
+}
+
+
+public class Solution {
+    public void recoverTree(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        
+        TreeNode curr = root, prev = null;
+        TreeNode first = null, second = null;
+        while(curr != null || !stack.isEmpty()) {
+            if(curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            } else {
+                curr = stack.pop();
                 
                 if(prev != null && first == null && prev.val > curr.val) {
                     first = prev;
