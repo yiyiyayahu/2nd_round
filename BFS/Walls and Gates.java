@@ -55,7 +55,11 @@ public class Solution {
     }
 }
 
-
+/*
+我觉得下面的bfs做法有问题，现在没有会员了没法儿test。。。但是应该找最小的啊
+下面这里的判断if(x-1 >= 0 && rooms[x-1][y] == Integer.MAX_VALUE)只是找INF，可是如果rooms[x-1][y]之前已经被set过一个大的值的话就不对了哇
+我觉得应该改为if(x-1 >= 0 && rooms[x-1][y] > rooms[x][y]+1) rooms[x-1][y] = rooms[x][y]+1; (当然rooms[x][y]+1其实就是level)
+*/
 public class Solution {
     private class Pair {
         int x;
