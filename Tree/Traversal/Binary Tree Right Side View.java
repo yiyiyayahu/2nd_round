@@ -22,6 +22,26 @@ You should return [1, 3, 4].
  */
  
  /*
+ 这种recursive的方法好在，可以跳过一些不必要遍历的点
+ */
+ public class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if(root == null) return list;
+        
+        dfs(root, list, 1);
+        return list;        
+    }
+    
+    public void dfs(TreeNode root, List<Integer> list, int level) {
+        if(root == null) return;
+        if(list.size() < level) list.add(root.val);
+        level ++;
+        dfs(root.right, list, level);
+        dfs(root.left, list, level);
+    }
+}
+ /*
  用一个int来记录当前这一个level的node数目，就不用再分配一个queue的extra space了
  */
  public class Solution {
