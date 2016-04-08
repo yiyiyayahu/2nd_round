@@ -70,6 +70,15 @@ public class Solution {
 }
 
 /*
+Stack overflow means exactly that: a stack overflows. 
+Usually there's a one stack in the program that contains local-scope variables and addresses where to return 
+when execution of a routine ends. That stack tends to be a fixed memory range somewhere in the memory, 
+therefore it's limited how much it can contain values.
+
+If the stack is empty you can't pop, if you do you'll get stack underflow error.
+If the stack is full you can't push, if you do you'll get stack overflow error.
+
+So stack overflow appears where you allocate too much into the stack. For instance, in the mentioned recursion.
 DFS很容易出现stack overflow，只有加上剪枝才能过test case，然后下面的是一种剪枝方法
 我觉得实际面试的时候应该不会那么严格
 the first time i wrote this code, i got stack overflow error. 
