@@ -70,7 +70,13 @@ public class Solution {
 }
 
 /*
-我其实还是不太清楚为什么dfs里面需要i>1,i<m-2,j>1,j<m-2，就是需要遍历在里面那圈。。。不然就会stack overflow，是因为会重复遍历么，再想想
+DFS很容易出现stack overflow，只有加上剪枝才能过test case，然后下面的是一种剪枝方法
+我觉得实际面试的时候应该不会那么严格
+the first time i wrote this code, i got stack overflow error. 
+because the base case i used was if (row < 0 || row >= board.length || ...) return, 
+now row > 1, the recursion stops when row == 1, not row < 0 anymore, thus we can save 2 levels of recursive calls, 
+that is when row == 0 and row == 1, we can prevent the stack frame of jvm from going deeper for 2 more levels, so the stack overflow error can be prevented. 
+(this is actually a corner case -- you can also prevent the stack overflow error by adjusting the "max-recursion-levels-allowed" parameter of the jvm.)
 */
 
 public class Solution {
