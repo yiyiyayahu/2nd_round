@@ -8,6 +8,43 @@ return ["255.255.11.135", "255.255.111.35"]. (Order does not matter)
 */
 
 /*
+自己的写法，注意0打头的情况啊啊啊
+*/
+public class Solution {
+    public List<String> restoreIpAddresses(String s) {
+        List<String> ret = new ArrayList<>();
+        if(s.length() < 4 || s.length() > 12) return ret;
+        
+        dfs(s, 0, new ArrayList<>(), ret);
+        return ret;
+    }
+    
+    public void dfs(String s, int index, List<String> tmp, List<String> ret) {
+        if(index == s.length()) {
+            if(tmp.size() == 4) {
+                StringBuilder ip = new StringBuilder();
+                for(int i = 0; i < 4; i++) {
+                    ip.append(tmp.get(i));
+                    if(i < 3) ip.append(".");
+                }
+                ret.add(ip.toString());
+            }
+            return;
+        }
+        
+        int sum = 0;
+        for(int i = index; i < Math.min(index+3, s.length()); i++) {
+            sum = sum * 10 + s.charAt(i)-'0';
+            if(sum >= 0 && sum <= 255 ) {
+                tmp.add(s.substring(index, i+1));
+                dfs(s, i+1, tmp, ret);
+                tmp.remove(tmp.size()-1);
+            }
+            if(i == index && sum == 0) break;
+        }
+    }
+}
+/*
 看了discuss之后refactor了一下code，似乎这样写规范一点
 */
 public class Solution {
