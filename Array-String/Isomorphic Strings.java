@@ -17,6 +17,35 @@ Note:
 You may assume both s and t have the same length.
 */
 
+/*
+这样会快很多
+*/
+public class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        char[] arrS = s.toCharArray();
+        char[] arrT = t.toCharArray();
+
+        int length = s.length();
+
+        char[] sm = new char[256];
+        char[] tm = new char[256];
+
+        for(int i=0; i<length; i++){
+            char sc = arrS[i];
+            char tc = arrT[i];
+            if(sm[sc] == 0 && tm[tc] == 0){
+                sm[sc] = tc;
+                tm[tc] = sc;
+            }else{
+                if(sm[sc] != tc || tm[tc] != sc){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+
 public class Solution {
     public boolean isIsomorphic(String s, String t) {
         HashMap<Character, Character> map1 = new HashMap<Character, Character>();
