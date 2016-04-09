@@ -30,6 +30,26 @@ The optimal runtime complexity is O(height of BST).
  */
  public class Solution {
     public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode tmp = root;
+        int i = 0;
+        while(!stack.isEmpty() || tmp != null) {
+            if(tmp != null) {
+                stack.push(tmp);
+                tmp = tmp.left;
+            } else {
+                tmp = stack.pop();
+                i++;
+                if(i == k) return tmp.val;
+                tmp = tmp.right;
+            }
+        }
+        return -1;
+    }
+}
+ 
+ public class Solution {
+    public int kthSmallest(TreeNode root, int k) {
         List<Integer> list = inorderTraversal(root);
         return list.get(k-1);
     }
