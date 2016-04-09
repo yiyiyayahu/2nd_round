@@ -25,6 +25,43 @@ The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.
 */
 
 /*
+refactor了一下code，没想到时间会快很多诶
+*/
+public class Solution {
+    public int longestIncreasingPath(int[][] matrix) {
+        if(matrix.length == 0) return 0;
+        
+        int m = matrix.length, n = matrix[0].length;
+        int[][] count = new int[m][n];
+        int[] max = new int[1];
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                dfs(matrix, i, j, count, max);
+            }
+        }
+        return max[0];
+    }
+    
+    public int dfs(int[][] matrix, int i, int j, int[][] count, int[] max) {
+        if(count[i][j] != 0) {
+            if(count[i][j] > max[0]) max[0] = count[i][j];
+            return count[i][j];
+        }
+        int tmp = 1;
+        int[] index = {-1,0,1,0,-1};
+        for(int k = 0; k < index.length-1; k++) {
+            int x = i + index[k], y = j + index[k+1];
+            if(x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length) continue;
+            if(matrix[x][y] > matrix[i][j]) {
+                tmp = Math.max(dfs(matrix, x, y, count, max) + 1, tmp);
+            }
+        }
+        count[i][j] = tmp;
+        if(count[i][j] > max[0]) max[0] = count[i][j];
+        return tmp;
+    }
+}
+/*
 好开心，这道题前几天还不会呢，后来看个视频讲解topological sort还挺有用的
 这题看到之后第一反应是dfs，然后肯定要dp存一下中间量。第一次看到尝试写，失败，没思路
 这次思路好清晰，瞬间写好。啦啦啦
