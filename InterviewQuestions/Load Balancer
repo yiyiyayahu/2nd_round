@@ -48,3 +48,12 @@ When all exclusive locks are monitored and modelled as a directed graph, a deadl
 two threads that are each waiting on the other thread to free a resource that it has locked. 
 The waiting threads can then be forced by some kind of exception to release the lock the other thread is waiting on.
 
+77. What is a semaphore?
+A semaphore is a data structure that maintains a set of permits that have to be acquired by competing threads. 
+Semaphores can therefore be used to control how many threads access a critical section or resource simultaneously. 
+Hence the constructor of java.util.concurrent.
+Semaphore takes as first parameter the number of permits the threads compete about. 
+Each invocation of its acquire() methods tries to obtain one of the available permits. 
+The method acquire() without any parameter blocks until the next permit gets available. 
+Later on, when the thread has finished its work on the critical resource, it can release the permit by invoking the method release() 
+on an instance of Semaphore.
