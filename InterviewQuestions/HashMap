@@ -1,0 +1,5 @@
+2.1怎么让一个class可以成为hashmap里的key 
+A: 实现hashcode 
+2.2Java里怎么实现hashcode （以前看过，一时间竟然忘了）。 
+2.3 举个栗子 
+2.4怎么实现hashmap （动态内存，冲突检测） 
