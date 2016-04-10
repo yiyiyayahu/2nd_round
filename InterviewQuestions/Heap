@@ -1,0 +1,160 @@
+/*
+Google onsite: 2015-12-30 http://www.1point3acres.com/bbs/thread-161480-1-1.html
+第二轮是关于数据结构的。第一问，如何定义一个heap？(答案要点有三：a. binary tree b. complete tree c. 父节点值小于等于子节点) 。
+若从中取出k最小值，时间复杂度几何，答曰klgn。问有无更好方法，答可以构建一个新的heap，并把原heap的root放进来。每次从新heap中poll出最小值，
+然后再把poll出node的子node放入新heap。时间复杂度klnk。
+
+我觉得可以只要maintain大小为k的heap就可以了。。。nlogk
+*/
+
+A binary heap is a heap data structure created using a binary tree. It can be seen as a binary tree with two additional constraints:
+i) The shape property: the tree is a complete binary tree; that is, all levels of the tree, except possibly the last one (deepest) 
+are fully filled and if the last level of the tree is not complete, the nodes of that level are filled from left to right.
+ii) The heap property: each node is greater than or equal to each of its children according to a comparison predicate defined for the data structure.
+Here binary heap is implemented using arrays.
+
+/**
+ *  Java Program to Implement Binary Heap
+ */
+ 
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+ 
+/** Class BinaryHeap **/
+class BinaryHeap    
+{
+    /** The number of children each node has **/
+    private static final int d = 2;
+    private int heapSize;
+    private int[] heap;
+ 
+    /** Constructor **/    
+    public BinaryHeap(int capacity)
+    {
+        heapSize = 0;
+        heap = new int[capacity + 1];
+        Arrays.fill(heap, -1);
+    }
+ 
+    /** Function to check if heap is empty **/
+    public boolean isEmpty( )
+    {
+        return heapSize == 0;
+    }
+ 
+    /** Check if heap is full **/
+    public boolean isFull( )
+    {
+        return heapSize == heap.length;
+    }
+ 
+    /** Clear heap */
+    public void makeEmpty( )
+    {
+        heapSize = 0;
+    }
+ 
+    /** Function to  get index parent of i **/
+    private int parent(int i) 
+    {
+        return (i - 1)/d;
+    }
+ 
+    /** Function to get index of k th child of i **/
+    private int kthChild(int i, int k) 
+    {
+        return d * i + k;
+    }
+ 
+    /** Function to insert element */
+    public void insert(int x)
+    {
+        if (isFull( ) )
+            throw new NoSuchElementException("Overflow Exception");
+        /** Percolate up **/
+        heap[heapSize++] = x;
+        heapifyUp(heapSize - 1);
+    }
+ 
+    /** Function to find least element **/
+    public int findMin( )
+    {
+        if (isEmpty() )
+            throw new NoSuchElementException("Underflow Exception");           
+        return heap[0];
+    }
+ 
+    /** Function to delete min element **/
+    public int deleteMin()
+    {
+        int keyItem = heap[0];
+        delete(0);
+        return keyItem;
+    }
+ 
+    /** Function to delete element at an index **/
+    public int delete(int ind)
+    {
+        if (isEmpty() )
+            throw new NoSuchElementException("Underflow Exception");
+        int keyItem = heap[ind];
+        heap[ind] = heap[heapSize - 1];
+        heapSize--;
+        heapifyDown(ind);        
+        return keyItem;
+    }
+ 
+    /** Function heapifyUp  **/
+    private void heapifyUp(int childInd)
+    {
+        int tmp = heap[childInd];    
+        while (childInd > 0 && tmp < heap[parent(childInd)])
+        {
+            heap[childInd] = heap[ parent(childInd) ];
+            childInd = parent(childInd);
+        }                   
+        heap[childInd] = tmp;
+    }
+ 
+    /** Function heapifyDown **/
+    private void heapifyDown(int ind)
+    {
+        int child;
+        int tmp = heap[ ind ];
+        while (kthChild(ind, 1) < heapSize)
+        {
+            child = minChild(ind);
+            if (heap[child] < tmp)
+                heap[ind] = heap[child];
+            else
+                break;
+            ind = child;
+        }
+        heap[ind] = tmp;
+    }
+ 
+    /** Function to get smallest child **/
+    private int minChild(int ind) 
+    {
+        int bestChild = kthChild(ind, 1);
+        int k = 2;
+        int pos = kthChild(ind, k);
+        while ((k <= d) && (pos < heapSize)) 
+        {
+            if (heap[pos] < heap[bestChild]) 
+                bestChild = pos;
+            pos = kthChild(ind, k++);
+        }    
+        return bestChild;
+    }
+ 
+    /** Function to print heap **/
+    public void printHeap()
+    {
+        System.out.print("\nHeap = ");
+        for (int i = 0; i < heapSize; i++)
+            System.out.print(heap[i] +" ");
+        System.out.println();
+    }     
+}
