@@ -10,6 +10,27 @@
 load balancer一个简单的算法就是round robin，但是有很多drawback，就是load分配不均，很可能有的server就overload，有的server没事儿干
 然后呢，可以通过和server通信看这个server有多么busy来决定分配给谁
 
+如果一下来了太多的load request呢，我的想法是用一个blocking queue先把这些request存起来，就是producer-consumer model。
+queue满的时候producer不要写，queue空的时候consumer不要读，然后一个时间内只能有一个producer或者consumer access同一个object
+
+关于server的忙碌程度呢，可以用一个thread不停的check，然后把server的state写到一个HashMap或者queue里，然后一直更新
+检测server如何忙的方法呢，比如我可以知道我分配给这个server的job length，也知道当前的timestamp，可以给个estimate end time
+当一个新的job进来的时候呢，就可以分配给那个estimate end time比较小的那个
+这里有可能有thread contention的问题就是我在分配job的同时需要update这个存server state的queue
+比如多个thread都要改这个server state queue的话就不行了，所以把这个queue做成synchronized的，一次只能一个thread改
+
+Race Condition: 
+When two processes/threads are executing concurrently, the result can depend on the precise interleaving of the two instruction streams 
+(this is called a race condition)
+–  race conditions cause bugs that are hard to reproduce!
+
+•  We’d like a way to “group” these three instructions together, so that other relevant threads/processes won’t interfere with them
+•  This is called the mutual exclusion problem
+Need to ensure “atomic” execution of a sequence of instructions
+Mutual exclusion refers to the requirement of ensuring that no two concurrent processes are in their critical section at the same time; 
+it is a basic requirement in concurrency control, to prevent race conditions.
+
+
 关于thread都有点忘差不多了，赶紧复习一下
 https://www.javacodegeeks.com/2014/11/multithreading-concurrency-interview-questions-answers.html
 
