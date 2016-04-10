@@ -1,0 +1,72 @@
+O(1)时间找stream number最近的N的数的average
+
+这道题要好好看，我觉得twitter电面的题和这个类似。。。
+twitter的题是这样的，也是input stream，但是是long timestamp对应一个int count，要找过去的10s之内的total counts，
+然后同一个timestamp会对应好多不同的count，要最新的那个
+
+我是用一个hashmap存的，key是timestamp，value是最新的那个count
+因为不停的调用，每秒都要掉，我就直接用了个class写的，然后找当前的timestamp往后数10s，加和，也算是做出来了吧。开始对于stream这个事情比较懵
+其实这个做法不太好，标准的应该是用sliding window或者这种思想。。。居然给我过了，也是神奇，可能不管怎么说code也算是写出来了？
+
+http://www.zrzahid.com/moving-average-of-last-n-numbers-in-a-stream/
+其实这种题解法应该是maintain一个window，长度是N这种
+用一个class存这个window，然后有两个函数
+    public void add(double num);
+    public double getAvg();
+可以maintain一个queue，如果queue.size()==N 每次add new number的时候就先dequeue，然后把这个new number add到queue的后面，avg也相应的改变avg = (N*avg-queue.dequeue()+num)/N
+Queue queue;
+double avg;
+
+def add(num) :
+    double
+    if(queue.size() == N) then
+         avg = (N*avg-queue.dequeue()+num)/N
+    else
+         avg = (queue.size()*avg+num)/(queue.size()+1)
+         queue.add(num);
+    end
+end
+
+def getAvg() :
+   return avg;
+end
+网站上还有一个不用queue的优化解法，就是用一个size是N的circular buffer，可以看做reuse的arr，然后每次都是加到这个array里，通过改变head和empty_slot的指针来track
+每加入一个数，head=(head+1)%N empty_slot=(head+N-1)%N
+
+
+public static class MovingAvgLastN{
+	int maxTotal;
+	int total;
+	double lastN[];
+	double avg;
+	int head;
+	
+	public MovingAvgLastN(int N){
+		maxTotal = N;
+		lastN = new double[N];
+		avg = 0;
+		head = 0;
+		total = 0;
+	}
+	
+	public void add(double num){
+		double prevSum = total*avg;
+		
+		if(total == maxTotal){
+			prevSum-=lastN[head];
+			total--;
+		}
+		
+		head = (head+1)%maxTotal;
+		int emptyPos = (maxTotal+head-1)%maxTotal;
+		lastN[emptyPos] = num;
+		
+		double newSum = prevSum+num;
+		total++;
+		avg = newSum/total;
+	}
+	
+	public double getAvg(){
+		return avg;
+	}
+}
