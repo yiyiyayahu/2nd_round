@@ -72,3 +72,70 @@ The signed left shift operator "<<" shifts a bit pattern to the left, and the si
 The bit pattern is given by the left-hand operand, and the number of positions to shift by the right-hand operand. 
 The unsigned right shift operator ">>>" shifts a zero into the leftmost position, while the leftmost position after ">>" depends on sign extension.
 
+
+====================
+Implement a hashmap
+HashMap maintains an array of buckets. Each bucket is a linkedlist of key value pairs encapsulated as Entry objects
+class Entry {
+    int key;
+    int value;
+    Entry next;
+}
+
+Initialize - an array of buckets
+put(key, value) 
+- hashCode(key) - map to bucket hash & (capacity-1)
+- iterate the Entry in the linked list, if replacement - update the value, if collision - append the entry to the list
+- update the map bucket
+
+get(key, value)
+- hashCode(key) - map to bucket hash & (capacity-1)
+- iterate the Entry in the linked list to find the corresponding value, and return
+
+
+In HashMap the decision regarding which bucket a key should go to is made on the basis of this :
+
+    static int indexFor( int hash, int capacity) {
+        return hash & (capacity-1);
+    }
+
+Note that capacity is always a power of 2 (ie 1 followed by a sequence of zeroes in binary). 
+So (capacity - 1) is a sequence of 1's in binary. 
+So if the capacity is 2^n, then only the lower n bits of hash are useful and the upper bits beyond that are ignored
+=====================
+Dynamic Resizing
+ 
+As the number of elements in the map grows, the hash chains will grow longer and retrieval time will increase. 
+At some point, it makes sense to increase the number of buckets and rehash the values. 
+Remember finding the correct bucket takes O(1) time while finding the correct entry in the bucket takes O(n) time. 
+So it makes sense to have more number of buckets instead of having a few crowded buckets
+ 
+HashMap always doubles up the capacity during resizing. 
+It creates a new bucket array of twice the size and copies data from old array to new array. 
+Then the table variable is reinitialized  with the new array
+
+    void resize( int newCapacity) {
+        Entry[] oldTable = table;
+        int oldCapacity = oldTable.length ;
+        if (oldCapacity == MAXIMUM_CAPACITY) {
+            threshold = Integer.MAX_VALUE;
+            return;
+        }
+ 
+        Entry[] newTable = new Entry [newCapacity];
+        transfer(newTable, initHashSeedAsNeeded(newCapacity));
+        table = newTable;
+    }
+
+During transfer from old array to new array, it iterates over the elements of the old array, 
+for every Entry element computes the new bucket array index and sets the next pointer of thst element to the head of the bucket 
+(ie adds elements to the head of the singly linked list). So, the order of the linked list elements are reversed
+ 
+Suppose original linkedlist was 1->2->3
+Lets assume after resizing, every element again goes into same bucket
+So, after first iteration, 1->null
+after second iteration, 2->1->null
+after third iteratuion, 3->2->1->null thus the link list gets reversed
+ 
+This creates a potential race condition during resizing. 
+Suppose two threads parallely decide that the HashMap needs resizing and try to resize. This may lead to an infinite loop.
