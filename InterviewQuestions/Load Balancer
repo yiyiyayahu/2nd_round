@@ -5,3 +5,10 @@
 从来刷题也没刷到过考多线程这么深的问题，不知多线程问题在Google是不是很多被问到，还是我太背啊。
 
 这个要好好准备一下啊。。。看来真正面试还真不是单纯的刷题那么简单。。。哭了
+
+
+load balancer一个简单的算法就是round robin，但是有很多drawback，就是load分配不均，很可能有的server就overload，有的server没事儿干
+然后呢，可以通过和server通信看这个server有多么busy来决定分配给谁
+
+关于thread都有点忘差不多了，赶紧复习一下
+https://www.javacodegeeks.com/2014/11/multithreading-concurrency-interview-questions-answers.html
