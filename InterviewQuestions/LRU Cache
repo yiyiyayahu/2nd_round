@@ -1,0 +1,8 @@
+一个大胡子美国人，有一个shadow 在旁边学习，我一直以为大胡子是练习的。
+上来先说我们准备design 一个cache system, 有两个method, slowGet(string key) 和fastGet(string key)，
+怎么样design这个cache system使得实现fastGet，楼主慢慢和他讨论 直到引出LRU Cache。 
+
+实现了 LRU 之后，大胡子开始和我讨论，如果request很多，我的方法会不会有问题。我说会，可能multi-thread会出问题，得加mutex 或者sophomore。
+之后大胡子说那如果之后系统很慢怎么办，我和他说 可以design database, 用sharding，然后问我怎么shard,
+我说可以根据地区，因为亚洲区的人query同样的query可能比较多。然后又问我如果这样还是很慢呢？我说可以每个地区的database 
+再进行load balancer分配request, 用master-slave 或者master-master去管理database server。这题讨论很多，感觉还比较顺，很面试官的交流很重要。 
