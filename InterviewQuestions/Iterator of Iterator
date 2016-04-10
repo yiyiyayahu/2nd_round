@@ -1,0 +1,3 @@
+第三轮是给定两个iterater,实现一个自定义的iterater接口，包含hasNext和next两个方法。
+例如iterater1返回13579，iterater2返回24680，那么你这个新的iterater就要返回1234567890。
+若两个iterater扩展到n个，又该如何实现？其间还分别分析了时间复杂度。. 
