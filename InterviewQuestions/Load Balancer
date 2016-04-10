@@ -12,3 +12,12 @@ load balancer一个简单的算法就是round robin，但是有很多drawback，
 
 关于thread都有点忘差不多了，赶紧复习一下
 https://www.javacodegeeks.com/2014/11/multithreading-concurrency-interview-questions-answers.html
+
+
+For what purposes is the keyword synchronized used?
+When you have to implement exclusive access to a resource, like some static value or some file reference, 
+the code that works with the exclusive resource can be embraced with a synchronized block:
+
+synchronized (SynchronizedCounter.class) {
+    counter++;
+}
