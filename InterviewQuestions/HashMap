@@ -3,3 +3,72 @@ A: 实现hashcode
 2.2Java里怎么实现hashcode （以前看过，一时间竟然忘了）。 
 2.3 举个栗子 
 2.4怎么实现hashmap （动态内存，冲突检测） 
+
+第二道题是问答题，问了问hash function. 问如果hash function 产生confilict 该怎么办。 比如：F('A') = 123，F('B') = 123.
+LZ直接说 用linkedList 解决。他又问会产生什么负面效果。LZ回答再坏情况下contains()操作需要O(n)时间。然后就过了。
+
+hashcode:
+http://stackoverflow.com/questions/113511/best-implementation-for-hashcode-method
+
+The best implementation? That is a hard question because it depends on the usage pattern.
+
+A for nearly all cases reasonable good implementation was proposed in Josh Bloch's Effective Java in item 8. 
+The best thing is to look it up there because the author explains there why the approach is good.
+
+A short version
+Create a int result and assign a non-zero value.
+
+For every field f tested in the equals() method, calculate a hash code c by:
+
+If the field f is a boolean: calculate (f ? 0 : 1);
+If the field f is a byte, char, short or int: calculate (int)f;
+If the field f is a long: calculate (int)(f ^ (f >>> 32));
+If the field f is a float: calculate Float.floatToIntBits(f);
+If the field f is a double: calculate Double.doubleToLongBits(f) and handle the return value like every long value;
+If the field f is an object: Use the result of the hashCode() method or 0 if f == null;
+If the field f is an array: see every field as separate element and calculate the hash value in a recursive fashion and combine the values as described next.
+Combine the hash value c with result:
+
+result = 37 * result + c
+Return result
+@Override 
+public int hashCode() {
+
+    // Start with a non-zero constant. Prime is preferred
+    int result = 17;
+
+    // Include a hash for each field.
+
+    // Primatives
+
+    result = 31 * result + (booleanField ? 1 : 0);                   // 1 bit   » 32-bit
+
+    result = 31 * result + byteField;                                // 8 bits  » 32-bit 
+    result = 31 * result + charField;                                // 16 bits » 32-bit
+    result = 31 * result + shortField;                               // 16 bits » 32-bit
+    result = 31 * result + intField;                                 // 32 bits » 32-bit
+
+    result = 31 * result + (int)(longField ^ (longField >>> 32));    // 64 bits » 32-bit
+
+    result = 31 * result + Float.floatToIntBits(floatField);         // 32 bits » 32-bit
+
+    long doubleFieldBits = Double.doubleToLongBits(doubleField);     // 64 bits (double) » 64-bit (long) » 32-bit (int)
+    result = 31 * result + (int)(doubleFieldBits ^ (doubleFieldBits >>> 32));
+
+    // Objects
+
+    result = 31 * result + Arrays.hashCode(arrayField);              // var bits » 32-bit
+
+    result = 31 * result + referenceField.hashCode();                // var bits » 32-bit (non-nullable)   
+    result = 31 * result +                                           // var bits » 32-bit (nullable)   
+        (nullableReferenceField == null
+            ? 0
+            : nullableReferenceField.hashCode());
+
+    return result;
+
+}
+The signed left shift operator "<<" shifts a bit pattern to the left, and the signed right shift operator ">>" shifts a bit pattern to the right. 
+The bit pattern is given by the left-hand operand, and the number of positions to shift by the right-hand operand. 
+The unsigned right shift operator ">>>" shifts a zero into the leftmost position, while the leftmost position after ">>" depends on sign extension.
+
