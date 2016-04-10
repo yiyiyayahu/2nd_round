@@ -21,3 +21,30 @@ the code that works with the exclusive resource can be embraced with a synchroni
 synchronized (SynchronizedCounter.class) {
     counter++;
 }
+
+37. What do we understand by a deadlock?
+A deadlock is a situation in which two (or more) threads are each waiting on the other thread to free a resource that it has locked, 
+while the thread itself has locked a resource the other thread is waiting on:
+Thread 1: locks resource A, waits for resource B
+Thread 2: locks resource B, waits for resource A
+
+38. What are the requirements for a deadlock situation?
+In general the following requirements for a deadlock can be identified:
+Mutual exclusion: There is a resource which can be accessed only by one thread at any point in time.
+Resource holding: While having locked one resource, the thread tries to acquire another lock on some other exclusive resource.
+No preemption: There is no mechanism, which frees the resource if one thread holds the lock for a specific period of time.
+Circular wait: During runtime a constellation occurs in which two (or more) threads are each waiting on the other thread to free a resource 
+that it has locked.
+
+39. Is it possible to prevent deadlocks at all?
+In order to prevent deadlocks one (or more) of the requirements for a deadlock has to be eliminated:
+Mutual exclusion: In some situation it is possible to prevent mutual exclusion by using optimistic locking.
+Resource holding: A thread may release all its exclusive locks, when it does not succeed in obtaining all exclusive locks.
+No preemption: Using a timeout for an exclusive lock frees the lock after a given amount of time.
+Circular wait: When all exclusive locks are obtained by all threads in the same sequence, no circular wait occurs.
+
+40. Is it possible to implement a deadlock detection?
+When all exclusive locks are monitored and modelled as a directed graph, a deadlock detection system can search for 
+two threads that are each waiting on the other thread to free a resource that it has locked. 
+The waiting threads can then be forced by some kind of exception to release the lock the other thread is waiting on.
+
