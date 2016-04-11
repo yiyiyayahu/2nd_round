@@ -1,11 +1,13 @@
-Encode and Decode Strings
+Encode and Decode Strings (len+#+String... String Compression)
 
 Number of Islands I, II
 
-Given a list of floats, find the closest one to a given target.
+Given a list of floats, find the closest one to a given target. (binary search - bug free!)
 Closest Binary Search Tree Value
 
 Fraction to recurring decimal 
+
+Merge Intervals
 
 Game of Life
 
