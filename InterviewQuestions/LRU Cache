@@ -6,3 +6,13 @@
 之后大胡子说那如果之后系统很慢怎么办，我和他说 可以design database, 用sharding，然后问我怎么shard,
 我说可以根据地区，因为亚洲区的人query同样的query可能比较多。然后又问我如果这样还是很慢呢？我说可以每个地区的database 
 再进行load balancer分配request, 用master-slave 或者master-master去管理database server。这题讨论很多，感觉还比较顺，很面试官的交流很重要。 
+
+
+第三轮算简单，类似于LRU的感觉，说不断地给你push data stream你需要打印出这些data
+如果当前data在过去十秒内出现呢就wait and skip to next，但是跳过不代表不管你仍然需要somehow记录他在这个时间点出现过，
+因为接下来十秒内可能又出现这个data, 而你要是用旧的最开始的那个data的话可能此时他已经在十秒外所以你就没管就把他打印出来了， 
+但其实你第一个十秒内遇到duplicate的时候应该记录一下那个时间点，所以说有可能不需要打印最新的这个repeated data。
+时间点的话假设你可以直接用一个什么Time.getTime()之类的方法get这不是重点。
+楼主基本上就是用一个queue来维护时间和data,然后没新来一个加到队尾同时把队首超过十秒的都通通poll, 同时用一个hashmap来不断更新data以及其出现的时间，
+如果超过十秒的就要随着queue一起也将超时的data从hashmap里删掉（必须删因为可能每秒的数据量非常大，你不删光保存并更新时间到最后内存会不够，
+这儿更新是个小trick我就懒得具体说了，我提到了更新大家应该都能知道什么意思）, 没超时直接更新。基本就是这样其实不难。
