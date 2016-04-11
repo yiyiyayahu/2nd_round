@@ -16,3 +16,7 @@
 楼主基本上就是用一个queue来维护时间和data,然后没新来一个加到队尾同时把队首超过十秒的都通通poll, 同时用一个hashmap来不断更新data以及其出现的时间，
 如果超过十秒的就要随着queue一起也将超时的data从hashmap里删掉（必须删因为可能每秒的数据量非常大，你不删光保存并更新时间到最后内存会不够，
 这儿更新是个小trick我就懒得具体说了，我提到了更新大家应该都能知道什么意思）, 没超时直接更新。基本就是这样其实不难。
+
+
+HashMap<Integer, DoubleLinkedListNode>
+用doubleLinkedList会比较方便remove，当然single linkedlist也可以啦
