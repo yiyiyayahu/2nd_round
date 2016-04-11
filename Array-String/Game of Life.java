@@ -19,7 +19,53 @@ Follow up:
     when the active area encroaches the border of the array. How would you address these problems?
 
 */
+/*
+in-place的做法就是在state上面做手脚，咔咔
+比如第一个digit表示2nd，第二个digit表示1st state
+就变成了
+00 dead <- dead  0
+01 dead <- live  1
+10 live <- dead  2
+11 live <- live  3
+根据第一个算出neighbor的数目，然后再board[i][j] >>= 1得到第二个state的值
+*/
+public class Solution {
+    public void gameOfLife(int[][] board) {
+        if(board.length == 0) return;
+        int m = board.length, n = board[0].length;
 
+        int[][] next = new int[m][n];
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                setNextState(board, i, j);
+            }
+        }
+         for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                board[i][j] >>= 1;
+            }
+        }       
+    }
+
+    public void setNextState(int[][] board, int i, int j) {
+        int numOfNeighs = 0;
+        for(int p = -1; p <= 1; p++) {
+            for(int q = -1; q <= 1; q ++) {
+                int x = i + p;
+                int y = j + q;
+                if(p == 0 && q == 0) continue;
+                if(x < 0 || x >= board.length || y < 0 || y >= board[0].length) continue;
+                numOfNeighs +=board[x][y] & 1;
+            }
+        }      
+        if(board[i][j] == 0 && numOfNeighs == 3) {
+            board[i][j] = 2;
+        }
+        if(board[i][j] == 1 && (numOfNeighs==2 || numOfNeighs==3)) {
+            board[i][j] = 3;
+        }
+    }
+}
 /*
 这道题倒是不难，无非就是不能一边遍历一边update，我就存下来next state然后再赋值好啦，最简单粗暴的解法。。。
 怎么优化呢，就是怎么inplace呢。。。
