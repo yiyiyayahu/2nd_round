@@ -4,6 +4,35 @@ Given two numbers represented as strings, return multiplication of the numbers a
 Note: The numbers can be arbitrarily large and are non-negative.
 */
 
+/*
+为啥我就没想到用一个int array来存每一位的值呢。。
+然后是哪一位的值就存到哪一个index里面： arr[i+j] += (s1.charAt(i)-'0') * (s2.charAt(j)-'0');
+*/
+public class Solution {
+    public String multiply(String num1, String num2) {
+        String s1 = (new StringBuilder(num1)).reverse().toString();
+        String s2 = (new StringBuilder(num2)).reverse().toString();
+        
+        int len1 = s1.length(), len2 = s2.length(), len = len1 + len2;
+        int[] arr = new int[len];
+        for(int i = 0; i < len1; i++) {
+            for(int j = 0; j < len2; j++) {
+                arr[i+j] += (s1.charAt(i)-'0') * (s2.charAt(j)-'0');
+            }
+        }
+        
+        int carry = 0;
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < len; i++) {
+            int sum = arr[i]+carry;
+            carry = sum/10;
+            sb.insert(0, sum%10);
+        }
+        
+        while(sb.charAt(0)=='0' && sb.length() > 1) sb.deleteCharAt(0);
+        return sb.toString();
+    }
+}
 
 /*
 写的这是什么和什么，虽然过了，但是我觉得这方法有点太简单粗暴？
