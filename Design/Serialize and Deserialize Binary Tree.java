@@ -18,7 +18,7 @@ Note: Do not use class member/global/static variables to store states. Your seri
 */
 
 /*
-其实倒是挺好像的，就和之前做的verify preorder traversal一样，记录下preorder traversal，如果是null，就用#占位，因为是string，用，分隔
+其实倒是挺好想的，就和之前做的verify preorder traversal一样，记录下preorder traversal，如果是null，就用#占位，因为是string，用，分隔
 所以[1,2,3,null,null,4,5] serialize的结果是1,2,#,#,3,4,#,#,5,#,#
 但是后来怎么deserialize想了好一会儿。。。其实recursive是最简单的啦
 */
