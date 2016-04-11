@@ -20,3 +20,9 @@ Trie
 Read4
 
 Binary Tree Level Order Traversal (reverse, zigzag)
+
+warm-up 
+add one的变体，add一个个位数，解法是一样的 
+follow up 
+两个数用array表示，相加。类似add binary那道题。做法一致。 
+面完还剩10多分钟，问了问他在做的组 
