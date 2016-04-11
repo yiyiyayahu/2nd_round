@@ -22,7 +22,7 @@ Follow up:
 
 /*
 这道题倒是不难，无非就是不能一边遍历一边update，我就存下来next state然后再赋值好啦，最简单粗暴的解法。。。
-怎么优化呢
+怎么优化呢，就是怎么inplace呢。。。
 而且完全不是dfs，只是遍历这个array的每个值就可以了
 */
 public class Solution {
