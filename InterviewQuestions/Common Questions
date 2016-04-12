@@ -1,7 +1,9 @@
-Encode and Decode Strings (len+#+String... String Compression)
+Encode and Decode Strings (len+#+String... String Compression， 高频)
 Group shifted strings (["abc","bcd","xyz"])
 
-Number of Islands I, II （II要用到union find）
+Number of Islands I, II （II要用到union find，高频）
+
+Read4 (感觉好高频）
 
 Given a list of floats, find the closest one to a given target. (binary search - bug free!)
 Closest Binary Search Tree Value
@@ -32,7 +34,6 @@ Trie
 
 计算 + 7 (* 8 19) (* 12 (+ 1 2))这样的表达式，就是 7 +（8*9）+（12* （1+2））
 
-Read4
 
 Binary Tree Level Order Traversal (reverse, zigzag)
 
