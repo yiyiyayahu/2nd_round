@@ -8,6 +8,7 @@ Closest Binary Search Tree Value
 Fraction to recurring decimal 
 
 Merge Intervals
+Merge k sorted Array
 
 Game of Life (重点在于no extra space，用两个digit表示前一个和后一个state，不难)
 
