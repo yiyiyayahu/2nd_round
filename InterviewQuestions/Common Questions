@@ -1,6 +1,6 @@
 Encode and Decode Strings (len+#+String... String Compression)
 
-Number of Islands I, II
+Number of Islands I, II （II要用到union find）
 
 Given a list of floats, find the closest one to a given target. (binary search - bug free!)
 Closest Binary Search Tree Value
@@ -9,7 +9,7 @@ Fraction to recurring decimal
 
 Merge Intervals
 
-Game of Life
+Game of Life (重点在于no extra space，用两个digit表示前一个和后一个state，不难)
 
 Maximum Subarray
 
@@ -27,4 +27,4 @@ warm-up
 add one的变体，add一个个位数，解法是一样的 
 follow up 
 两个数用array表示，相加。类似add binary那道题。做法一致。 
-面完还剩10多分钟，问了问他在做的组 
+multiply string
