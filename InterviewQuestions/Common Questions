@@ -13,7 +13,9 @@ Game of Life (重点在于no extra space，用两个digit表示前一个和后�
 
 Maximum Subarray
 
-longest substring with at most m distinct characters
+longest substring without repeating characters (index[c] > start -> start = index[c]+1)
+longest substring with at most 2 distinct characters
+longest substring with at most m distinct characters (这个感觉好难肿么办，肯定要用个东西存起来神马的）
 
 Trie
 
