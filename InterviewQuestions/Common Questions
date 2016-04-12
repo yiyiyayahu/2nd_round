@@ -1,4 +1,5 @@
 Encode and Decode Strings (len+#+String... String Compression)
+Group shifted strings (["abc","bcd","xyz"])
 
 Number of Islands I, II （II要用到union find）
 
