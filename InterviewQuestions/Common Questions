@@ -17,6 +17,9 @@ longest substring without repeating characters (index[c] > start -> start = inde
 longest substring with at most 2 distinct characters
 longest substring with at most m distinct characters (这个感觉好难肿么办，肯定要用个东西存起来神马的）
 
+Clone Graph
+Copy List with Random Pointer
+
 Trie
 
 计算 + 7 (* 8 19) (* 12 (+ 1 2))这样的表达式，就是 7 +（8*9）+（12* （1+2））
