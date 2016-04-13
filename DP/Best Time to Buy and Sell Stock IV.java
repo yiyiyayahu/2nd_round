@@ -75,12 +75,38 @@ global[i][j] = Math.max(global[i-1][j], local[i][j])
 二维dp其实都可以压缩到一维
 然后因为dp[i][j]要看i-1,j-1和i-1,j的情况的,所以从后往前推比较方便
 */
+public class Solution {
+    public int maxProfit(int k, int[] prices) {
+        int len = prices.length;
+        if(len == 0) return 0;
+        if(k >= len/2) {
+            int max = 0;
+            for(int i = 1; i < len; i++) {
+                if(prices[i] > prices[i-1]) {
+                    max += prices[i] - prices[i-1];
+                }
+            }
+            return max;
+        }
+
+        int[] local = new int[k+1];
+        int[] global = new int[k+1];
+        for(int i = 1; i < len; i++) {
+            int diff = prices[i] - prices[i-1];
+            for(int j = k; j > 0; j--) {
+                local[j] = Math.max(local[j]+diff, global[j-1]);
+                global[j] = Math.max(global[j], local[j]);
+            }
+        }
+        return global[k];  
+    }
+}
 
 public class Solution {
     public int maxProfit(int k, int[] prices) {
         int len = prices.length;
         if(len == 0) return 0;
-        if(k >= len) {
+        if(k >= len/2) {
             int max = 0;
             for(int i = 1; i < len; i++) {
                 if(prices[i] > prices[i-1]) {
