@@ -6,6 +6,35 @@ For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
 Note: The result may be very large, so you need to return a string instead of an integer.
 */
 
+/*
+如果直接转成string[] sort会快一点，但是差不多啦
+*/
+public class Solution {
+    public String largestNumber(int[] nums) {
+        if (nums == null || nums.length == 0) return "";
+        String[] strs = new String[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            strs[i] = nums[i]+"";
+        }
+        Arrays.sort(strs, new Comparator<String>() {
+            @Override
+            public int compare(String i, String j) {
+                String s1 = i+j;
+                String s2 = j+i;
+                return s2.compareTo(s1);
+            }
+        });
+        
+        if(strs[0].charAt(0) == '0') return "0";
+        
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < nums.length; i++) {
+            sb.append(strs[i]);
+        }
+        return sb.toString();
+    }
+}
+
 public class Solution {
     public String largestNumber(int[] nums) {
     	ArrayList<Integer> list = new ArrayList<Integer>();
