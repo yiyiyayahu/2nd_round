@@ -7,6 +7,28 @@ b = "1"
 Return "100".
 */
 
+/*
+人家的代码简洁好多。。。
+
+是这样的，如果这道题比较简单呢，就要比较细心，不要犯错。。。
+开始我没看清题意直接撸袖子开始写。。。然后发现，不对额，i和j要从后往前，不能从0开始
+总之要多检查多跑test case，不要想当然
+*/
+public class Solution {
+    public String addBinary(String a, String b) {
+        int c = 0;
+        StringBuilder sb = new StringBuilder();
+        for(int i = a.length() - 1, j = b.length() - 1; i >= 0 || j >= 0;){
+            if(i >= 0) c += a.charAt(i--) - '0';
+            if(j >= 0) c += b.charAt(j--) - '0';
+            sb.insert(0, (char)((c % 2) + '0'));
+            c /= 2;
+        }
+        if(c == 1) sb.insert(0, "1");
+        return sb.toString();
+    }
+}
+
 public class Solution {
     public String addBinary(String a, String b) {
         if(a == null || b == null) return null;
