@@ -14,6 +14,21 @@ you know that the reversed integer might overflow. How would you handle such cas
 There is a more generic way of solving this problem.
 */
 
+public class Solution {
+    public boolean isPalindrome(int x) {
+        if(x < 0) return false;
+        int maxFactor = 1;
+        while(x/maxFactor >= 10) maxFactor*=10;
+        
+        while(x>0) {
+            if(x/maxFactor != x%10) return false;
+            x = (x%maxFactor)/10;
+            maxFactor /= 100;
+        }
+        return true;
+    }
+}
+
 /*
 这里我要注意一下，之前我写的
         while(x / div > 0) {
