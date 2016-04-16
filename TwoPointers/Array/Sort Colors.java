@@ -47,28 +47,23 @@ public class Solution {
 */
 public class Solution {
     public void sortColors(int[] nums) {
-        if(nums == null || nums.length < 2) return;
+        if(nums == null || nums.length == 0) return;
         int len = nums.length;
         int start = 0, end = len-1;
         while(start < len && nums[start] == 0) start ++;
         while(end >= 0 && nums[end] == 2) end --;
         
-        for(int i = start; i <= end; ) {
+        for(int i = start; i <= end; i++) {
             if(nums[i] == 0) {
-                swap(nums, i, start);
-                start ++;
-                i++;
+                swap(nums, i, start++);
             } else if(nums[i] == 2) {
-                swap(nums, i, end);
-                end --;
-            } else {
-                i++;
+                swap(nums, i--, end--);
             }
         }
     }
-    public void swap(int[] nums, int start, int end) {
-        int tmp = nums[start];
-        nums[start] = nums[end];
-        nums[end] = tmp;
+    public void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }
