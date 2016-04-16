@@ -27,8 +27,6 @@ public class Solution {
         int[] res = new int[num+1];
         if(num <= 0) return res;
         for(int i = 1; i <= num; ) {
-            if(i == 1) { res[i] = 1; i++; continue; }
-            
             if( (i&(i-1)) == 0) res[i] = 1;
             int j = i+1;
             for(; j < i*2 && j <= num; j++) {
