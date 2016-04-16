@@ -17,6 +17,29 @@ Could you come up with an one-pass algorithm using only constant space?
 */
 
 /*
+好巧妙的做法啊
+要注意这个for loop里面要i<=right而不是i<len
+*/
+public class Solution {
+    public void sortColors(int[] nums) {
+        if(nums == null || nums.length == 0) return;
+        int len = nums.length;
+        int left = 0, right = len-1;
+        for(int i = 0; i <= right; i++) {
+            if(nums[i] == 0 && i != left) {
+                swap(nums, i--, left++);
+            } else if(nums[i] == 2 && i != right) {
+                swap(nums, i--, right--);
+            }
+        }
+    }
+    public void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+}
+/*
 这道题不是很好写。start表示从前面开始第一个不是0的位置，end表示从后面开始第一个不是1的位置。然后再用一个指针扫中间的
 犯了两个错误：
 1. i是从start到end，而不是从start+1到end-1
