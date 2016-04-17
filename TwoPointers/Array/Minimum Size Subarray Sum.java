@@ -10,6 +10,28 @@ More practice:
 If you have figured out the O(n) solution, try coding another solution of which the time complexity is O(n log n).
 */
 
+public class Solution {
+    public int minSubArrayLen(int s, int[] nums) {
+        if(nums == null || nums.length == 0) return 0;
+        
+        int len = nums.length;
+        int minLen = len+1;
+        int start = 0, end = start, sum = 0;
+        while(end < len) {
+            sum += nums[end];
+            if(sum >= s) {
+                //check to see if start can move further
+                while(sum - nums[start] >= s) {
+                    sum -= nums[start++];
+                }
+                minLen = Math.min(minLen, end-start+1);
+                sum -= nums[start++];
+            } 
+            end ++;
+        }
+        return minLen==len+1? 0 : minLen;
+    }
+}
 /*
 code写的简洁一点
 */
