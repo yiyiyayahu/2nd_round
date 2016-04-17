@@ -6,7 +6,28 @@ In a complete binary tree every level, except possibly the last, is completely f
 It can have between 1 and 2h nodes inclusive at the last level h.
 */
 
-
+public class Solution {
+    public int countNodes(TreeNode root) {
+        if(root == null) return 0;
+        int left = getLeftHeight(root.left);
+        int right = getLeftHeight(root.right);
+        if(left == right) {
+            return (1 << left) + countNodes(root.right);
+        } else {
+            return (1 << right) + countNodes(root.left);
+        }
+    }
+    
+    public int getLeftHeight(TreeNode root) {
+        TreeNode tmp = root;
+        int height = 0;
+        while(tmp != null) {
+            tmp = tmp.left;
+            height ++;
+        }
+        return height;
+    }
+}
 /*
 优化了一下
 一直TLE。。。后来和可爱的室友们讨论了一下，我的复杂度也还好啊，O(h^2) = O((logn)^2)，也没有重复计算神马的
