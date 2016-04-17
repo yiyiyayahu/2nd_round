@@ -18,6 +18,24 @@ contain duplicates就可能出现nums[mid] == nums[start] == nums[end]这种情�
 
 public class Solution {
     public int findMin(int[] nums) {
+         if(nums == null || nums.length == 0) return 0;
+         
+         int start = 0, end = nums.length-1;
+         while(start < end && nums[start] >= nums[end]) {
+             int mid = (start + end)/2;
+             if(nums[mid] > nums[end]) {
+                 start = mid+1;
+             } else if(nums[mid] < nums[end]) {
+                 end = mid;
+             } else {
+                 end--;
+             }
+         }
+         return nums[start];
+    }
+}
+public class Solution {
+    public int findMin(int[] nums) {
         if(nums == null || nums.length == 0) return -1;
         int start = 0, end = nums.length - 1;
         
