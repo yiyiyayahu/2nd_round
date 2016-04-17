@@ -9,6 +9,40 @@ You may assume no duplicate exists in the array.
 */
 
 /*
+其实思路清晰了这些问题也就避免了，当然可以简化一下code，不过我开始是这样想的
+*/
+public class Solution {
+    public int search(int[] nums, int target) {
+        if(nums == null || nums.length == 0) return -1;
+        
+        int start = 0, end = nums.length-1;
+        while(start <= end) {
+            int mid = (start + end)/2;
+            if(target == nums[mid]) return mid;
+            else if(target < nums[mid]) {
+                if(nums[mid] > nums[end]) {
+                    //leftside is sorted
+                    if(target >= nums[start]) end = mid-1; //in left
+                    else start = mid+1;
+                } else {
+                    //rightside is sorted but not in right
+                    end = mid-1;
+                }
+            } else {
+                if(nums[mid] > nums[end]) {
+                    //leftside is sorted but not in left
+                    start = mid+1;
+                } else {
+                    //rightside is sorted
+                    if(target <= nums[end]) start = mid+1; //in right
+                    else end = mid-1;
+                }
+            }
+        }
+        return -1;
+    }
+}
+/*
 time: O(logn) space: O(1)
 唉，这道题submit了好多次，开始写的是
   if(nums[end] >= target && nums[mid] < target) {
