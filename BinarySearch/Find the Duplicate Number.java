@@ -11,6 +11,25 @@ Note:
 */
 
 /*
+先sort一遍，然后看nums[mid]和mid作比较，如果在start-mid之间没有duplicate的话应该是nums[mid]=mid+1的
+*/
+public class Solution {
+    public int findDuplicate(int[] nums) {
+        if(nums == null || nums.length == 0) return 0;
+        Arrays.sort(nums);
+        int start = 0, end = nums.length-1;
+        while(start <= end) {
+            int mid = (start + end)/2;
+            if(nums[mid] <= mid) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return start;
+    }
+}
+/*
 很显然，sort，hashmap，brute force，都是不行的
 然后我开始思路一直是算sum。。。根本想不通
 后来看提示，two pointers，binary search
