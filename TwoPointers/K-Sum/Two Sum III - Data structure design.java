@@ -11,20 +11,19 @@ find(7) -> false
 */
 
 public class TwoSum {
-    HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+    	HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
     
 	public void add(int number) {
 	    if(map.containsKey(number)) map.put(number, map.get(number)+1);
 	    else map.put(number,1);
 	}
-
+	
 	public boolean find(int value) {
 	    for(int n : map.keySet()) {
 	        if(value == 2*n) {
-	            if(map.get(n)>1) return true;
-	            else return false;
+	            return map.get(n)>1;
 	        } 
-            if(map.containsKey(value-n)) return true;
+	    	if(map.containsKey(value-n)) return true;
 	    }
 	    return false;
 	}
