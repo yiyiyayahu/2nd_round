@@ -40,6 +40,31 @@ public class Solution {
     }
 }
 /*
+个人觉得这样做好些，不然2会挪来挪去的，不过上面的也还ok啦
+*/
+public class Solution {
+    public void sortColors(int[] nums) {
+        if(nums == null || nums.length == 0) return;
+        int len = nums.length;
+        int start = 0, end = len-1;
+        while(start < len && nums[start] == 0) start ++;
+        while(end >= 0 && nums[end] == 2) end --;
+        
+        for(int i = start; i <= end; i++) {
+            if(nums[i] == 0) {
+                swap(nums, i, start++);
+            } else if(nums[i] == 2) {
+                swap(nums, i--, end--);
+            }
+        }
+    }
+    public void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+}
+/*
 这道题不是很好写。start表示从前面开始第一个不是0的位置，end表示从后面开始第一个不是1的位置。然后再用一个指针扫中间的
 犯了两个错误：
 1. i是从start到end，而不是从start+1到end-1
