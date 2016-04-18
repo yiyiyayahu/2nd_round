@@ -5,9 +5,12 @@ The overall run time complexity should be O(log (m+n)).
 
 /*
 if (aMid < bMid) Keep [aRight + bLeft]
-
 else Keep [bRight + aLeft]
-
+我觉得这个解法容易懂一些
+就是如果amid<bmid的话，nums1左边的部分和nums2右边的部分其实就不用考虑了，但是相应的要第k个的k要变化
+要注意的几点
+1. k更新成k-k/2不等同于k/2，考虑到k不一定是odd还是even，因为astart只是往后移动了k/2个位置，所以相应的k-k/2
+2. 要考虑到很多edge case，比如start > m-1, bstart > n-1, k == 1这些
 */
 public class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
