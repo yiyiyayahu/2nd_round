@@ -9,6 +9,28 @@ dict = ["leet", "code"].
 Return true because "leetcode" can be segmented as "leet code".
 */
 
+
+//dp[i] - word break can be found from [i,len-1]
+//dp[i] = dp[j] && wordDict.contains(s.substring(i,j))
+
+public class Solution {
+    public boolean wordBreak(String s, Set<String> wordDict) {
+        if(s == null || s.length() == 0) return false;
+        
+        int len = s.length();
+        boolean[] dp = new boolean[len+1];
+        dp[len] = true;
+        for(int i = len-1; i >= 0; i--) {
+            for(int j = i+1; j <= len; j++) {
+                if(!dp[j]) continue;
+                String sub = s.substring(i, j);
+                if(wordDict.contains(sub)) dp[i] = true;
+            }
+        }
+        return dp[0];
+    }
+}
+
 /*
 有点二了。。。这个很明显是DP，开始居然没想出来，因为想的是要存word对应true/false
 实际上只要存当前index之前的substring是不是就可以了呀
