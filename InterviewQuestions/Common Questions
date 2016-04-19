@@ -21,7 +21,7 @@ Best time to buy and sell stock with cooldown
 
 longest substring without repeating characters (index[c] > start -> start = index[c]+1)
 longest substring with at most 2 distinct characters
-longest substring with at most m distinct characters (这个感觉好难肿么办，肯定要用个东西存起来神马的）
+longest substring with at most m distinct characters 
 
 Clone Graph
 Copy List with Random Pointer
