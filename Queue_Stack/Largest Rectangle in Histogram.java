@@ -12,6 +12,31 @@ return 10.
 */
 
 /*
+我比较习惯这种写法。。。
+*/
+public class Solution {
+    public int largestRectangleArea(int[] heights) {
+        if(heights == null || heights.length == 0) return 0;
+        
+        int len = heights.length;
+        Stack<Integer> stack = new Stack<>();
+        int largest = 0;
+        for(int i = 0; i < len; i++) {
+            while(!stack.isEmpty() && heights[i] < heights[stack.peek()]) {
+                int tmp = heights[stack.pop()] * (stack.isEmpty()? i : i-stack.peek()-1);
+                largest = Math.max(largest, tmp);
+            }
+            stack.push(i);
+        }
+        while(!stack.isEmpty()) {
+            int tmp = heights[stack.pop()] * (stack.isEmpty() ? len : len-stack.peek()-1);
+            largest = Math.max(largest, tmp);
+        }
+        return largest;
+    }
+}
+
+/*
 这道题好难的说。。。
 就是用一个stack maintain一个递增的序列，stack里面存index
 如果比peek大就push进去，不然就把里面大的一点点pop出来同时计算面积
