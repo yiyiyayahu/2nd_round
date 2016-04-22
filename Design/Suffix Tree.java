@@ -67,8 +67,8 @@ class SuffixTree {
 	
 	public SuffixTree(String s) {
 		for(int i = 0; i < s.length(); i++) {
-		String suffix = s.substring(i);
-		insertString(suffix, i);
+			String suffix = s.substring(i);
+			insertString(suffix, i);
 		}
 	}
 
@@ -86,14 +86,14 @@ class SuffixTree {
 		for(int i = 0; i < suffix.length(); i++) {
 			char curr = suffix.charAt(i);
 			if(!tmp.children.containsKey(curr)) {
-			  tmp.children.put(curr, new SuffixTreeNode());
+				tmp.children.put(curr, new SuffixTreeNode());
 			}
 			SuffixTreeNode next = tmp.children.get(curr);
 			next.indexes.add(index);
 			tmp = next;
-			}
 		}
 	}
+}
 
 
 class SuffixTreeNode {
