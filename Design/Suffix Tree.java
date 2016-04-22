@@ -1,6 +1,11 @@
 /*
 leetcode上面的一道题，关于suffix tree的一种简单写法
 Given a string s and an array of smaller strings T, design a method to search s for each small string in T
+
+search return的ArrayList<Integer>是这个substring的starting index
+比如"abcabc"
+stree.search("c") -> [2,5]
+stree.search("ab") -> [0,3]
 */
 
 public class SuffixTree {
