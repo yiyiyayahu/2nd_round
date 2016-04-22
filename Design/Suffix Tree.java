@@ -57,3 +57,51 @@ public class SuffixTreeNode {
     return null;
   }
 }
+
+
+/*
+但是如果我会更喜欢写成这个样子
+*/
+class SuffixTree {
+	  SuffixTreeNode root = new SuffixTreeNode();
+	  
+	  public SuffixTree(String s) {
+	    for(int i = 0; i < s.length(); i++) {
+	      String suffix = s.substring(i);
+	      insertString(suffix, i);
+	    }
+	  }
+	  
+	  public ArrayList<Integer> search(String s) {
+		SuffixTreeNode tmp = root;
+	    for(int i = 0; i < s.length(); i++) {
+	    	char curr = s.charAt(i);
+	    	tmp = tmp.children.get(curr);
+	    }
+	    return tmp.indexes;
+	  }
+	  
+	  public void insertString(String suffix, int index) {
+		  SuffixTreeNode tmp = root;
+		  for(int i = 0; i < suffix.length(); i++) {
+			  char curr = suffix.charAt(i);
+			  if(!tmp.children.containsKey(curr)) {
+				  tmp.children.put(curr, new SuffixTreeNode());
+			  }
+			  SuffixTreeNode next = tmp.children.get(curr);
+			  next.indexes.add(index);
+			  tmp = next;
+		  }
+	  }
+}
+
+
+class SuffixTreeNode {
+  HashMap<Character, SuffixTreeNode> children = new HashMap<>();
+  char value;
+  ArrayList<Integer> indexes = new ArrayList<>();
+  
+  public SuffixTreeNode() {
+    
+  }
+}
