@@ -13,7 +13,9 @@ You may check the breaking results of n ranging from 7 to 10 to discover the reg
 */
 
 /*
-找规律的一道题，居然只要能让3当倍数就让3当倍数。。。
+找规律的一道题，居然只要能让3当倍数就让3当倍数。。。就所有数最好都分成2和3，3要尽可能多，就可以了。。。
+当然dp也可以做啦，但是找到这个规律就没必要dp了
+https://leetcode.com/discuss/98548/explanation-for-integer-break
 */
 public class Solution {
     public int integerBreak(int n) {
