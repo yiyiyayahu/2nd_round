@@ -15,12 +15,21 @@ Can you do it in O(n) time and/or in-place with O(1) extra space?
 /*
 改进的O(n)的做法，但是code还是好难写T_T
 1. find the median element - 可以用heap，参照findKthLargestNumber
-2. smaller than median -> fill in even slot
-3. larger than median -> fill in odd slot
+2. smaller than median -> fill in the last even slot
+3. larger than median -> fill in the first odd slot
+(that is, using two pointers, left starts from the first odd, right starts from the last even)
 4. median -> fill the rest slot
 
 During the swap, to avoid messing up with the original array, use an indexing mapping to store the latter index
+Accessing A(0) actually accesses nums[1].
+Accessing A(1) actually accesses nums[3].
+Accessing A(2) actually accesses nums[5].
+Accessing A(3) actually accesses nums[0].
+Accessing A(4) actually accesses nums[2].
+Accessing A(5) actually accesses nums[4].
+
 https://leetcode.com/discuss/95156/step-by-step-explanation-of-index-mapping-in-java
+https://leetcode.com/discuss/77133/o-n-o-1-after-median-virtual-indexing
 */
 
 public class Solution {
