@@ -30,7 +30,7 @@ Return true (self crossing)
 */
 
 /*
-好难想。。。。
+好难想。。。。不过画个图就理解这个code了
 */
 // Categorize the self-crossing scenarios, there are 3 of them: 
 // 1. Fourth line crosses first line and works for fifth line crosses second line and so on...
@@ -47,10 +47,11 @@ public class Solution {
                 if(x[i-1] == x[i-3] && x[i] + x[i-4] >= x[i-2]) return true; // Fifth line meets first line and onward
             }
             if(i >=5) {
-                if(x[i-2] - x[i-4] >= 0 && x[i] >= x[i-2] - x[i-4] && x[i-1] >= x[i-3] - x[i-5] && x[i-1] <= x[i-3]) 
+                if(x[i-2] >= x[i-4] && x[i-1] <= x[i-3] && x[i] >= x[i-2] - x[i-4] && x[i-1] >= x[i-3] - x[i-5] ) 
                     return true;  // Sixth line crosses first line and onward
             }
         }
         return false;
     }
+}
 }
